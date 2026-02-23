@@ -1,0 +1,26 @@
+{
+  "name": "skill-issues",
+  "metadata": {
+    "description": "Personal collection of GitHub Copilot customizations — prompts, instructions, agents, and skills",
+    "version": "1.0.0",
+    "pluginRoot": "./skills"
+  },
+  "owner": {
+    "name": "Steven Liekens",
+    "email": "steven.liekens@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "synouser",
+      "source": "synouser",
+      "description": "Synology utilities for managing local users and groups with synouser and synogroup.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "ugacltool",
+      "source": "ugacltool",
+      "description": "UGREEN NAS ACL utility for editing file and directory permissions with ugacltool.",
+      "version": "1.0.0"
+    }
+  ]
+}
