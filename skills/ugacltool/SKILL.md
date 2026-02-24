@@ -53,6 +53,46 @@ ugacltool del_one PATH INDEX
 ugacltool del_all PATH
 ```
 
+### Replace an ACL entry by index
+
+```bash
+ugacltool replace PATH INDEX group:NAME:allow:rwxpdDaARWc--:-fd-
+```
+
+> Only works with level 0 (direct) ACLs. Use `ugacltool get PATH` to find the index.
+
+### Copy ACLs between paths
+
+```bash
+ugacltool copy PATH_SRC PATH_DST
+```
+
+### Check permissions on a path
+
+```bash
+ugacltool check PATH rwx
+```
+
+Returns "check success" or "check fail" (checks the current user's effective permissions).
+
+### Get effective permissions for a user
+
+```bash
+ugacltool get_perms USERNAME PATH
+```
+
+Example output: `user[nginx] pwd[/path] perm[r-x-d-a-R-c--]`
+
+> `get_perm PATH USERNAME` also exists but requires the ability to switch user context (may need root). Prefer `get_perms`.
+
+### Enforce ACL inheritance
+
+```bash
+ugacltool enforce_inherit PATH
+```
+
+Re-applies the parent directory's inheritable ACLs to all children. Useful when inheritance was broken or not applied automatically.
+
 ## Commands
 
 | Command | Description |
@@ -122,12 +162,41 @@ Use `addace` when the user/group only exists inside a container or when you only
 | `i` | **i**nherit only |
 | `n` | **n**o propagate |
 
+### Allow vs Deny
+
+Both `allow` and `deny` rules are supported. Deny rules take precedence and override matching allow permissions.
+
+```bash
+# Deny delete permission for nginx (overrides any allow that includes delete)
+ugacltool add PATH group:nginx:deny:----d--------:----
+```
+
+### Special Types
+
+| Type | Name field | Description |
+|---|---|---|
+| `user` | username | A specific user |
+| `group` | groupname | A specific group |
+| `owner` | `*` | The file/directory owner |
+| `everyone` | (empty) | All users |
+| `authenticated_user` | `*` | Any authenticated user |
+| `system` | `*` | System processes |
+
+```bash
+# Grant everyone read access
+ugacltool add PATH everyone::allow:r-x---a-R-c--:-fd-
+# Grant the file owner full control
+ugacltool add PATH owner:*:allow:rwxpdDaARWcCo:fd--
+```
+
 ### Examples
 
 ```
 user:root:allow:rwx-d---RWc--:fd--
 owner:*:allow:rwx-d---RWc--:fd--
 group:nginx:allow:r-x---a-R-c--:-fd-
+group:nginx:deny:----d--------:----
+everyone::allow:r-x---a-R-c--:-fd-
 ```
 
 ## Common Workflow: Docker Container Permissions
