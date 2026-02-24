@@ -226,6 +226,47 @@ Used with `set_archive`, `get_archive`, and `del_archive`:
 
 `is_inherit`, `is_read_only`, `is_owner_group`, `has_ACL`, `is_support_ACL`
 
+## Exit Codes
+
+Exit codes are **inconsistent** across commands. Do not rely on exit codes alone — always check stdout/stderr.
+
+| Exit Code | Meaning |
+|---|---|
+| `0` | Success (but also returned by many commands on failure) |
+| `1` | Wrong number of arguments / unknown command |
+| `255` | Operation error (bad path, invalid index, bad ACL entry) |
+
+### Commands that return reliable exit codes
+
+| Command | 0 | 255 |
+|---|---|---|
+| `add` | success | bad path, malformed ACL entry |
+| `addace` | success | bad path, malformed ACL entry |
+| `replace` | success | bad path, index out of range (only level 0) |
+| `stat` | success | bad path |
+| `check` | **always 0** — parse stdout for "check success" or "check fail" | bad path |
+| `enforce_inherit` | success (or prints error on stderr) | bad path |
+
+### Commands that always return 0
+
+These commands return exit code 0 even when the operation fails or the path doesn't exist. Check stdout/stderr for error messages like `"path not exist"`, `"It's Linux mode"`, or `"Bad parameter"`.
+
+`get`, `getace`, `get_perm`, `get_perms`, `del_one`, `del_all`, `copy`, `set_eadir_acl`, `set_archive`, `get_archive`, `del_archive`
+
+### Common error messages
+
+| Message | Meaning |
+|---|---|
+| `path not exist` | The target path does not exist |
+| `It's Linux mode` | The filesystem does not support UGREEN ACLs |
+| `add acl fail: Operation not supported` | Filesystem doesn't support ACLs (e.g., `/tmp`) |
+| `param err.` / `param fail` | Malformed ACL entry |
+| `Index out of range` | ACL index doesn't exist or is not level 0 |
+| `change user fail.` | `get_perm` can't switch to target user (use `get_perms` instead) |
+| `del ace fail: No data available` | `del_one` index doesn't exist |
+| `ug_acl_auto_inherit fail` | `enforce_inherit` couldn't apply inheritance |
+| `Bad parameter: USERNAME` | User doesn't exist (`get_perms`) |
+
 ---
 
 *Source: [UGREEN Community Guide](https://guide.ugreen.community/ugos/docker/container-users.html)*
