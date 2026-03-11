@@ -12,8 +12,8 @@
     {
       "name": "devcontainer",
       "source": "plugins/devcontainer",
-      "description": "Create, update, validate, operate, and troubleshoot Dev Container setups, including devcontainer.json, Features, and devcontainer CLI workflows.",
-      "version": "1.0.0"
+      "description": "Create, update, validate, operate, and troubleshoot Dev Container setups, including `devcontainer.json`, local or published Dev Container Features, and `devcontainer` CLI workflows.",
+      "version": "1.0.1"
     },
     {
       "name": "synouser",

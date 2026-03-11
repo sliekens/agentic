@@ -76,15 +76,20 @@ Object form runs commands in parallel within the object only.
 
 - If a Feature needs assets after install, copy them somewhere persistent outside `/tmp`.
 - Do not assume installers or temporary extracted files remain available after the build.
+- Distinguish image-time state from runtime state:
+  - use `install.sh` for image-layer files and helper-script installation
+  - if a path is populated by a Feature `mounts` entry, treat it as runtime state
+  - ownership fixes, first-run migration, and reconciliation with existing user files for mounted paths belong in a runtime lifecycle hook, because the mount hides image-layer changes made during `install.sh`
 - For per-devcontainer durable storage, named volumes plus `${devcontainerId}` are the right pattern when the data must survive rebuilds without colliding across containers.
 - Avoid hardcoding user-home paths like `/home/vscode` in Feature metadata `mounts`.
 - If persistence needs to be tied to the eventual dev user, prefer:
   - a neutral/stable mount target, or
-  - configuring the user-scoped path from `install.sh` or lifecycle logic using `_REMOTE_USER_HOME`
+  - configuring the user-scoped path from `install.sh` using `_REMOTE_USER_HOME` when only image-layer state is involved
+  - configuring the user-scoped path from lifecycle logic when it depends on mounted runtime state or the final runtime home
 - Use Feature metadata `mounts` for user-independent paths when possible.
 - If the correct persistent path depends on the consuming repo's final user model, prefer putting that mount in the consuming `devcontainer.json` instead of the Feature metadata.
 
-Example pattern:
+Example pattern for mounted per-devcontainer state:
 
 ```json
 {
@@ -97,27 +102,39 @@ Example pattern:
       "target": "/var/lib/my-feature",
       "type": "volume"
     }
-  ]
+  ],
+  "onCreateCommand": "/usr/local/share/my-feature/on_create.sh"
 }
 ```
 
 ```bash
+# install.sh
+install -d -m 0755 /usr/local/share/my-feature
+install -m 0755 ./on_create.sh /usr/local/share/my-feature/on_create.sh
+```
+
+```bash
+# on_create.sh
 #!/usr/bin/env bash
 set -euo pipefail
 
 install -d -m 0755 /var/lib/my-feature
-install -d -m 0755 "${_REMOTE_USER_HOME}/.local/share"
+if command -v sudo >/dev/null 2>&1; then
+  sudo -n chown -R "$(id -u):$(id -g)" /var/lib/my-feature || chown -R "$(id -u):$(id -g)" /var/lib/my-feature
+else
+  chown -R "$(id -u):$(id -g)" /var/lib/my-feature
+fi
 
-ln -snf /var/lib/my-feature "${_REMOTE_USER_HOME}/.local/share/my-feature"
-chown -h "${_REMOTE_USER}:${_REMOTE_USER}" "${_REMOTE_USER_HOME}/.local/share/my-feature"
-chown -R "${_REMOTE_USER}:${_REMOTE_USER}" /var/lib/my-feature
+install -d -m 0755 "$HOME/.local/share"
+ln -snf /var/lib/my-feature "$HOME/.local/share/my-feature"
 ```
 
 Why this works:
 
 - the volume target is stable and user-independent
-- the user-facing path is derived from `_REMOTE_USER_HOME`
+- the user-facing path is derived from the actual runtime home
 - the symlink keeps tools happy without hardcoding `/home/vscode`
+- ownership is applied to the mounted volume, not to an image layer that will be hidden at container start
 
 ## Validation and release path
 
