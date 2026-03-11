@@ -1,0 +1,18 @@
+{
+  "name": "devcontainer",
+  "description": "Create, update, validate, operate, and troubleshoot Dev Container setups, including `devcontainer.json`, local or published Dev Container Features, and `devcontainer` CLI workflows.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Steven Liekens",
+    "email": "steven.liekens@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "devcontainer",
+    "devcontainer-cli",
+    "devcontainer-feature",
+    "development-containers",
+    "containers"
+  ],
+  "skills": "skills/"
+}

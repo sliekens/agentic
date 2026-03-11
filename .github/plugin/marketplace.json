@@ -1,15 +1,21 @@
 {
   "name": "skill-issues",
   "metadata": {
-    "description": "Personal collection of GitHub Copilot customizations — prompts, instructions, agents, and skills",
+    "description": "Personal collection of GitHub Copilot CLI plugins and customizations",
     "version": "1.0.0",
-    "pluginRoot": "./skills"
+    "pluginRoot": "./plugins"
   },
   "owner": {
     "name": "Steven Liekens",
-    "email": "steven.liekens@gmail.com"
+    "email": "hey@stevenliekens.be"
   },
   "plugins": [
+    {
+      "name": "devcontainer",
+      "source": "devcontainer",
+      "description": "Create, update, validate, operate, and troubleshoot Dev Container setups, including devcontainer.json, Features, and devcontainer CLI workflows.",
+      "version": "1.0.0"
+    },
     {
       "name": "synouser",
       "source": "synouser",
