@@ -2,8 +2,7 @@
   "name": "skill-issues",
   "metadata": {
     "description": "Personal collection of GitHub Copilot CLI plugins and customizations",
-    "version": "1.0.0",
-    "pluginRoot": "./plugins"
+    "version": "1.0.0"
   },
   "owner": {
     "name": "Steven Liekens",
@@ -12,19 +11,19 @@
   "plugins": [
     {
       "name": "devcontainer",
-      "source": "devcontainer",
+      "source": "plugins/devcontainer",
       "description": "Create, update, validate, operate, and troubleshoot Dev Container setups, including devcontainer.json, Features, and devcontainer CLI workflows.",
       "version": "1.0.0"
     },
     {
       "name": "synouser",
-      "source": "synouser",
+      "source": "plugins/synouser",
       "description": "Synology utilities for managing local users and groups with synouser and synogroup.",
       "version": "1.0.0"
     },
     {
       "name": "ugacltool",
-      "source": "ugacltool",
+      "source": "plugins/ugacltool",
       "description": "UGREEN NAS ACL utility for editing file and directory permissions with ugacltool.",
       "version": "1.0.0"
     }
