@@ -47,5 +47,5 @@ When adding or reorganizing a plugin:
 1. Update that plugin's `plugin.json`.
 2. Update `.github/plugin/marketplace.json` if the plugin should be discoverable from this repository's marketplace.
 3. Keep `plugin.json` operational and `marketplace.json` catalog-oriented.
-4. If a marketplace entry duplicates fields such as `description` or `version`, keep those values in sync with the plugin's `plugin.json`.
+4. Keep duplicated marketplace fields such as `description` or `version` in sync with the plugin's `plugin.json`.
 5. Treat `plugin.json` as canonical when resolving any mismatch.
