@@ -7,15 +7,12 @@ My personal collection of GitHub Copilot customizations — prompts, instruction
 ## Structure
 
 ```
-skill-issues/
+agentic/
+├── AGENTS.md                    # Repo-specific rules for future Codex/Copilot work
 ├── .github/
-│   └── copilot-instructions.md   # Global Copilot instructions for this repo
-├── prompts/
-│   ├── README.md                 # How to use prompt files
-│   └── sample.prompt.md          # Template for new prompts
-├── instructions/
-│   ├── README.md                 # How to use instruction files
-│   └── sample.instructions.md    # Template for new instructions
+│   ├── copilot-instructions.md   # Global Copilot instructions for this repo
+│   └── plugin/
+│       └── marketplace.json      # Marketplace catalog for this repo's plugins
 ├── agents/
 │   ├── README.md                 # How to define custom agents
 │   └── sample/
@@ -28,26 +25,29 @@ skill-issues/
     │       └── devcontainer/
     │           ├── SKILL.md
     │           └── references/
-    └── sample/
-        ├── README.md             # Template for a new plugin
+    ├── synouser/
+    │   ├── plugin.json
+    │   └── skills/
+    │       └── synouser/
+    │           └── SKILL.md
+    └── ugacltool/
         ├── plugin.json
         └── skills/
-            └── sample/
+            └── ugacltool/
                 └── SKILL.md
 ```
 
 ## Quick Reference
 
-| Folder          | Purpose                                             | File type                            |
-| --------------- | --------------------------------------------------- | ------------------------------------ |
-| `.github/`      | Repo-level Copilot instructions                     | `copilot-instructions.md`            |
-| `prompts/`      | Reusable, task-specific prompts                     | `*.prompt.md`                        |
-| `instructions/` | Coding standards applied to matching files          | `*.instructions.md`                  |
-| `agents/`       | Custom agent configurations (MCP / tools)           | `README.md` per agent                |
-| `plugins/`      | Installable Copilot CLI plugins with bundled skills | `plugin.json` + `skills/**/SKILL.md` |
+| Folder      | Purpose                                             | File type                            |
+| ----------- | --------------------------------------------------- | ------------------------------------ |
+| `AGENTS.md` | Repo-specific rules for future agent work           | `AGENTS.md`                          |
+| `.github/`  | Repo-level Copilot instructions and plugin catalog  | `copilot-instructions.md`, `*.json`  |
+| `agents/`   | Custom agent configurations (MCP / tools)           | `README.md` per agent                |
+| `plugins/`  | Installable Copilot CLI plugins with bundled skills | `plugin.json` + `skills/**/SKILL.md` |
 
 ## Usage
 
-Copy any prompt or instruction file into the `.github/prompts/` or `.github/instructions/` directory of a target repository to activate it in that project. Plugins can be installed from `plugins/<name>/` directly or exposed through [`.github/plugin/marketplace.json`](.github/plugin/marketplace.json).
+Plugins can be installed from `plugins/<name>/` directly or exposed through [`.github/plugin/marketplace.json`](.github/plugin/marketplace.json).
 
 See the `README.md` inside each folder for the expected format and workflow.

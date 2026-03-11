@@ -16,11 +16,10 @@ plugins/
 
 ## Creating a new plugin
 
-1. Copy the `sample/` folder and rename it.
-2. Update `plugin.json` with the plugin metadata you want to publish.
-3. Rename `skills/sample/` to match the real skill name.
-4. Replace the placeholder content in `skills/<skill-name>/SKILL.md`.
-5. Add `references/` only when the root skill needs to stay concise and delegate details.
+1. Create `plugins/<plugin-name>/plugin.json`.
+2. Create `plugins/<plugin-name>/skills/<skill-name>/SKILL.md`.
+3. Keep the plugin name, skill name, and marketplace entry aligned.
+4. Add `references/` only when the root skill needs to stay concise and delegate details.
 
 ## Publishing in this repo
 
