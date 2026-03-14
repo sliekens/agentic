@@ -1,0 +1,14 @@
+{
+    "name": "agentic",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+        "ghcr.io/devcontainers/features/python:1": {
+            "version": "os-provided",
+            "installTools": false
+        },
+        "cr.stevenliekens.be/sliekens/tea:1": {},
+        "cr.stevenliekens.be/sliekens/github-cli:1": {},
+        "cr.stevenliekens.be/sliekens/copilot-cli:1": {},
+        "cr.stevenliekens.be/sliekens/codex:1": {}
+    }
+}
