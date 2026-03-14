@@ -13,10 +13,6 @@ agentic/
 │   ├── copilot-instructions.md   # Global Copilot instructions for this repo
 │   └── plugin/
 │       └── marketplace.json      # Marketplace catalog for this repo's plugins
-├── agents/
-│   ├── README.md                 # How to define custom agents
-│   └── sample/
-│       └── README.md             # Template for a new agent
 └── plugins/
     ├── README.md                 # How plugin packages are organized
     ├── devcontainer/
