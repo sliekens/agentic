@@ -6,9 +6,9 @@
             "version": "os-provided",
             "installTools": false
         },
-        "cr.stevenliekens.be/sliekens/tea:1": {},
-        "cr.stevenliekens.be/sliekens/github-cli:1": {},
-        "cr.stevenliekens.be/sliekens/copilot-cli:1": {},
-        "cr.stevenliekens.be/sliekens/codex:1": {}
+        "ghcr.io/sliekens/devcontainer-features/tea:1": {},
+        "ghcr.io/sliekens/devcontainer-features/github-cli:1": {},
+        "ghcr.io/sliekens/devcontainer-features/copilot:1": {},
+        "ghcr.io/sliekens/devcontainer-features/codex:1": {}
     }
 }
