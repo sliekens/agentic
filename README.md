@@ -21,6 +21,12 @@ agentic/
     │       └── devcontainer/
     │           ├── SKILL.md
     │           └── references/
+    ├── engineering-workflow/
+    │   ├── plugin.json
+    │   └── agents/
+    │       ├── distiller.agent.md
+    │       ├── implementation.agent.md
+    │       └── technical-analyst.agent.md
     ├── synouser/
     │   ├── plugin.json
     │   └── skills/
@@ -35,12 +41,12 @@ agentic/
 
 ## Quick Reference
 
-| Folder      | Purpose                                             | File type                            |
-| ----------- | --------------------------------------------------- | ------------------------------------ |
-| `AGENTS.md` | Repo-specific rules for future agent work           | `AGENTS.md`                          |
-| `.github/`  | Repo-level Copilot instructions and plugin catalog  | `copilot-instructions.md`, `*.json`  |
-| `agents/`   | Custom agent configurations (MCP / tools)           | `README.md` per agent                |
-| `plugins/`  | Installable Copilot CLI plugins with bundled skills | `plugin.json` + `skills/**/SKILL.md` |
+| Folder            | Purpose                                                        | File type                                                      |
+| ----------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| `AGENTS.md`       | Repo-specific rules for future agent work                      | `AGENTS.md`                                                    |
+| `.github/`        | Repo-level Copilot instructions and plugin catalog             | `copilot-instructions.md`, `*.json`                            |
+| `.github/agents/` | Workspace custom agent configurations                          | `*.agent.md`                                                   |
+| `plugins/`        | Installable Copilot CLI plugins with bundled skills and agents | `plugin.json` + `skills/**/SKILL.md` or `agents/**/*.agent.md` |
 
 ## Usage
 

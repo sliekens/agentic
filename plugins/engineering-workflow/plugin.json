@@ -1,0 +1,21 @@
+{
+  "name": "engineering-workflow",
+  "description": "Workflow agents for prompt distillation, technical design analysis, and implementation.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Steven Liekens",
+    "email": "hey@stevenliekens.be"
+  },
+  "license": "MIT",
+  "keywords": [
+    "workflow",
+    "engineering",
+    "analysis",
+    "architecture",
+    "design",
+    "implementation",
+    "prompt-engineering",
+    "refinement"
+  ],
+  "agents": "agents/"
+}

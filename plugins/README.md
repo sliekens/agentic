@@ -8,7 +8,9 @@ This folder contains installable GitHub Copilot CLI plugins. Each plugin has its
 plugins/
 └── <plugin-name>/
     ├── plugin.json
-    └── skills/
+    ├── agents/                    # optional
+    │   └── <agent-name>.agent.md
+    └── skills/                    # optional
         └── <skill-name>/
             ├── SKILL.md
             └── references/        # optional
@@ -17,9 +19,9 @@ plugins/
 ## Creating a new plugin
 
 1. Create `plugins/<plugin-name>/plugin.json`.
-2. Create `plugins/<plugin-name>/skills/<skill-name>/SKILL.md`.
-3. Keep the plugin name, skill name, and marketplace entry aligned.
-4. Add `references/` only when the root skill needs to stay concise and delegate details.
+2. Add one or more components such as `agents/<agent-name>.agent.md` or `skills/<skill-name>/SKILL.md`.
+3. Keep the plugin name, bundled component names, and marketplace entry aligned.
+4. Add `references/` only when a root skill needs to stay concise and delegate details.
 
 ## Publishing in this repo
 
