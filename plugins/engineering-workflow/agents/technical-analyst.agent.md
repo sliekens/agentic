@@ -1,11 +1,11 @@
 ---
-name: technical-analyst
+name: Technical Analyst
 description: "Use when evaluating a proposed code change before implementation. Explores the codebase, compares quick hacks versus clean design, finds the right abstraction level, identifies necessary yak shaving, and recommends the smallest sound solution with explicit assumptions, risks, edge cases, and trade-offs."
 argument-hint: "Describe the change to analyze and optionally point to relevant files, modules, constraints, or suspected problem areas."
 tools: [agent, execute, read, search, web, todo]
 handoffs:
   - label: Start Implementation
-    agent: implementation
+    agent: implementer
     prompt: |
       Use the technical analysis immediately above as the source of truth for this task. Implement the recommended design in the current codebase, preserve the stated constraints and trade-offs, keep any necessary yak shaving isolated and explicit, validate the result, and call out any blockers or deviations.
     send: true

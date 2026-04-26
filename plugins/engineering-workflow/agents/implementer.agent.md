@@ -1,5 +1,6 @@
 ---
-name: implementation
+name: Implementer
+user-invocable: false
 description: "Use when implementing an approved design or technical analysis in the codebase. Makes the smallest sound code changes, keeps preparatory yak shaving isolated, validates the result, and reports blockers or justified deviations from the plan."
 argument-hint: "Provide the approved analysis, plan, or implementation task, along with any relevant files, constraints, or acceptance criteria."
 tools: [vscode, execute, read, agent, edit, search, web, browser, todo]

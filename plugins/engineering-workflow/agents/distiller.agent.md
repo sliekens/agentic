@@ -1,5 +1,5 @@
 ---
-name: distiller
+name: Distiller
 description: "Use when turning messy notes, rough requests, or scattered thoughts into a clean handoff prompt for the technical analyst. Extracts the real ask, organizes context and constraints, and produces a concise prompt the analyst can act on immediately. If the input is ambiguous, asks clarifying questions before refining."
 argument-hint: "Paste rough notes, a draft request, or scattered ideas that should be distilled into a handoff prompt for the technical analyst."
 tools: [read]
