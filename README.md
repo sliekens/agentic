@@ -25,7 +25,7 @@ agentic/
     │   ├── plugin.json
     │   └── agents/
     │       ├── distiller.agent.md
-    │       ├── implementation.agent.md
+    │       ├── implementer.agent.md
     │       └── technical-analyst.agent.md
     ├── synouser/
     │   ├── plugin.json
