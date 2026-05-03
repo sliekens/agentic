@@ -1,11 +1,11 @@
 ---
-name: make-consistent
-description: Use this skill when the user wants to audit code consistency issues — when the same problem is solved in different ways across the codebase. Activate on /make-consistent.
+name: realign
+description: Use this skill when the user wants to audit code consistency issues — when the same problem is solved in different ways across the codebase. Activate on /realign.
 ---
 
-# make-consistent
+# realign
 
-Activate when the user invokes `/make-consistent`.
+Activate when the user invokes `/realign`.
 
 ## Input
 
@@ -14,7 +14,7 @@ The user provides two arguments:
 - **Scope** (required): A file or directory path where they noticed the inconsistency — the anchor, not a search boundary
 - **Hint** (required): A short free-text description of what they noticed (e.g. `"user group assignment"`, `"volume migration"`, `"error handling"`)
 
-Example: `/make-consistent src/services/payments "error handling"`
+Example: `/realign src/services/payments "error handling"`
 
 ## Procedure
 
