@@ -16,6 +16,5 @@
     "implementation",
     "prompt-engineering",
     "refinement"
-  ],
-  "agents": "agents/"
+  ]
 }

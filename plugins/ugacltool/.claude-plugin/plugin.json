@@ -1,0 +1,17 @@
+{
+  "name": "ugacltool",
+  "description": "UGREEN utility for editing FACLs.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Steven Liekens",
+    "email": "hey@stevenliekens.be"
+  },
+  "license": "MIT",
+  "keywords": [
+    "ugreen",
+    "acl",
+    "facl",
+    "permissions",
+    "nas"
+  ]
+}

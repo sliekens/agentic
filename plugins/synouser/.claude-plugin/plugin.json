@@ -1,0 +1,17 @@
+{
+  "name": "synouser",
+  "description": "Synology utilities for managing local users and groups.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Steven Liekens",
+    "email": "hey@stevenliekens.be"
+  },
+  "license": "MIT",
+  "keywords": [
+    "synology",
+    "dsm",
+    "users",
+    "groups",
+    "nas"
+  ]
+}
