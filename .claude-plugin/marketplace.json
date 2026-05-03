@@ -12,26 +12,22 @@
     {
       "name": "devcontainer",
       "source": "./plugins/devcontainer",
-      "description": "Create, update, validate, operate, and troubleshoot Dev Container setups, including `devcontainer.json`, local or published Dev Container Features, and `devcontainer` CLI workflows.",
-      "version": "1.0.1"
+      "description": "Create, update, validate, operate, and troubleshoot Dev Container setups, including `devcontainer.json`, local or published Dev Container Features, and `devcontainer` CLI workflows."
     },
     {
       "name": "engineering-workflow",
       "source": "./plugins/engineering-workflow",
-      "description": "Workflow agents for prompt distillation, technical design analysis, and implementation.",
-      "version": "1.0.1"
+      "description": "Workflow agents for prompt distillation, technical design analysis, and implementation."
     },
     {
       "name": "synouser",
       "source": "./plugins/synouser",
-      "description": "Synology utilities for managing local users and groups with synouser and synogroup.",
-      "version": "1.0.0"
+      "description": "Synology utilities for managing local users and groups with synouser and synogroup."
     },
     {
       "name": "ugacltool",
       "source": "./plugins/ugacltool",
-      "description": "UGREEN NAS ACL utility for editing file and directory permissions with ugacltool.",
-      "version": "1.0.0"
+      "description": "UGREEN NAS ACL utility for editing file and directory permissions with ugacltool."
     }
   ]
 }
