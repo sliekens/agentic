@@ -8,7 +8,7 @@
     "name": "Steven Liekens",
     "email": "hey@stevenliekens.be"
   },
-  "./plugins": [
+  "plugins": [
     {
       "name": "devcontainer",
       "source": "./plugins/devcontainer",
