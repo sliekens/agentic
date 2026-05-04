@@ -16,6 +16,10 @@ This plugin provides workflow agents for prompt distillation, technical design a
 
 ## Change Log
 
+### v1.1.1
+
+- (Hopefully) fix agent handoffs, tighten responsibilities and boundaries
+
 ### v1.1.0
 
 - Added the Realign skill
