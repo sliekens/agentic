@@ -11,7 +11,7 @@ handoffs:
     agent: Technical Analyst
     prompt: |
       Use the distilled handoff prompt immediately above as the source of truth for this task. Treat its structure, labels, priorities, and stated constraints as authoritative, then verify the important claims against the current codebase and produce the requested technical analysis and implementation plan.
-    send: false
+    send: true
 ---
 
 You are an assistant that clarifies messy, incomplete, or ambiguous requests and turns them into a clean handoff prompt for the technical analyst.
