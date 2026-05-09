@@ -5,19 +5,19 @@ This plugin provides a workflow for turning a rough request into a verified impl
 ## Workflow
 
 ```mermaid
-flowchart TD
-	A[User request or rough notes] --> B[Distiller]
-	B -->|Clarified handoff| C[Technical Analyst]
-	C -->|Approved analysis and implementation plan| D[Implementer]
-	D -->|No repository doc change needed| F[Task complete]
-	D -->|Implementation result and doc handoff| E[Technical Writer]
-	E -->|Contributor docs reconciled| F[Task complete]
-	D -->|Hand-back with code evidence, blocker, or plan contradiction| C
-	C -->|Proven documentation discrepancy or enabling doc repair| E
-	E -->|Resolved documentation discrepancy| C
-	E -->|Implementation-owned documentation gap| D
-	C -->|Revised analysis and updated plan| D
+stateDiagram-v2
+	[*] --> Distiller: rough request
+	Distiller --> TechnicalAnalyst
+	TechnicalAnalyst --> Implementer
+	TechnicalAnalyst --> TechnicalWriter: doc discrepancy
+	Implementer --> TechnicalWriter: repo docs update
+	Implementer --> TechnicalAnalyst: implementation hand-back
+	TechnicalWriter --> Implementer: implementation-owned doc gap
+	TechnicalWriter --> TechnicalAnalyst: analysis needed
+	TechnicalWriter --> [*]: docs reconciled
 ```
+
+The diagram shows the main workflow states and transitions. The prose below explains when work completes directly from the Implementer and when it flows through the Technical Writer.
 
 In the normal path, the Distiller turns a messy ask into a clean handoff, the Technical Analyst verifies the problem against the codebase and produces the smallest sound plan, and the Implementer executes that plan with minimal changes and relevant validation. When the task needs a durable contributor-facing written trace, the Implementer can then hand the result to the Technical Writer for a scoped documentation pass or delegate that pass automatically as a subagent when it is self-contained.
 
