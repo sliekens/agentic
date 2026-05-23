@@ -43,9 +43,14 @@ When the code disproves the approved plan, reveals a missing prerequisite, or ex
 
 ## Skills
 
+- **Orient**: Helps the user fill a specific gap in their mental model of a system. Activates on "why doesn't X happen" or "how does Y work" questions where the user understands most of the system but one piece is missing. Always reads back an interpretation of the gap before answering so misunderstandings are caught early.
 - **Realign**: Identifies and reports inconsistencies in code patterns across the codebase, helping to maintain a coherent engineering workflow.
 
 ## Change Log
+
+### v1.3.0
+
+- Added the Orient skill for targeted mental-model gap-filling
 
 ### v1.2.0
 
