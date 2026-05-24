@@ -43,14 +43,23 @@ agentic/
     │   └── skills/
     │       └── synouser/
     │           └── SKILL.md
-    └── ugacltool/
+    ├── ugacltool/
+    │   ├── .claude-plugin/
+    │   │   └── plugin.json
+    │   ├── .plugin/
+    │   │   └── plugin.json
+    │   └── skills/
+    │       └── ugacltool/
+    │           └── SKILL.md
+    └── aspire/
         ├── .claude-plugin/
         │   └── plugin.json
         ├── .plugin/
         │   └── plugin.json
         └── skills/
-            └── ugacltool/
-                └── SKILL.md
+            └── aspire-deploy-pipeline/
+                ├── SKILL.md
+                └── references/
 ```
 
 ## Quick Reference

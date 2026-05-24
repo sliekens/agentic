@@ -1,0 +1,18 @@
+{
+  "name": "aspire",
+  "description": ".NET Aspire tooling for app host development and deployment.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Steven Liekens",
+    "email": "hey@stevenliekens.be"
+  },
+  "license": "MIT",
+  "keywords": [
+    "aspire",
+    "dotnet",
+    "deploy",
+    "pipeline",
+    "deployment",
+    "hosting"
+  ]
+}

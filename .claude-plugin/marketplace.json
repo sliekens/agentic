@@ -28,6 +28,11 @@
       "name": "ugacltool",
       "source": "./plugins/ugacltool",
       "description": "UGREEN NAS ACL utility for editing file and directory permissions with ugacltool."
+    },
+    {
+      "name": "aspire",
+      "source": "./plugins/aspire",
+      "description": ".NET Aspire tooling for app host development and deployment."
     }
   ]
 }
