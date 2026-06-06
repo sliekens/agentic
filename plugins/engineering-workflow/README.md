@@ -38,8 +38,13 @@ In the normal path, the Distiller turns a messy ask into a clean handoff, the Te
 - **Orient**: Helps the user fill a specific gap in their mental model of a system. Activates on "why doesn't X happen" or "how does Y work" questions where the user understands most of the system but one piece is missing. Always reads back an interpretation of the gap before answering so misunderstandings are caught early.
 - **Realign**: Identifies and reports inconsistencies in code patterns across the codebase, helping to maintain a coherent engineering workflow.
 - **Blind Spot Coverage**: Analyzes a specific method to identify uncovered edge cases, error paths, and unusual inputs that existing tests miss. Focuses on pragmatic, high-value blind spots rather than achieving 100% line coverage. Activates on `/blind-spot-coverage` commands.
+- **Scenario Design**: Systematically enumerates the scenario space for problems with multiple interacting variables — to find gaps, validate assumptions, or produce structured test cases. Reasons about the problem shape, selects the right technique (decision tables, equivalence partitioning + BVA, combinatorial testing, state transition testing, FMEA, design space exploration, scenario analysis, or cause-effect graphing), explains the approach, confirms with the user, and writes the output to a markdown file.
 
 ## Change Log
+
+### v1.5.0
+
+- Added the Scenario Design skill for systematic scenario enumeration and gap detection using specification-based techniques
 
 ### v1.4.0
 
