@@ -37,6 +37,7 @@ In the normal path, the Distiller turns a messy ask into a clean handoff, the Te
 
 - **Orient**: Helps the user fill a specific gap in their mental model of a system. Activates on "why doesn't X happen" or "how does Y work" questions where the user understands most of the system but one piece is missing. Always reads back an interpretation of the gap before answering so misunderstandings are caught early.
 - **Realign**: Identifies and reports inconsistencies in code patterns across the codebase, helping to maintain a coherent engineering workflow.
+- **Blind Spot Coverage**: Analyzes a specific method to identify uncovered edge cases, error paths, and unusual inputs that existing tests miss. Focuses on pragmatic, high-value blind spots rather than achieving 100% line coverage. Activates on `/blind-spot-coverage` commands.
 
 ## Change Log
 
@@ -46,6 +47,7 @@ In the normal path, the Distiller turns a messy ask into a clean handoff, the Te
 - Removed circular handoffs between Implementer ↔ Technical Analyst and Technical Writer ↔ Implementer/Technical Analyst
 - Technical Analyst and Implementer now delegate documentation tasks to Technical Writer as subagents
 - Technical Writer no longer has handoffs back to other agents
+- Added the Blind Spot Coverage skill for identifying pragmatic test coverage gaps in specific methods
 
 ### v1.3.0
 
