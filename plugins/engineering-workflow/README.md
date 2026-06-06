@@ -44,6 +44,7 @@ In the normal path, the Distiller turns a messy ask into a clean handoff, the Te
 
 ### v1.5.0
 
+- Added the Blind Spot Coverage skill for identifying uncovered edge cases, error paths, and unusual inputs in a specific method
 - Added the Scenario Design skill for systematic scenario enumeration and gap detection using specification-based techniques
 
 ### v1.4.0
