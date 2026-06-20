@@ -1,7 +1,7 @@
 {
   "name": "engineering-workflow",
   "description": "Workflow agents for prompt distillation, technical design analysis, implementation, and contributor-facing documentation.",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "author": {
     "name": "Steven Liekens",
     "email": "hey@stevenliekens.be"

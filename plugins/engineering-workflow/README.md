@@ -35,6 +35,7 @@ In the normal path, the Distiller turns a messy ask into a clean handoff, the Te
 
 ## Skills
 
+- **Operator Setup**: Creates or updates `.agents/OPERATOR.md` in the current workspace — a personal profile that tells AI models who you are, your skill levels, and how you like to collaborate. Only invoked when the user explicitly runs `/operator-setup`.
 - **Orient**: Helps the user fill a specific gap in their mental model of a system. Activates on "why doesn't X happen" or "how does Y work" questions where the user understands most of the system but one piece is missing. Always reads back an interpretation of the gap before answering so misunderstandings are caught early.
 - **Realign**: Identifies and reports inconsistencies in code patterns across the codebase, helping to maintain a coherent engineering workflow.
 - **Blind Spot Coverage**: Analyzes a specific method to identify uncovered edge cases, error paths, and unusual inputs that existing tests miss. Focuses on pragmatic, high-value blind spots rather than achieving 100% line coverage. Activates on `/blind-spot-coverage` commands.
@@ -42,6 +43,10 @@ In the normal path, the Distiller turns a messy ask into a clean handoff, the Te
 - **Technical Debt Audit**: Identifies structural problems in a codebase and writes them up as technical debt documentation — one file per issue in a subfolder, plus an index. Surfaces concerns that make code hard to change, test, or reason about, producing actionable write-ups with concrete consequences and credible paths forward.
 
 ## Change Log
+
+### v1.7.0
+
+- Added the Operator Setup skill for creating or updating `.agents/OPERATOR.md` to capture operator profile, skill levels, and collaboration preferences
 
 ### v1.6.0
 
