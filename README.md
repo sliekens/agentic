@@ -6,6 +6,7 @@ My personal collection of GitHub Copilot customizations — prompts, instruction
 
 ## Structure
 
+<!-- STRUCTURE_START -->
 ```
 agentic/
 ├── AGENTS.md                    # Repo-specific rules for future Codex/Copilot work
@@ -16,64 +17,90 @@ agentic/
 │   └── plugin/
 │       └── marketplace.json      # Compatibility copy of marketplace catalog
 └── plugins/
-    ├── README.md                 # How plugin packages are organized
     ├── devcontainer/
-    │   ├── .claude-plugin/
-    │   │   └── plugin.json
     │   ├── .plugin/
+    │   │   └── plugin.json
+    │   ├── .claude-plugin/
     │   │   └── plugin.json
     │   └── skills/
     │       └── devcontainer/
     │           ├── SKILL.md
     │           └── references/
+    │               ├── checklists.md
+    │               ├── cli.md
+    │               ├── configuration.md
+    │               ├── decision-trees.md
+    │               ├── features.md
+    │               ├── persistence.md
+    │               └── troubleshooting.md
     ├── engineering-workflow/
-    │   ├── .claude-plugin/
-    │   │   └── plugin.json
+    │   ├── README.md                 # How plugin packages are organized
     │   ├── .plugin/
+    │   │   └── plugin.json
+    │   ├── .claude-plugin/
     │   │   └── plugin.json
     │   ├── agents/
     │   │   ├── distiller.agent.md
     │   │   ├── implementer.agent.md
-    │   │   └── technical-analyst.agent.md
+    │   │   ├── technical-analyst.agent.md
+    │   │   └── technical-writer.agent.md
     │   └── skills/
     │       ├── blind-spot-coverage/
+    │       │   └── SKILL.md
+    │       ├── operator-setup/
     │       │   └── SKILL.md
     │       ├── orient/
     │       │   └── SKILL.md
     │       ├── realign/
     │       │   └── SKILL.md
     │       ├── scenario-design/
-    │       │   └── SKILL.md
-    │       ├── scenario-design-workspace/
-    │       │   └── SKILL.md
+    │       │   ├── SKILL.md
+    │       │   └── references/
+    │       │       ├── cause-effect-graphing.md
+    │       │       ├── decision-tables.md
+    │       │       ├── design-space-exploration.md
+    │       │       ├── equivalence-partitioning-bva.md
+    │       │       ├── fmea.md
+    │       │       ├── orthogonal-array-testing.md
+    │       │       ├── scenario-analysis.md
+    │       │       └── state-transition-testing.md
     │       └── technical-debt-audit/
     │           └── SKILL.md
     ├── synouser/
-    │   ├── .claude-plugin/
-    │   │   └── plugin.json
     │   ├── .plugin/
+    │   │   └── plugin.json
+    │   ├── .claude-plugin/
     │   │   └── plugin.json
     │   └── skills/
     │       └── synouser/
     │           └── SKILL.md
     ├── ugacltool/
-    │   ├── .claude-plugin/
-    │   │   └── plugin.json
     │   ├── .plugin/
+    │   │   └── plugin.json
+    │   ├── .claude-plugin/
     │   │   └── plugin.json
     │   └── skills/
     │       └── ugacltool/
     │           └── SKILL.md
     └── aspire/
-        ├── .claude-plugin/
-        │   └── plugin.json
         ├── .plugin/
+        │   └── plugin.json
+        ├── .claude-plugin/
         │   └── plugin.json
         └── skills/
             └── aspire-deploy-pipeline/
                 ├── SKILL.md
                 └── references/
+                    ├── adding-steps.md
+                    ├── gotchas.md
+                    ├── multi-step-factory.md
+                    ├── ordering-steps.md
+                    ├── parameters-and-config.md
+                    ├── pipeline-services.md
+                    ├── tagging-steps.md
+                    └── well-known-steps.md
 ```
+<!-- STRUCTURE_END -->
 
 ## Quick Reference
 
