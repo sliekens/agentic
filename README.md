@@ -31,10 +31,23 @@ agentic/
     │   │   └── plugin.json
     │   ├── .plugin/
     │   │   └── plugin.json
-    │   └── agents/
-    │       ├── distiller.agent.md
-    │       ├── implementer.agent.md
-    │       └── technical-analyst.agent.md
+    │   ├── agents/
+    │   │   ├── distiller.agent.md
+    │   │   ├── implementer.agent.md
+    │   │   └── technical-analyst.agent.md
+    │   └── skills/
+    │       ├── blind-spot-coverage/
+    │       │   └── SKILL.md
+    │       ├── orient/
+    │       │   └── SKILL.md
+    │       ├── realign/
+    │       │   └── SKILL.md
+    │       ├── scenario-design/
+    │       │   └── SKILL.md
+    │       ├── scenario-design-workspace/
+    │       │   └── SKILL.md
+    │       └── technical-debt-audit/
+    │           └── SKILL.md
     ├── synouser/
     │   ├── .claude-plugin/
     │   │   └── plugin.json

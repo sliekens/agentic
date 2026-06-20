@@ -39,8 +39,13 @@ In the normal path, the Distiller turns a messy ask into a clean handoff, the Te
 - **Realign**: Identifies and reports inconsistencies in code patterns across the codebase, helping to maintain a coherent engineering workflow.
 - **Blind Spot Coverage**: Analyzes a specific method to identify uncovered edge cases, error paths, and unusual inputs that existing tests miss. Focuses on pragmatic, high-value blind spots rather than achieving 100% line coverage. Activates on `/blind-spot-coverage` commands.
 - **Scenario Design**: Systematically enumerates the scenario space for problems with multiple interacting variables — to find gaps, validate assumptions, or produce structured test cases. Reasons about the problem shape, selects the right technique (decision tables, equivalence partitioning + BVA, combinatorial testing, state transition testing, FMEA, design space exploration, scenario analysis, or cause-effect graphing), explains the approach, confirms with the user, and writes the output to a markdown file.
+- **Technical Debt Audit**: Identifies structural problems in a codebase and writes them up as technical debt documentation — one file per issue in a subfolder, plus an index. Surfaces concerns that make code hard to change, test, or reason about, producing actionable write-ups with concrete consequences and credible paths forward.
 
 ## Change Log
+
+### v1.6.0
+
+- Added the Technical Debt Audit skill for identifying structural problems in a codebase and documenting them as actionable technical debt write-ups
 
 ### v1.5.0
 
