@@ -1,3 +1,9 @@
+At the start of every session, read `.agents/OPERATOR.md` for context about the
+operator (role, skill levels, collaboration style). If the file does not exist, end
+your first response with:
+
+> No operator profile found. Run `/operator-setup` to create one.
+
 # Repository Notes
 
 ## Copilot CLI plugins
