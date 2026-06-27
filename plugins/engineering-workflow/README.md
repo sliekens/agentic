@@ -44,6 +44,11 @@ In the normal path, the Distiller turns a messy ask into a clean handoff, the Te
 
 ## Change Log
 
+### v1.7.1
+
+- Expanded the Technical Debt Audit issue catalog with two archetypes: misplaced responsibility / leaky layer (a generic component bakes in narrower domain policy) and contract divergence / hidden behaviour (an implementation does more or less than its signature and docs promise)
+- Added a short remediation hint to each archetype in the catalog ("usually points to ...") as a starting direction to confirm during solution design
+
 ### v1.7.0
 
 - Added the Operator Setup skill for creating or updating `.agents/OPERATOR.md` to capture operator profile, skill levels, and collaboration preferences
