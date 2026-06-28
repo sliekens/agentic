@@ -44,6 +44,10 @@ In the normal path, the Distiller turns a messy ask into a clean handoff, the Te
 
 ## Change Log
 
+### v1.7.3
+
+- Extended the Technical Debt Audit issue catalog with a new archetype: non-local coupling (code whose correctness cannot be assessed locally because effects, preconditions, or decisions are scattered across files or layers)
+
 ### v1.7.2
 
 - Extended the Technical Debt Audit issue catalog with a new archetype: silent error suppression (an error is caught and discarded, causing a misleading loud failure downstream that points away from the real source)
