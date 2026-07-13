@@ -78,6 +78,20 @@ Each file follows this structure:
 
 Cross-reference liberally. If fixing issue A is a prerequisite for fixing issue B, say so in both files.
 
+### AGENTS.md pointer
+
+- Check the repo root for `AGENTS.md` (or `CLAUDE.md`).
+- If one exists and doesn't already reference the index, append:
+
+  ```markdown
+  ## Technical debt
+
+  Before changing code in an area, check [docs/technical-debt.md](docs/technical-debt.md) for relevant entries and read the linked write-up first. Treat it as context, not a mandate — let it inform the change instead of expanding scope to fix it.
+  ```
+
+- Skip if a pointer already exists.
+- If neither file exists, don't create one. Flag it in the Step 5 summary and ask whether to add one.
+
 ## Step 5 — Confirm with the user
 
-After writing, summarize what was documented in a short message: how many issues, which area they're in, and whether any cross-reference each other in a meaningful dependency order. If the user wants to track priority or effort, that's a separate conversation — don't add it to the files unless asked.
+After writing, summarize what was documented in a short message: how many issues, which area they're in, and whether any cross-reference each other in a meaningful dependency order. Note whether a pointer to the index was added to `AGENTS.md` (or `CLAUDE.md`), or whether neither file exists and the user should decide if one should be created. If the user wants to track priority or effort, that's a separate conversation — don't add it to the files unless asked.

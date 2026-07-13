@@ -44,6 +44,10 @@ In the normal path, the Distiller turns a messy ask into a clean handoff, the Te
 
 ## Change Log
 
+### v1.8.0
+
+- Technical Debt Audit now links the index from the repo's `AGENTS.md` (or `CLAUDE.md`) after writing it, so any agent working in the repo later — not just this skill — knows to check it before changing code in a covered area
+
 ### v1.7.3
 
 - Extended the Technical Debt Audit issue catalog with a new archetype: non-local coupling (code whose correctness cannot be assessed locally because effects, preconditions, or decisions are scattered across files or layers)
