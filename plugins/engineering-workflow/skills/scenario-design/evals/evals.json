@@ -3,53 +3,27 @@
   "evals": [
     {
       "id": 1,
-      "prompt": "I'm writing a `createBooking` method that accepts three integer parameters: `numberOfGuests` (valid range 1–20), `durationDays` (valid range 1–30), and `advanceDays` (how many days ahead the booking is made, valid range 1–365). I know I need input validation but I'm not sure what test cases to write. What scenarios should I cover?",
-      "expected_output": "An equivalence partitioning + boundary value analysis table for all three parameters, identifying valid/invalid partitions and boundary values (e.g. 0, 1, 2 at the lower boundary and 19, 20, 21 at the upper). A derived test case list showing the representative inputs and expected outcomes. Any gaps (e.g. null/undefined handling, multi-parameter invalid combos) flagged explicitly. Output written to a markdown file.",
+      "prompt": "We have a `SubscriptionPlan` entity with a `status` field (trial, active, past_due, cancelled, expired) that changes based on billing events (payment_success, payment_failure, cancel, trial_end, reactivate). It also has a `seatCount` field with valid range 1-500 that customers can change at any time. I want a systematic pass over this before we ship the billing rewrite -- what am I missing?",
+      "expected_output": "Recognition that this problem has two distinct shapes: a stateful entity (status field driven by billing events) and a range-constrained input (seatCount). Diagnosis naming both dimensions and recommending state-transition-testing for the status field and equivalence-partitioning-bva for seatCount as two separate passes, confirming with the user before proceeding, then handing off to (or applying) both techniques and tying the two outputs together in a combined summary.",
       "files": [],
       "expectations": [
-        "The output identifies valid and invalid equivalence classes for all three parameters (numberOfGuests, durationDays, advanceDays)",
-        "The output includes boundary values: at-minimum, just-below-minimum, just-above-minimum, at-maximum, just-above-maximum for at least one parameter",
-        "The output includes a derived test case table or list with representative values and expected outcomes",
-        "The output explicitly flags gaps or unspecified behavior (e.g. null/missing inputs, behavior when multiple parameters are simultaneously invalid)",
-        "The output is written to a markdown file (not only printed to conversation)"
+        "The response explicitly identifies that the problem has two distinct shapes/dimensions rather than forcing everything into one technique",
+        "State-transition testing (or equivalent reasoning about states and events) is recommended for the status field",
+        "Equivalence partitioning / boundary value analysis (or equivalent reasoning about valid/invalid ranges and boundaries) is recommended for the seatCount field",
+        "The response confirms the approach with the user (or clearly explains the plan) before producing the full output",
+        "A combined output or summary ties the two technique outputs together rather than leaving them as two disconnected artifacts"
       ]
     },
     {
       "id": 2,
-      "prompt": "We have a `PaymentTransaction` entity with these states: `initiated`, `processing`, `completed`, `failed`, `refunded`, `disputed`. The events that can occur are: `submit`, `process_success`, `process_failure`, `request_refund`, `refund_success`, `dispute`, `resolve_dispute`. I want to find gaps in our state handling — are there transitions we haven't handled? Can you map this out systematically?",
-      "expected_output": "A state transition table covering all (state, event) combinations. Every cell should specify either the next state + action, 'ignored/no-op', or be flagged as a gap (undefined behavior). Invalid transitions (e.g. refunding a transaction that hasn't completed) should be called out. A derived test case list. Optionally a Mermaid diagram. Output written to a markdown file.",
+      "prompt": "I want to map out all the transitions in our order fulfillment state machine -- states are placed, picking, packed, shipped, delivered, returned, cancelled. Can you build me the transition table?",
+      "expected_output": "Recognition that the problem shape is unambiguous (a single state machine, no other dimension mentioned) and the technique is clearly state-transition-testing. The skill should hand off to (or directly apply) state-transition-testing rather than re-deriving its own separate procedure, and should not force in unrelated techniques like decision tables or FMEA just to seem thorough.",
       "files": [],
       "expectations": [
-        "The output includes a state transition table with states as rows (or columns) and events as columns (or rows)",
-        "The table covers all combinations of the 6 states and 7 events (or clearly notes which combinations are out of scope)",
-        "At least 3 undefined or invalid transitions are identified as gaps",
-        "The output includes a derived test case list with start state, event, expected next state, and expected action",
-        "The output is written to a markdown file"
-      ]
-    },
-    {
-      "id": 3,
-      "prompt": "Our notification system lets users configure four settings: `email_enabled` (on or off), `sms_enabled` (on or off), `push_enabled` (on or off), and `digest_mode` (immediate, daily, or weekly). I want to write a test suite for this but I'm not sure how to approach it systematically — what would you suggest?",
-      "expected_output": "Recognition that this is a combinatorial problem. Selection and explanation of pairwise/all-pairs testing as the right technique (vs. exhaustive or random). A pairwise test matrix with significantly fewer rows than exhaustive. Pair coverage verified. Exhaustive vs. pairwise count stated. Gaps or constraints documented. Output written to a markdown file.",
-      "files": [],
-      "expectations": [
-        "The output explains why pairwise/combinatorial testing is the right technique for this problem",
-        "The output produces a test matrix with fewer rows than the 24 exhaustive combinations",
-        "The test matrix guarantees that every pair of factor values appears at least once (pairwise coverage)",
-        "The output states both the exhaustive combination count (24) and the pairwise count",
-        "The output is written to a markdown file"
-      ]
-    }
-    ,{
-      "id": 4,
-      "prompt": "Our checkout has three discount factors: loyalty members get 5% off, orders over $100 get 10% off, and a valid promo code gives 15% off. I want to make sure we've thought through all the cases — particularly what happens when a customer qualifies for more than one. Can you help me map this out?",
-      "expected_output": "A decision table covering all 8 combinations of the three binary conditions. The 5 single-condition and no-condition rules are clear; the 4 multi-condition combinations (loyalty+order, loyalty+promo, order+promo, all three) should be flagged as gaps because the stacking rule is unspecified — additive (30%), maximum (15%), or a separate tiered schedule. Output written to a markdown file.",
-      "files": [],
-      "expectations": [
-        "The output uses a decision table format with conditions as rows and rules (combinations) as columns",
-        "All 8 combinations of the three binary conditions are represented",
-        "The 4 multi-condition combinations are identified as gaps or unresolved questions because the discount stacking rule is not specified",
-        "The output explicitly names the stacking ambiguity (e.g. additive vs. max vs. tiered) as the key unresolved question",
+        "The response identifies state-transition testing as the technique with no unnecessary hedging, since the problem shape is unambiguous",
+        "The response does not stack in unrelated techniques (e.g. decision tables, FMEA) for a problem that only has one dimension",
+        "A state transition table or equivalent structured artifact covering the 7 states and the fulfillment events is produced",
+        "Gaps (undefined or invalid transitions) are flagged explicitly",
         "The output is written to a markdown file"
       ]
     }

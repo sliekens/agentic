@@ -1,23 +1,26 @@
-# Cause-Effect Graphing
+---
+name: cause-effect-graphing
+description: Build a directed graph connecting causes (inputs, preconditions) to effects (outputs, actions) through AND/OR/NOT logic nodes, then mechanically derive a decision table from it — for when conditional logic is too tangled to see clearly in prose or needs to be communicated visually to non-technical stakeholders. Use when the user has complex validation logic with nested conditions (more than ~5 interacting conditions), says the spec seems to have implicit logical structure they can't quite see, or needs to communicate business rules to stakeholders via a diagram. For straightforward conditional logic with 5 or fewer conditions, the decision-tables skill is the faster, more direct path to the same result — reach for this only when the graph itself adds clarity.
+---
 
-## What it is
+# Cause-Effect Graphing
 
 A cause-effect graph is a directed graph that maps **causes** (inputs, conditions, preconditions) to **effects** (outputs, outcomes, system actions) through intermediate logical nodes (AND, OR, NOT). It captures the same information as a decision table but makes the causal structure visible — which is valuable when the logic is complex and non-obvious.
 
-Cause-effect graphing was developed as a precursor to decision table derivation: you build the graph first, then mechanically derive the decision table from it.
+Cause-effect graphing was developed as a precursor to decision table derivation: build the graph first, then mechanically derive the decision table from it.
 
-**In practice**: for most software problems, go straight to a decision table. Use cause-effect graphing when:
-1. The logical structure between causes is complex (nested ANDs and ORs) and you want to validate the structure before building the table
-2. You're communicating to stakeholders who benefit from seeing the causal chain visually
+**In practice**: for most software problems, go straight to a decision table (see the `decision-tables` skill). Use cause-effect graphing when:
+1. The logical structure between causes is complex (nested ANDs and ORs) and validating the structure before building the table adds value
+2. Communicating to stakeholders who benefit from seeing the causal chain visually
 
 ## When to use
 
 - Complex validation logic with nested conditions
 - Communicating business rules to non-technical stakeholders via diagrams
-- When you suspect the spec has implicit logical structure that isn't visible in prose form
+- When the spec seems to have implicit logical structure that isn't visible in prose form
 - As a precursor to decision table derivation when conditions > 5 and interactions are complex
 
-For straightforward conditional logic with ≤ 5 conditions, go directly to a decision table.
+For straightforward conditional logic with ≤ 5 conditions, use the `decision-tables` skill directly instead.
 
 ## How to apply
 
@@ -76,7 +79,7 @@ graph LR
 
 ### Derived decision table
 
-After building the graph, derive the decision table. See `references/decision-tables.md` for the table format. The decision table is the output you'll use for test case derivation — the graph is a working artifact to reach it.
+After building the graph, derive the decision table (see the `decision-tables` skill for the table format). The decision table is the output used for test case derivation — the graph is a working artifact to reach it.
 
 ```markdown
 ## Cause-Effect Graph: [Name]
@@ -109,3 +112,10 @@ After building the graph, derive the decision table. See `references/decision-ta
 - Rule combining C2=Y and C3=Y not explicitly tested — covered by Rule 1
 - Behavior when C2=Y and C1=N is constrained-impossible; document this explicitly
 ```
+
+## Procedure
+
+1. Understand the logic being modeled and confirm the causes and effects with the user if either is ambiguous.
+2. Apply the steps above: build the graph, add constraints, derive the decision table, simplify.
+3. Write the output to a markdown file. Suggested default: `docs/analysis/<artifact-name>-cause-effect.md`. Ask the user if they'd prefer a different path before writing. Include the Mermaid graph alongside the derived table.
+4. Summarize: the number of effects/rules derived and any gaps or constrained-impossible combinations flagged.

@@ -39,10 +39,25 @@ In the normal path, the Distiller turns a messy ask into a clean handoff, the Te
 - **Orient**: Helps the user fill a specific gap in their mental model of a system. Activates on "why doesn't X happen" or "how does Y work" questions where the user understands most of the system but one piece is missing. Always reads back an interpretation of the gap before answering so misunderstandings are caught early.
 - **Realign**: Identifies and reports inconsistencies in code patterns across the codebase, helping to maintain a coherent engineering workflow.
 - **Blind Spot Coverage**: Analyzes a specific method to identify uncovered edge cases, error paths, and unusual inputs that existing tests miss. Focuses on pragmatic, high-value blind spots rather than achieving 100% line coverage. Activates on `/blind-spot-coverage` commands.
-- **Scenario Design**: Systematically enumerates the scenario space for problems with multiple interacting variables — to find gaps, validate assumptions, or produce structured test cases. Reasons about the problem shape, selects the right technique (decision tables, equivalence partitioning + BVA, combinatorial testing, state transition testing, FMEA, design space exploration, scenario analysis, or cause-effect graphing), explains the approach, confirms with the user, and writes the output to a markdown file.
+- **Scenario Design**: Diagnoses the shape of a scenario-enumeration problem and routes to the right systematic technique below — used when the shape isn't obvious yet or when a problem spans multiple dimensions (e.g. a stateful entity with range-constrained fields) that need more than one technique. Confirms the plan with the user, then hands off to the matching technique skill(s) and ties multi-technique outputs together. Jump straight to a technique skill instead when it's already clear which one fits.
+  - **Decision Tables**: Maps every combination of independent yes/no conditions to an outcome, flagging combinations nobody has specified — authorization rules, validation logic, discount/pricing stacking.
+  - **Equivalence Partitioning + BVA**: Partitions an input's valid/invalid ranges into classes and probes the boundaries between them, where bugs disproportionately cluster — numeric ranges, string lengths, date windows, enums.
+  - **Combinatorial Testing**: Shrinks an exponential combination space (feature flags, config options) down to a minimal pairwise/orthogonal-array test matrix that still guarantees every pair of values is covered.
+  - **State Transition Testing**: Models a stateful entity as states and event-triggered transitions, finding missing transitions, unreachable states, trap states, and undefined invalid-transition handling.
+  - **FMEA**: Enumerates failure modes for a system or process and scores each by severity, likelihood, and detectability into a prioritized risk register (RPN = S × O × D).
+  - **Design Space Exploration**: Maps the dimensions along which an architectural or design decision can vary, places known options in that space, and surfaces unexplored regions before a decision locks in.
+  - **Scenario Analysis**: Builds named, narrative scenarios — who does what under what conditions — to find requirements gaps and give stakeholders a shared vocabulary to validate against.
+  - **Cause-Effect Graphing**: Builds a directed graph connecting causes to effects through AND/OR/NOT logic, then derives a decision table from it — for tangled conditional logic or stakeholder-facing visuals.
 - **Technical Debt Audit**: Identifies structural problems in a codebase and writes them up as technical debt documentation — one file per issue in a subfolder, plus an index. Surfaces concerns that make code hard to change, test, or reason about, producing actionable write-ups with concrete consequences and credible paths forward.
 
 ## Change Log
+
+### v1.9.0
+
+- Split Scenario Design's eight specification-based techniques into standalone skills (Decision Tables, Equivalence Partitioning + BVA, Combinatorial Testing, State Transition Testing, FMEA, Design Space Exploration, Scenario Analysis, Cause-Effect Graphing) so a technique can be jumped to directly instead of always routing through Scenario Design
+- Scenario Design is now a lean pivot: it diagnoses problem shape and hands off to the matching technique skill(s), rather than embedding every technique's procedure itself
+- Decision Tables now gives each rule column a short descriptive name and a one-line plain-English summary, not just a numbered Y/N grid
+- Scenario Analysis now explicitly considers adversarial/misuse actors, not just legitimate ones
 
 ### v1.8.0
 

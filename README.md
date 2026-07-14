@@ -47,23 +47,30 @@ agentic/
     │   └── skills/
     │       ├── blind-spot-coverage/
     │       │   └── SKILL.md
+    │       ├── cause-effect-graphing/
+    │       │   └── SKILL.md
+    │       ├── combinatorial-testing/
+    │       │   └── SKILL.md
+    │       ├── decision-tables/
+    │       │   └── SKILL.md
+    │       ├── design-space-exploration/
+    │       │   └── SKILL.md
+    │       ├── equivalence-partitioning-bva/
+    │       │   └── SKILL.md
+    │       ├── fmea/
+    │       │   └── SKILL.md
     │       ├── operator-setup/
     │       │   └── SKILL.md
     │       ├── orient/
     │       │   └── SKILL.md
     │       ├── realign/
     │       │   └── SKILL.md
+    │       ├── scenario-analysis/
+    │       │   └── SKILL.md
     │       ├── scenario-design/
-    │       │   ├── SKILL.md
-    │       │   └── references/
-    │       │       ├── cause-effect-graphing.md
-    │       │       ├── decision-tables.md
-    │       │       ├── design-space-exploration.md
-    │       │       ├── equivalence-partitioning-bva.md
-    │       │       ├── fmea.md
-    │       │       ├── orthogonal-array-testing.md
-    │       │       ├── scenario-analysis.md
-    │       │       └── state-transition-testing.md
+    │       │   └── SKILL.md
+    │       ├── state-transition-testing/
+    │       │   └── SKILL.md
     │       └── technical-debt-audit/
     │           └── SKILL.md
     ├── synouser/

@@ -1,6 +1,9 @@
-# FMEA — Failure Mode and Effects Analysis
+---
+name: fmea
+description: Systematically enumerate failure modes for a system or process, score each by severity, likelihood, and detectability, and produce a prioritized risk register (Risk Priority Number = S × O × D). Use eagerly whenever the user asks "what could go wrong", wants a pre-launch risk review of a critical feature, is turning an incident postmortem into a broader risk analysis, needs a documented risk assessment for compliance, or describes a new system/integration where failure modes haven't been catalogued yet. Trigger on "failure modes", "risk register", "what are the risks here", "RPN", "risk priority", or "what should we worry about before we ship this". Prefer this over scenario-analysis when the output needs to be quantified and prioritized rather than narrative; if the user wants stakeholder-facing stories instead of a scored register, the scenario-analysis skill fits better.
+---
 
-## What it is
+# FMEA — Failure Mode and Effects Analysis
 
 FMEA is a systematic method for identifying how a system can fail, what the consequences of each failure are, and which failures to prioritize based on their risk. The core output is a **risk register**: a table where each row is a failure mode, scored by severity, probability of occurrence, and detectability. The product of these three scores — the **Risk Priority Number (RPN)** — determines what to address first.
 
@@ -13,6 +16,8 @@ FMEA originated in hardware engineering (aerospace, automotive) but applies equa
 - Incident post-mortems (to turn "what happened" into "what else could happen")
 - Compliance contexts that require documented risk assessment
 - Any situation where the user asks "what could go wrong?" and needs a prioritized, structured answer
+
+FMEA is quantitative — it produces a ranked register. If the user needs narrative, stakeholder-facing situations instead (who does what, under what conditions), the `scenario-analysis` skill is the better fit.
 
 ## Scoring
 
@@ -38,7 +43,7 @@ Each failure mode is scored on three dimensions (1–10 scale):
 - 7–8: Low — likely to go undetected until user reports
 - 9–10: Undetectable — no current mechanism to detect it
 
-**RPN = S × O × D**. Higher RPN = higher priority. Focus mitigation on items with RPN > 100 (or whatever threshold fits your risk appetite).
+**RPN = S × O × D**. Higher RPN = higher priority. Focus mitigation on items with RPN > 100 (or whatever threshold fits the user's risk appetite).
 
 ## How to apply
 
@@ -95,3 +100,10 @@ For high-RPN items, propose specific mitigations that reduce S, O, or D. Priorit
 - No analysis of authentication failures — should be added as a separate FMEA pass
 - Detection scores are estimates; actual monitoring coverage not verified
 ```
+
+## Procedure
+
+1. Understand the system/component/process being analyzed and confirm the scope with the user — FMEA sprawls badly on an unbounded scope.
+2. Apply the steps above: decompose into components, enumerate failure modes, score, calculate RPN, recommend mitigations.
+3. Write the output to a markdown file. Suggested default: `docs/analysis/<artifact-name>-fmea.md`. Ask the user if they'd prefer a different path before writing.
+4. Summarize: the highest-RPN items and the single most urgent recommended action.

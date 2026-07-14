@@ -1,12 +1,15 @@
-# Equivalence Partitioning & Boundary Value Analysis
+---
+name: equivalence-partitioning-bva
+description: Turn a parameter's valid/invalid ranges into a systematic set of test cases by partitioning the input space into equivalence classes and probing the boundaries between them, where bugs disproportionately cluster. Use eagerly whenever the user needs test cases for numeric ranges (age, quantity, price, days), string length constraints, date/time windows, or enumerated sets — especially when they say "what test cases should I write for this", "what are the edge cases", "boundary values", "off-by-one", or describe a method with documented min/max constraints on its parameters. Also trigger when they mention validation logic for a range-constrained input and aren't sure what to check beyond the happy path. If the problem is really about combinations of many independent parameters rather than the boundaries of one, the scenario-design skill can route to combinatorial-testing instead.
+---
 
-## What it is
+# Equivalence Partitioning & Boundary Value Analysis
 
 **Equivalence partitioning (EP)** divides the input space into classes where every value in a class is expected to behave the same way. Once you've identified the classes, you need only one representative value per class — the assumption being that if one value in the class passes (or fails), they all will.
 
 **Boundary value analysis (BVA)** zooms in on the edges between equivalence classes, because bugs disproportionately cluster at boundaries. For every boundary between a valid and invalid class, you test: the value just inside, the boundary value itself, and the value just outside.
 
-EP and BVA almost always apply together. EP gives you the structure; BVA tells you which values within that structure to actually test.
+EP and BVA almost always apply together — EP gives you the structure, BVA tells you which values within that structure are actually worth testing. Don't do one without the other; a class list with no boundary probes misses where the bugs actually live, and boundary values with no class structure miss whole categories of invalid input (nulls, wrong types, empty collections).
 
 ## When to use
 
@@ -56,7 +59,7 @@ For non-numeric boundaries (e.g., string patterns, date formats), identify the a
 
 ### Step 4 — Combine across parameters
 
-If the method has multiple parameters, note which combinations are worth testing together. You don't need every combination (that's combinatorial testing), but interactions between boundary cases are worth flagging.
+If the method has multiple parameters, note which combinations are worth testing together. You don't need every combination (that's combinatorial testing — see the `combinatorial-testing` skill if the combination space itself is the concern), but interactions between boundary cases are worth flagging.
 
 ## Output format
 
@@ -101,3 +104,10 @@ Produce one table per parameter, followed by a combined test case list.
 - Behavior for negative zero (-0) not specified
 - No documentation on behavior when both age and name are invalid simultaneously
 ```
+
+## Procedure
+
+1. Understand the method or component being analyzed and confirm the documented (or inferred) valid ranges for each parameter with the user if unclear.
+2. Apply the steps above: partition each parameter, then derive boundary values, then combine into a test case list.
+3. Write the output to a markdown file. Suggested default: `docs/analysis/<artifact-name>-ep-bva.md`. Ask the user if they'd prefer a different path before writing.
+4. Summarize: how many parameters and test cases were covered, and any gaps flagged (e.g. null handling, multi-parameter invalid combos) that need a product or spec decision.

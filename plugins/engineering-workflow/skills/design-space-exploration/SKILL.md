@@ -1,8 +1,11 @@
+---
+name: design-space-exploration
+description: Map the dimensions along which an architectural or design decision can vary, place known options in that space, and surface the unexplored regions and implicit assumptions before a decision gets locked in. Use eagerly when the user is deciding *how* to build something and multiple valid approaches exist — sync vs. async, monolith vs. services, REST vs. GraphQL, storage tier choices, algorithm/data-structure selection — or asks "what are all the ways we could solve this", "what are we not considering", "help me think through this design tradeoff", or wants a systematic pass before committing to an architecture. Unlike the other scenario-design techniques, this isn't about testing an existing system — it's about reasoning about the space of possible systems before one is built. If the goal is instead to enumerate test scenarios for something already built or specified, another scenario-design technique fits better.
+---
+
 # Design Space Exploration
 
-## What it is
-
-Design space exploration maps the **parameter space of a design decision** — the dimensions along which a design can vary — to understand what tradeoffs exist, which regions of the space have been explored, and which haven't. Unlike the other techniques in this toolkit, design space exploration is not about testing an existing system; it's about reasoning about the *space of possible systems* before committing to one.
+Design space exploration maps the **parameter space of a design decision** — the dimensions along which a design can vary — to understand what tradeoffs exist, which regions of the space have been explored, and which haven't. Unlike techniques that test an existing system, design space exploration is about reasoning about the *space of possible systems* before committing to one.
 
 The goal is to surface implicit assumptions ("we assumed X had to be true, but does it?"), identify regions of the design space that haven't been considered, and make tradeoffs explicit so decisions are deliberate rather than accidental.
 
@@ -33,11 +36,11 @@ For each dimension, list the meaningful design choices. These don't have to be b
 
 ### Step 3 — Map known design points
 
-For each design option you've already considered, place it in the space by specifying its value on each dimension. This makes implicit choices explicit.
+For each design option already considered, place it in the space by specifying its value on each dimension. This makes implicit choices explicit.
 
 ### Step 4 — Identify unexplored regions
 
-Look for combinations of dimension values that don't correspond to any design you've considered. Ask: is this region unexplored by accident, or is it genuinely unviable? A region you haven't looked at might contain a better design; a region you've ruled out should have an explicit reason.
+Look for combinations of dimension values that don't correspond to any design considered so far. Ask: is this region unexplored by accident, or is it genuinely unviable? A region nobody has looked at might contain a better design; a region ruled out should have an explicit reason.
 
 ### Step 5 — Evaluate tradeoffs
 
@@ -50,7 +53,7 @@ The goal is not to find the "best" design but to make the tradeoffs visible so t
 
 ### Step 6 — Identify constraints that eliminate regions
 
-Some combinations are impossible given system constraints (latency requirements, team skill, cost budget, existing infrastructure). Document these as constraints — they explain why you're not exploring certain regions.
+Some combinations are impossible given system constraints (latency requirements, team skill, cost budget, existing infrastructure). Document these as constraints — they explain why certain regions aren't being explored.
 
 ## Output format
 
@@ -94,3 +97,10 @@ Design B addresses the resilience requirement but introduces conflict resolution
 - What are the actual consistency requirements? "Strong" may be over-specified for this use case.
 - Does the team have operational experience with distributed caches?
 ```
+
+## Procedure
+
+1. Understand the decision being made and confirm the dimensions with the user — this step benefits most from a quick back-and-forth, since the "right" dimensions are rarely obvious upfront.
+2. Apply the steps above: enumerate values, map known design points, identify unexplored regions, evaluate tradeoffs.
+3. Write the output to a markdown file. Suggested default: `docs/analysis/<decision-name>-design-space.md`. Ask the user if they'd prefer a different path before writing.
+4. Summarize: the recommendation (if one emerges), and which unexplored region is most worth a follow-up spike.

@@ -1,6 +1,9 @@
-# State Transition Testing
+---
+name: state-transition-testing
+description: Model a system as states connected by event-triggered transitions, and find the (state, event) combinations nobody has defined — missing transitions, unreachable states, trap states, and undefined invalid-transition handling. Use eagerly whenever the user describes an entity with a status field that changes based on events (order lifecycle, payment states, approval workflows, auth flows, wizard/multi-step forms, protocol states) and wants to find gaps in the transition logic, or asks "what transitions are we missing", "can this get stuck", "map out this state machine", or "what happens if this event fires in the wrong state". If the problem is really about combinations of independent input parameters rather than a stateful entity, the scenario-design skill can route elsewhere.
+---
 
-## What it is
+# State Transition Testing
 
 State transition testing models a system as a finite set of **states** connected by **transitions** (triggered by events or conditions). The goal is to enumerate all valid and invalid transitions, verify that each one produces the correct next state and output, and identify transitions that are missing, unreachable, or undefined.
 
@@ -135,3 +138,10 @@ Include the Mermaid diagram when the user will benefit from a visual overview; a
 | 8 | draft | approve | draft (unchanged) | Error / ignored | Invalid transition |
 | 9 | approved | approve | ??? | ??? | **GAP: behavior undefined** |
 ```
+
+## Procedure
+
+1. Understand the entity being modeled and confirm the state and event lists with the user if either is ambiguous.
+2. Apply the steps above to build the full (state × event) table, then derive test cases.
+3. Write the output to a markdown file. Suggested default: `docs/analysis/<artifact-name>-state-transitions.md`. Ask the user if they'd prefer a different path before writing. Include the Mermaid diagram only if it adds value beyond the table.
+4. Summarize: how many gaps, unreachable states, or trap states were found, and what the highest-priority fix is.
