@@ -17,7 +17,7 @@
     {
       "name": "engineering-workflow",
       "source": "./plugins/engineering-workflow",
-      "description": "Workflow agents for prompt distillation, technical design analysis, and implementation."
+      "description": "Engineering skills for operator setup, consistency audits, test design, scenario analysis, and technical debt reviews."
     },
     {
       "name": "synouser",

@@ -39,11 +39,6 @@ agentic/
     │   │   └── plugin.json
     │   ├── .claude-plugin/
     │   │   └── plugin.json
-    │   ├── agents/
-    │   │   ├── distiller.agent.md
-    │   │   ├── implementer.agent.md
-    │   │   ├── technical-analyst.agent.md
-    │   │   └── technical-writer.agent.md
     │   └── skills/
     │       ├── blind-spot-coverage/
     │       │   └── SKILL.md
@@ -60,8 +55,6 @@ agentic/
     │       ├── fmea/
     │       │   └── SKILL.md
     │       ├── operator-setup/
-    │       │   └── SKILL.md
-    │       ├── orient/
     │       │   └── SKILL.md
     │       ├── realign/
     │       │   └── SKILL.md
