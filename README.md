@@ -40,6 +40,8 @@ agentic/
     │   ├── .claude-plugin/
     │   │   └── plugin.json
     │   └── skills/
+    │       ├── analyze-complexity/
+    │       │   └── SKILL.md
     │       ├── blind-spot-coverage/
     │       │   └── SKILL.md
     │       ├── cause-effect-graphing/

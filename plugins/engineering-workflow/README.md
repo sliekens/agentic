@@ -1,9 +1,10 @@
 # Engineering Workflow Plugin
 
-This plugin provides engineering skills for operator setup, consistency auditing, test design, scenario analysis, and technical debt reviews.
+This plugin provides engineering skills for operator setup, consistency auditing, test design, scenario analysis, complexity analysis, and technical debt reviews.
 
 ## Skills
 
+- **Analyze Complexity**: Analyze a code path, system, workflow, or architecture to separate inherent complexity imposed by requirements and external constraints from accidental complexity introduced by the current implementation, then define the invariants a simplification must preserve. Use when the user asks what complexity is necessary or unavoidable, asks for inherent vs. accidental complexity, says a pipeline or subsystem feels too complex, wants to understand why something cannot be simpler, or wants a complexity map before refactoring. Also use before a technical-debt audit when unavoidable constraints and removable implementation complexity are mixed together. Do not use for exploring competing greenfield designs (`design-space-exploration`) or for a pure structural-debt inventory that does not need an invariant boundary (`technical-debt-audit`).
 - **Operator Setup**: Creates or updates `.agents/OPERATOR.md` in the current workspace — a personal profile that tells AI models who you are, your skill levels, and how you like to collaborate. Only invoked when the user explicitly runs `/operator-setup`.
 - **Realign**: Identifies and reports inconsistencies in code patterns across the codebase, helping to maintain a coherent engineering workflow.
 - **Blind Spot Coverage**: Analyzes a specific method to identify uncovered edge cases, error paths, and unusual inputs that existing tests miss. Focuses on pragmatic, high-value blind spots rather than achieving 100% line coverage. Activates on `/blind-spot-coverage` commands.
@@ -19,6 +20,10 @@ This plugin provides engineering skills for operator setup, consistency auditing
 - **Technical Debt Audit**: Identifies structural problems in a codebase and writes them up as technical debt documentation — one file per issue in a subfolder, plus an index. Surfaces concerns that make code hard to change, test, or reason about, producing actionable write-ups with concrete consequences and credible paths forward.
 
 ## Change Log
+
+### v2.1.0
+
+- Added Analyze Complexity for separating required invariants from removable implementation complexity before refactoring or technical-debt analysis
 
 ### v2.0.0
 
