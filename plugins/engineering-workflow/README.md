@@ -5,7 +5,7 @@ This plugin provides engineering skills for operator setup, consistency auditing
 ## Skills
 
 - **Analyze Complexity**: Analyze a code path, system, workflow, or architecture to separate inherent complexity imposed by requirements and external constraints from accidental complexity introduced by the current implementation, then define the invariants a simplification must preserve. Use when the user asks what complexity is necessary or unavoidable, asks for inherent vs. accidental complexity, says a pipeline or subsystem feels too complex, wants to understand why something cannot be simpler, or wants a complexity map before refactoring. Also use before a technical-debt audit when unavoidable constraints and removable implementation complexity are mixed together. Do not use for exploring competing greenfield designs (`design-space-exploration`) or for a pure structural-debt inventory that does not need an invariant boundary (`technical-debt-audit`).
-- **Operator Setup**: Creates or updates `.agents/OPERATOR.md` in the current workspace — a personal profile that tells AI models who you are, your skill levels, and how you like to collaborate. Only invoked when the user explicitly runs `/operator-setup`.
+- **Operator Setup**: Creates or updates a personal operator profile under `~/.agents/projects/` (index + `OPERATOR.md`) — who you are, skill calibration, and collaboration preferences for this project. Worktree-safe via main worktree path; wires only the current harness. Only invoked when the user explicitly runs `/operator-setup`.
 - **Realign**: Identifies and reports inconsistencies in code patterns across the codebase, helping to maintain a coherent engineering workflow.
 - **Blind Spot Coverage**: Analyzes a specific method to identify uncovered edge cases, error paths, and unusual inputs that existing tests miss. Focuses on pragmatic, high-value blind spots rather than achieving 100% line coverage. Activates on `/blind-spot-coverage` commands.
 - **Scenario Design**: Diagnoses the shape of a scenario-enumeration problem and routes to the right systematic technique below — used when the shape isn't obvious yet or when a problem spans multiple dimensions (e.g. a stateful entity with range-constrained fields) that need more than one technique. Confirms the plan with the user, then hands off to the matching technique skill(s) and ties multi-technique outputs together. Jump straight to a technique skill instead when it's already clear which one fits.
@@ -20,6 +20,11 @@ This plugin provides engineering skills for operator setup, consistency auditing
 - **Technical Debt Audit**: Identifies structural problems in a codebase and writes them up as technical debt documentation — one file per issue in a subfolder, plus an index. Surfaces concerns that make code hard to change, test, or reason about, producing actionable write-ups with concrete consequences and credible paths forward.
 
 ## Change Log
+
+### v2.2.0
+
+- Operator Setup now stores profiles under `~/.agents/projects/` with a path index (main worktree as canonical root), skill calibration menus instead of proficiency scores, minimal mid-session patches, and harness-only self-wiring — no workspace `OPERATOR.md` or repo `AGENTS.md` injection
+- Operator Setup migrates and removes legacy workspace `.agents/OPERATOR.md` and the old repo `AGENTS.md`/`CLAUDE.md` operator-load blurb after a successful home-profile write
 
 ### v2.1.0
 
