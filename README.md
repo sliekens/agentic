@@ -84,23 +84,34 @@ agentic/
     │   └── skills/
     │       └── ugacltool/
     │           └── SKILL.md
-    └── aspire/
+    ├── aspire/
+    │   ├── .plugin/
+    │   │   └── plugin.json
+    │   ├── .claude-plugin/
+    │   │   └── plugin.json
+    │   └── skills/
+    │       └── aspire-deploy-pipeline/
+    │           ├── SKILL.md
+    │           └── references/
+    │               ├── adding-steps.md
+    │               ├── gotchas.md
+    │               ├── multi-step-factory.md
+    │               ├── ordering-steps.md
+    │               ├── parameters-and-config.md
+    │               ├── pipeline-services.md
+    │               ├── tagging-steps.md
+    │               └── well-known-steps.md
+    └── technical-writing/
+        ├── README.md
         ├── .plugin/
         │   └── plugin.json
         ├── .claude-plugin/
         │   └── plugin.json
         └── skills/
-            └── aspire-deploy-pipeline/
+            └── ste-writing/
                 ├── SKILL.md
-                └── references/
-                    ├── adding-steps.md
-                    ├── gotchas.md
-                    ├── multi-step-factory.md
-                    ├── ordering-steps.md
-                    ├── parameters-and-config.md
-                    ├── pipeline-services.md
-                    ├── tagging-steps.md
-                    └── well-known-steps.md
+                ├── LICENSE
+                └── UPSTREAM.md
 ```
 <!-- STRUCTURE_END -->
 

@@ -1,0 +1,17 @@
+{
+  "name": "technical-writing",
+  "description": "Skills for clear, controlled technical prose.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Steven Liekens",
+    "email": "hey@stevenliekens.be"
+  },
+  "license": "MIT",
+  "keywords": [
+    "technical-writing",
+    "documentation",
+    "simplified-technical-english",
+    "ste",
+    "prose"
+  ]
+}

@@ -44,7 +44,10 @@ def format_plugin_tree(root: Path) -> list[str]:
         items = []
         readme = plugin_dir / "README.md"
         if readme.exists():
-            items.append(("README.md                 # How plugin packages are organized", None, True))
+            readme_label = "README.md"
+            if plugin_dir.name == "engineering-workflow":
+                readme_label += "                 # How plugin packages are organized"
+            items.append((readme_label, None, True))
         
         for d in [".plugin", ".claude-plugin"]:
             dir_path = plugin_dir / d
@@ -100,6 +103,16 @@ def format_plugin_tree(root: Path) -> list[str]:
                         children = []
                         skill_md = [f for f in sd.iterdir() if f.is_file() and f.name == "SKILL.md"]
                         children.extend(skill_md)
+
+                        license_files = [
+                            f for f in sd.iterdir()
+                            if f.is_file() and f.name in {"LICENSE", "LICENSE.md", "LICENSE.txt"}
+                        ]
+                        children.extend(sorted(license_files))
+
+                        upstream_notice = sd / "UPSTREAM.md"
+                        if upstream_notice.is_file():
+                            children.append(upstream_notice)
                         
                         ref_dir = sd / "references"
                         if ref_dir.exists() and any(f.is_file() for f in ref_dir.iterdir()):

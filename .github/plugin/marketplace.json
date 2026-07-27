@@ -33,6 +33,11 @@
       "name": "aspire",
       "source": "./plugins/aspire",
       "description": ".NET Aspire tooling for app host development and deployment."
+    },
+    {
+      "name": "technical-writing",
+      "source": "./plugins/technical-writing",
+      "description": "Skills for clear, controlled technical prose."
     }
   ]
 }
