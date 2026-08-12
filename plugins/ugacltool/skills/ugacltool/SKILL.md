@@ -1,11 +1,15 @@
 ---
 name: ugacltool
-description: UGREEN utility for editing FACLs
+description: UGREEN NAS ACL utility. Use when editing UGOS ACLs, converting a path back to Linux mode, or choosing between chmod and del_all.
 ---
 
 # ugacltool — UGREEN NAS ACL Utility
 
-`ugacltool` manages Access Control Lists (ACLs) on UGREEN NASync devices. Standard Linux `chown`/`chmod` commands don't work correctly on these devices due to their custom ACL system — use `ugacltool` instead.
+`ugacltool` reads and edits UGOS ACLs on UGREEN NASync volumes. Those ACLs sit beside POSIX mode bits and win when present: `ls` can show `0777` while a process is still denied.
+
+`chmod` on an inode writes the requested mode bits and clears the UGOS ACL on that inode. That is how a path returns to **Linux mode**. `ugacltool del_all` is not that operation.
+
+Use `ugacltool` when the path should keep a UGOS ACL (SMB / File Manager users). Use `chmod` / `chown` when the path should be ordinary POSIX.
 
 ## Quick Reference
 
@@ -53,6 +57,18 @@ ugacltool del_one PATH INDEX
 ugacltool del_all PATH
 ```
 
+`del_all` deletes the UGOS ACL and leaves POSIX mode `000` (`d---------` / `----------`). It does not restore Linux mode.
+
+On a directory with an explicit (level 0) ACL:
+
+- that inode becomes mode `000`
+- children that still carry **inherited** ACLs also become `000`
+- children already in Linux mode are left alone — but a `000` parent still blocks the tree
+
+On a directory that only has inherited ACLs (no explicit ACE), `del_all` can no-op and leave the inherited ACL in place.
+
+To return a path to Linux mode, `chmod` it. See [Return to Linux mode](#return-to-linux-mode).
+
 ### Replace an ACL entry by index
 
 ```bash
@@ -92,6 +108,20 @@ ugacltool enforce_inherit PATH
 ```
 
 Re-applies the parent directory's inheritable ACLs to all children. Useful when inheritance was broken or not applied automatically.
+
+## Return to Linux mode
+
+Issue `chmod` on the inode you want in Linux mode. The call writes the mode bits you pass and clears the UGOS ACL on that inode only.
+
+```bash
+chmod 0775 PATH
+```
+
+A tool that stats first and skips `chmod` when the displayed mode already matches will leave the UGOS ACL in place. The displayed bits can already be `0777` while an ACL still denies. Always invoke `chmod` when converting.
+
+Non-recursive `chmod` converts only that inode. Inherited children keep a UGOS ACL (the ACE list may be rewritten to match the new parent mode). Recursive `chmod` converts each visited inode and is the way to wipe ACLs from a tree whose contents should be ordinary POSIX.
+
+`chmod` on a `000` inode the caller owns recovers it to Linux mode at the requested bits. `ugacltool get PATH` then prints `It's Linux mode`.
 
 ## Commands
 
@@ -258,7 +288,7 @@ These commands return exit code 0 even when the operation fails or the path does
 | Message | Meaning |
 |---|---|
 | `path not exist` | The target path does not exist |
-| `It's Linux mode` | The filesystem does not support UGREEN ACLs |
+| `It's Linux mode` | No UGOS ACL on this inode (converted to Linux mode, or the filesystem has none) |
 | `add acl fail: Operation not supported` | Filesystem doesn't support ACLs (e.g., `/tmp`) |
 | `param err.` / `param fail` | Malformed ACL entry |
 | `Index out of range` | ACL index doesn't exist or is not level 0 |
