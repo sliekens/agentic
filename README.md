@@ -77,6 +77,7 @@ agentic/
     │       └── synouser/
     │           └── SKILL.md
     ├── ugacltool/
+    │   ├── README.md
     │   ├── .plugin/
     │   │   └── plugin.json
     │   ├── .claude-plugin/
