@@ -1,16 +1,16 @@
 # Plugins
 
-This folder contains installable GitHub Copilot CLI plugins. Each plugin has its own `plugin.json` manifest and can bundle one or more skills, plus any supporting references, agents, hooks, or MCP/LSP configs.
+This folder contains portable Agent Plugins 1.0 packages. Each package has a canonical root `plugin.json` and one or more Agent Skills. Codex, GitHub Copilot CLI, and VS Code use the portable package directly. A generated Claude Code manifest adapts the package for that client's required manifest location.
 
 ## Structure
 
 ```
 plugins/
 └── <plugin-name>/
-    ├── plugin.json
-    ├── agents/                    # optional
-    │   └── <agent-name>.agent.md
-    └── skills/                    # optional
+    ├── plugin.json                # canonical Agent Plugins 1.0 manifest
+    ├── .claude-plugin/
+    │   └── plugin.json            # generated Claude Code adapter
+    └── skills/
         └── <skill-name>/
             ├── SKILL.md
             └── references/        # optional
@@ -18,11 +18,16 @@ plugins/
 
 ## Creating a new plugin
 
-1. Create `plugins/<plugin-name>/plugin.json`.
-2. Add one or more components such as `agents/<agent-name>.agent.md` or `skills/<skill-name>/SKILL.md`.
-3. Keep the plugin name, bundled component names, and marketplace entry aligned.
-4. Add `references/` only when a root skill needs to stay concise and delegate details.
+1. Create `plugins/<plugin-name>/plugin.json` with the Agent Plugins 1.0 schema.
+2. Add each skill at `skills/<skill-name>/SKILL.md`.
+3. Add root `mcp.json` only when the package includes a portable MCP server configuration.
+4. Run `python scripts/sync-plugin-metadata.py` to generate the Claude Code adapter.
+5. Run `python scripts/validate-agent-plugins.py`.
+
+Do not create `.plugin/plugin.json` or `.codex-plugin/plugin.json`. Hooks, custom agents, commands, LSP servers, UI resources, and marketplace entries are not portable Agent Plugins 1.0 components.
 
 ## Publishing in this repo
 
 If you want the plugin to be installable from this repository's marketplace, add an entry to [`.github/plugin/marketplace.json`](../.github/plugin/marketplace.json).
+
+The GitHub and Claude marketplace catalogs are distribution metadata outside the individual plugin packages. Root `plugin.json` remains canonical for duplicated name, description, and version metadata.

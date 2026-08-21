@@ -1,4 +1,5 @@
 {
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "engineering-workflow",
   "description": "Engineering skills for operator setup, complexity and consistency analysis, test design, scenario analysis, and technical debt reviews.",
   "version": "2.2.0",

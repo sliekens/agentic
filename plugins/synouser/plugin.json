@@ -1,6 +1,7 @@
 {
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "synouser",
-  "description": "Synology utilities for managing local users and groups.",
+  "description": "Synology utilities for managing local users and groups with synouser and synogroup.",
   "version": "1.0.0",
   "author": {
     "name": "Steven Liekens",

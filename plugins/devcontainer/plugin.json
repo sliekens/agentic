@@ -1,4 +1,5 @@
 {
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "devcontainer",
   "description": "Create, update, validate, operate, and troubleshoot Dev Container setups, including `devcontainer.json`, local or published Dev Container Features, and `devcontainer` CLI workflows.",
   "version": "1.0.1",

@@ -11,32 +11,32 @@
   "plugins": [
     {
       "name": "devcontainer",
-      "source": "./plugins/devcontainer",
+      "source": "plugins/devcontainer",
       "description": "Create, update, validate, operate, and troubleshoot Dev Container setups, including `devcontainer.json`, local or published Dev Container Features, and `devcontainer` CLI workflows."
     },
     {
       "name": "engineering-workflow",
-      "source": "./plugins/engineering-workflow",
+      "source": "plugins/engineering-workflow",
       "description": "Engineering skills for operator setup, complexity and consistency analysis, test design, scenario analysis, and technical debt reviews."
     },
     {
       "name": "synouser",
-      "source": "./plugins/synouser",
+      "source": "plugins/synouser",
       "description": "Synology utilities for managing local users and groups with synouser and synogroup."
     },
     {
       "name": "ugacltool",
-      "source": "./plugins/ugacltool",
+      "source": "plugins/ugacltool",
       "description": "UGREEN NAS ACL utility for editing file and directory permissions with ugacltool."
     },
     {
       "name": "aspire",
-      "source": "./plugins/aspire",
+      "source": "plugins/aspire",
       "description": ".NET Aspire tooling for app host development and deployment."
     },
     {
       "name": "technical-writing",
-      "source": "./plugins/technical-writing",
+      "source": "plugins/technical-writing",
       "description": "Skills for clear, controlled technical prose."
     }
   ]

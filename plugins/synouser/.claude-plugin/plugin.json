@@ -1,6 +1,6 @@
 {
   "name": "synouser",
-  "description": "Synology utilities for managing local users and groups.",
+  "description": "Synology utilities for managing local users and groups with synouser and synogroup.",
   "version": "1.0.0",
   "author": {
     "name": "Steven Liekens",

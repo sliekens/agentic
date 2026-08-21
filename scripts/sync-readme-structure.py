@@ -12,7 +12,7 @@ from pathlib import Path
 
 
 def format_plugin_tree(root: Path) -> list[str]:
-    """Format the plugins directory tree, showing only key files (SKILL.md, plugin.json, references/)."""
+    """Format the plugin tree, including portable manifests and the Claude adapter."""
     lines = []
     plugins_path = root / "plugins"
     
@@ -40,7 +40,7 @@ def format_plugin_tree(root: Path) -> list[str]:
             lines.append("    ├── " + plugin_dir.name + "/")
             prefix = "    │   "
         
-        # Get items in order: README.md, .plugin, .claude-plugin, agents, skills
+        # Get items in order: README.md, portable manifest, adapters, agents, skills
         items = []
         readme = plugin_dir / "README.md"
         if readme.exists():
@@ -49,7 +49,11 @@ def format_plugin_tree(root: Path) -> list[str]:
                 readme_label += "                 # How plugin packages are organized"
             items.append((readme_label, None, True))
         
-        for d in [".plugin", ".claude-plugin"]:
+        portable_manifest = plugin_dir / "plugin.json"
+        if portable_manifest.exists():
+            items.append(("plugin.json", None, True))
+
+        for d in [".claude-plugin"]:
             dir_path = plugin_dir / d
             if dir_path.exists():
                 items.append((d + "/", dir_path, False))
@@ -79,7 +83,7 @@ def format_plugin_tree(root: Path) -> list[str]:
                 sub_prefix = prefix + ("    " if is_last_item else "│   ")
                 
                 if name.startswith("."):
-                    # .plugin or .claude-plugin - just show plugin.json
+                    # Client adapter - just show plugin.json
                     lines.append(sub_prefix + "└── plugin.json")
                 elif name == "agents/":
                     # List agent files
@@ -177,13 +181,13 @@ def update_readme():
     
     # Add .claude-plugin
     tree_lines.append("├── .claude-plugin/")
-    tree_lines.append("│   └── marketplace.json          # Canonical marketplace catalog (Claude & Copilot)")
+    tree_lines.append("│   └── marketplace.json          # Claude Code distribution catalog")
     
     # Add .github
     tree_lines.append("├── .github/")
     tree_lines.append("│   ├── copilot-instructions.md   # Global Copilot instructions for this repo")
     tree_lines.append("│   └── plugin/")
-    tree_lines.append("│       └── marketplace.json      # Compatibility copy of marketplace catalog")
+    tree_lines.append("│       └── marketplace.json      # GitHub Copilot distribution catalog")
     
     # Add plugins tree
     tree_lines.append("└── plugins/")

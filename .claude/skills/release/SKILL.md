@@ -1,6 +1,6 @@
 ---
 name: release
-description: Release a new version of a plugin in this repo. Handles the full release workflow — bumps both plugin.json files, writes the changelog entry, updates the Skills or Agents section of the plugin README when something new was added, and runs the sync scripts. Invoke with /release or whenever the user says "bump version", "release plugin", "add changelog", "run sync", or asks to publish or version a plugin after making any kind of change.
+description: Release a new version of a plugin in this repo. Bumps the canonical portable manifest, writes the changelog entry, updates the plugin README when needed, regenerates the Claude adapter and catalogs, and validates the packages. Invoke with /release or when the user asks to bump, publish, or version a plugin.
 ---
 
 # Release Plugin
@@ -11,7 +11,7 @@ Publish a new version of a plugin after changes have been made to it.
 
 If the plugin name is not stated, infer it from context (the last file edited, the last skill or agent mentioned). If genuinely ambiguous, ask.
 
-Read the current version from `plugins/<name>/.plugin/plugin.json`.
+Read the current version from canonical `plugins/<name>/plugin.json`.
 
 ## Step 2 — Detect what changed
 
@@ -46,11 +46,7 @@ Skip this step if nothing new was added — an existing skill or agent updated i
 
 ## Step 4 — Bump the version
 
-Update the `"version"` field in both:
-- `plugins/<name>/.plugin/plugin.json`
-- `plugins/<name>/.claude-plugin/plugin.json`
-
-Both must match. If only one exists, update whichever is present.
+Update the `"version"` field in `plugins/<name>/plugin.json`. Do not edit the generated Claude Code adapter directly.
 
 ## Step 5 — Add the changelog entry
 
@@ -64,20 +60,23 @@ In `plugins/<name>/README.md`, insert a new section immediately after `## Change
 
 One bullet per logical change. Describe what was added or fixed, not the steps taken to do it.
 
-## Step 6 — Run the sync script
+## Step 6 — Run the sync scripts
 
 ```bash
+python3 scripts/sync-plugin-metadata.py
 python3 scripts/sync-readme-structure.py
 ```
 
-Run from the repo root. This updates the directory tree in the top-level `README.md`.
+Run from the repo root. The first command regenerates the Claude Code adapter plus duplicated marketplace fields from the portable manifest. The second updates the directory tree in the top-level `README.md`.
 
 ## Step 7 — Verify and report
 
 Run `git diff` and confirm:
-- Version bumped consistently in both plugin.json files
+- Version changed in the root portable manifest and synchronized Claude adapter
 - Changelog entry present
 - README Skills/Agents section updated if applicable
 - Root README structure updated
+
+Run `python3 scripts/validate-agent-plugins.py` and stop if it fails.
 
 Tell the user the new version number and the one-line changelog summary. Ask if they want to commit.

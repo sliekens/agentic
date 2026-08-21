@@ -1,6 +1,6 @@
 # Agentic
 
-My personal collection of GitHub Copilot customizations — prompts, instructions, agents, and installable plugins — tailored to my specific workflows and preferences.
+My personal collection of portable Agent Plugins, skills, and client-specific agent customizations.
 
 > Inspired by [github/awesome-copilot](https://github.com/github/awesome-copilot).
 
@@ -11,15 +11,14 @@ My personal collection of GitHub Copilot customizations — prompts, instruction
 agentic/
 ├── AGENTS.md                    # Repo-specific rules for future Codex/Copilot work
 ├── .claude-plugin/
-│   └── marketplace.json          # Canonical marketplace catalog (Claude & Copilot)
+│   └── marketplace.json          # Claude Code distribution catalog
 ├── .github/
 │   ├── copilot-instructions.md   # Global Copilot instructions for this repo
 │   └── plugin/
-│       └── marketplace.json      # Compatibility copy of marketplace catalog
+│       └── marketplace.json      # GitHub Copilot distribution catalog
 └── plugins/
     ├── devcontainer/
-    │   ├── .plugin/
-    │   │   └── plugin.json
+    │   ├── plugin.json
     │   ├── .claude-plugin/
     │   │   └── plugin.json
     │   └── skills/
@@ -35,8 +34,7 @@ agentic/
     │               └── troubleshooting.md
     ├── engineering-workflow/
     │   ├── README.md                 # How plugin packages are organized
-    │   ├── .plugin/
-    │   │   └── plugin.json
+    │   ├── plugin.json
     │   ├── .claude-plugin/
     │   │   └── plugin.json
     │   └── skills/
@@ -69,8 +67,7 @@ agentic/
     │       └── technical-debt-audit/
     │           └── SKILL.md
     ├── synouser/
-    │   ├── .plugin/
-    │   │   └── plugin.json
+    │   ├── plugin.json
     │   ├── .claude-plugin/
     │   │   └── plugin.json
     │   └── skills/
@@ -78,16 +75,14 @@ agentic/
     │           └── SKILL.md
     ├── ugacltool/
     │   ├── README.md
-    │   ├── .plugin/
-    │   │   └── plugin.json
+    │   ├── plugin.json
     │   ├── .claude-plugin/
     │   │   └── plugin.json
     │   └── skills/
     │       └── ugacltool/
     │           └── SKILL.md
     ├── aspire/
-    │   ├── .plugin/
-    │   │   └── plugin.json
+    │   ├── plugin.json
     │   ├── .claude-plugin/
     │   │   └── plugin.json
     │   └── skills/
@@ -104,8 +99,7 @@ agentic/
     │               └── well-known-steps.md
     └── technical-writing/
         ├── README.md
-        ├── .plugin/
-        │   └── plugin.json
+        ├── plugin.json
         ├── .claude-plugin/
         │   └── plugin.json
         └── skills/
@@ -118,12 +112,14 @@ agentic/
 
 ## Quick Reference
 
-| Folder            | Purpose                                                     | File type              |
-| ----------------- | ----------------------------------------------------------- | ---------------------- |
-| `.claude-plugin/` | Canonical marketplace catalog (Claude & Copilot compatible) | `marketplace.json`     |
-| `.github/plugin/` | Compatibility copy of marketplace catalog for Copilot users | `marketplace.json`     |
-| `plugins/`        | Installable plugins with bundled skills and agents          | `**/*.md`, `**/*.json` |
+| Folder            | Purpose                                                 | File type              |
+| ----------------- | ------------------------------------------------------- | ---------------------- |
+| `.claude-plugin/` | Claude Code distribution catalog                       | `marketplace.json`     |
+| `.github/plugin/` | GitHub Copilot distribution catalog                    | `marketplace.json`     |
+| `plugins/`        | Portable Agent Plugins with a generated Claude adapter | `**/*.md`, `**/*.json` |
 
 ## Usage
 
-Plugins can be installed from `plugins/<name>/` directly or exposed through the canonical [`/.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) (compatible with both Claude Code and GitHub Copilot CLI). A compatibility copy is maintained at [`.github/plugin/marketplace.json`](.github/plugin/marketplace.json) for Copilot users.
+Each `plugins/<name>/` directory is a portable Agent Plugins 1.0 package. Codex, GitHub Copilot CLI, and VS Code consume its root `plugin.json`. Only Claude Code uses a generated `.claude-plugin/plugin.json` compatibility adapter.
+
+The [GitHub Copilot catalog](.github/plugin/marketplace.json) and [Claude Code catalog](.claude-plugin/marketplace.json) are separate distribution metadata. Run `python scripts/sync-plugin-metadata.py` after changing portable metadata, and run `python scripts/validate-agent-plugins.py` before release.

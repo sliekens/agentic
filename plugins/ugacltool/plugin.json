@@ -1,6 +1,7 @@
 {
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ugacltool",
-  "description": "UGREEN utility for editing FACLs.",
+  "description": "UGREEN NAS ACL utility for editing file and directory permissions with ugacltool.",
   "version": "1.0.1",
   "author": {
     "name": "Steven Liekens",
