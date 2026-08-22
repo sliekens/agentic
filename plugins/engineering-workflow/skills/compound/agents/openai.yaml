@@ -1,0 +1,5 @@
+interface:
+  display_name: "Compound"
+  short_description: "Hill-climb the instruction surface from this session's friction"
+policy:
+  allow_implicit_invocation: false

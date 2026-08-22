@@ -1,10 +1,11 @@
 # Engineering Workflow Plugin
 
-This plugin provides engineering skills for operator setup, consistency auditing, test design, scenario analysis, complexity analysis, and technical debt reviews.
+This plugin provides engineering skills for operator setup, session compounding, consistency auditing, test design, scenario analysis, complexity analysis, and technical debt reviews.
 
 ## Skills
 
 - **Analyze Complexity**: Analyze a code path, system, workflow, or architecture to separate inherent complexity imposed by requirements and external constraints from accidental complexity introduced by the current implementation, then define the invariants a simplification must preserve. Use when the user asks what complexity is necessary or unavoidable, asks for inherent vs. accidental complexity, says a pipeline or subsystem feels too complex, wants to understand why something cannot be simpler, or wants a complexity map before refactoring. Also use before a technical-debt audit when unavoidable constraints and removable implementation complexity are mixed together. Do not use for exploring competing greenfield designs (`design-space-exploration`) or for a pure structural-debt inventory that does not need an invariant boundary (`technical-debt-audit`).
+- **Compound**: End-of-session hill climb on the instruction surface. Encodes this session's friction into AGENTS.md, skills, or project docs so the next session does not pay the same tax.
 - **Operator Setup**: Creates or updates a personal operator profile under `~/.agents/projects/` (index + `OPERATOR.md`) — who you are, skill calibration, and collaboration preferences for this project. Worktree-safe via main worktree path; wires only the current harness. Only invoked when the user explicitly runs `/operator-setup`.
 - **Realign**: Identifies and reports inconsistencies in code patterns across the codebase, helping to maintain a coherent engineering workflow.
 - **Blind Spot Coverage**: Analyzes a specific method to identify uncovered edge cases, error paths, and unusual inputs that existing tests miss. Focuses on pragmatic, high-value blind spots rather than achieving 100% line coverage. Activates on `/blind-spot-coverage` commands.
@@ -20,6 +21,10 @@ This plugin provides engineering skills for operator setup, consistency auditing
 - **Technical Debt Audit**: Identifies structural problems in a codebase and writes them up as technical debt documentation — one file per issue in a subfolder, plus an index. Surfaces concerns that make code hard to change, test, or reason about, producing actionable write-ups with concrete consequences and credible paths forward.
 
 ## Change Log
+
+### v2.3.0
+
+- Added Compound for end-of-session hill climbing on the instruction surface (AGENTS.md, skills, project docs)
 
 ### v2.2.0
 

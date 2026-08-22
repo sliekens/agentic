@@ -46,6 +46,8 @@ agentic/
     │       │   └── SKILL.md
     │       ├── combinatorial-testing/
     │       │   └── SKILL.md
+    │       ├── compound/
+    │       │   └── SKILL.md
     │       ├── decision-tables/
     │       │   └── SKILL.md
     │       ├── design-space-exploration/
