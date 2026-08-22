@@ -9,6 +9,8 @@ Agent Plugins 1.0 is the canonical package format in this repository. Keep porta
 - `.claude-plugin/plugin.json` is a generated Claude Code adapter.
 - `.github/plugin/marketplace.json` and `.claude-plugin/marketplace.json` are client-specific distribution catalogs for many plugins.
 
+Before committing changes under `plugins/`, `.claude-plugin/`, or `.github/plugin/`, follow the `release` skill.
+
 Reference:
 
 - https://docs.github.com/en/copilot/reference/cli-plugin-reference
@@ -35,7 +37,7 @@ Claude Code uses a generated `.claude-plugin/plugin.json` compatibility adapter.
 
 Codex, GitHub Copilot CLI, and VS Code use the root portable package in this repository. Do not create `.codex-plugin/plugin.json`.
 
-Run `python scripts/sync-plugin-metadata.py` after changing a root portable manifest. Do not bundle duplicate skills in the Claude Code adapter.
+Do not bundle duplicate skills in the Claude Code adapter.
 
 ### `marketplace.json`
 
@@ -54,11 +56,4 @@ In `.github/plugin/marketplace.json`, use explicit repo-root-relative `source` p
 
 ### Update rule
 
-When adding or reorganizing a plugin:
-
-1. Update that plugin's `plugin.json`.
-2. Run `python scripts/sync-plugin-metadata.py` to regenerate the Claude Code adapter and duplicated catalog metadata.
-3. Update the appropriate marketplace catalog only when plugin discovery or distribution policy changes.
-4. Keep `plugin.json` operational and marketplace catalogs distribution-oriented.
-5. Run `python scripts/validate-agent-plugins.py`.
-6. Treat root `plugin.json` as canonical when resolving any mismatch.
+When adding or reorganizing a plugin, follow the `release` skill. Keep `plugin.json` operational and marketplace catalogs distribution-oriented. Treat root `plugin.json` as canonical when resolving any mismatch.

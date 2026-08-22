@@ -134,16 +134,17 @@ def validate_plugin(plugin_root: Path) -> list[str]:
 
 
 def main() -> int:
-    sync = subprocess.run(
-        [sys.executable, str(ROOT / "scripts" / "sync-plugin-metadata.py"), "--check"],
-        cwd=ROOT,
-        text=True,
-        capture_output=True,
-        check=False,
-    )
     errors = []
-    if sync.returncode:
-        errors.append(sync.stdout.strip() or sync.stderr.strip())
+    for script in ("sync-plugin-metadata.py", "sync-readme-structure.py"):
+        sync = subprocess.run(
+            [sys.executable, str(ROOT / "scripts" / script), "--check"],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if sync.returncode:
+            errors.append(sync.stdout.strip() or sync.stderr.strip() or f"{script} --check failed")
 
     plugin_roots = sorted(
         path for path in PLUGINS.iterdir() if path.is_dir() and (path / "plugin.json").exists()

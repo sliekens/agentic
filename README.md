@@ -124,4 +124,4 @@ agentic/
 
 Each `plugins/<name>/` directory is a portable Agent Plugins 1.0 package. Codex, GitHub Copilot CLI, and VS Code consume its root `plugin.json`. Only Claude Code uses a generated `.claude-plugin/plugin.json` compatibility adapter.
 
-The [GitHub Copilot catalog](.github/plugin/marketplace.json) and [Claude Code catalog](.claude-plugin/marketplace.json) are separate distribution metadata. Run `python scripts/sync-plugin-metadata.py` after changing portable metadata, and run `python scripts/validate-agent-plugins.py` before release.
+The [GitHub Copilot catalog](.github/plugin/marketplace.json) and [Claude Code catalog](.claude-plugin/marketplace.json) are separate distribution metadata. Follow the `release` skill before committing plugin, catalog, or adapter changes — it regenerates those files and the README tree, then validates.

@@ -8,6 +8,7 @@ Uses HTML comments to mark the auto-generated section:
 Run from the repo root: python scripts/sync-readme-structure.py
 """
 
+import argparse
 from pathlib import Path
 
 
@@ -144,67 +145,69 @@ def format_plugin_tree(root: Path) -> list[str]:
     return lines
 
 
-def update_readme():
-    """Update the README.md structure section."""
-    repo_root = Path(__file__).parent.parent
-    readme_path = repo_root / "README.md"
-    
-    # Read the current README
-    with open(readme_path, 'r', encoding='utf-8') as f:
-        content = f.read()
-    
-    # Find the structure section between HTML comments
+def rendered_readme(repo_root: Path, content: str) -> str | None:
+    """Return README.md with a regenerated structure section, or None if markers are missing."""
     start_marker = "<!-- STRUCTURE_START -->"
     end_marker = "<!-- STRUCTURE_END -->"
-    
+
     start_idx = content.find(start_marker)
     end_idx = content.find(end_marker)
-    
+
     if start_idx == -1 or end_idx == -1:
-        print("Error: Could not find STRUCTURE_START and/or STRUCTURE_END markers in README.md")
-        print("Please add these HTML comments to mark the auto-generated section:")
-        print(f"  {start_marker}")
-        print(f"  ... (the tree structure) ...")
-        print(f"  {end_marker}")
-        return False
-    
-    # Extract the prefix (everything before START marker including the marker)
-    prefix = content[:start_idx + len(start_marker)]
-    # Extract the suffix (everything after END marker)
+        return None
+
+    prefix = content[: start_idx + len(start_marker)]
     suffix = content[end_idx:]
-    
-    # Generate the new tree
+
     tree_lines = ["agentic/"]
-    
-    # Add root files
     tree_lines.append("├── AGENTS.md                    # Repo-specific rules for future Codex/Copilot work")
-    
-    # Add .claude-plugin
     tree_lines.append("├── .claude-plugin/")
     tree_lines.append("│   └── marketplace.json          # Claude Code distribution catalog")
-    
-    # Add .github
     tree_lines.append("├── .github/")
     tree_lines.append("│   ├── copilot-instructions.md   # Global Copilot instructions for this repo")
     tree_lines.append("│   └── plugin/")
     tree_lines.append("│       └── marketplace.json      # GitHub Copilot distribution catalog")
-    
-    # Add plugins tree
     tree_lines.append("└── plugins/")
-    plugin_lines = format_plugin_tree(repo_root)
-    tree_lines.extend(plugin_lines)
-    
-    # Build the new content with backticks
+    tree_lines.extend(format_plugin_tree(repo_root))
+
     new_tree = "\n".join(tree_lines)
-    new_content = prefix + "\n```\n" + new_tree + "\n```\n" + suffix
-    
-    # Write the updated README
-    with open(readme_path, 'w', encoding='utf-8') as f:
-        f.write(new_content)
-    
-    print("Successfully updated README.md structure section")
-    return True
+    return prefix + "\n```\n" + new_tree + "\n```\n" + suffix
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--check", action="store_true", help="Fail when the README structure section is out of date."
+    )
+    args = parser.parse_args()
+
+    repo_root = Path(__file__).resolve().parent.parent
+    readme_path = repo_root / "README.md"
+    content = readme_path.read_text(encoding="utf-8")
+    expected = rendered_readme(repo_root, content)
+
+    if expected is None:
+        print("Error: Could not find STRUCTURE_START and/or STRUCTURE_END markers in README.md")
+        print("Please add these HTML comments to mark the auto-generated section:")
+        print("  <!-- STRUCTURE_START -->")
+        print("  ... (the tree structure) ...")
+        print("  <!-- STRUCTURE_END -->")
+        return 1
+
+    if args.check:
+        if content == expected:
+            print("README structure is synchronized.")
+            return 0
+        print("out of date: README.md")
+        return 1
+
+    if content != expected:
+        readme_path.write_text(expected, encoding="utf-8")
+        print("Successfully updated README.md structure section")
+    else:
+        print("README structure is synchronized.")
+    return 0
 
 
 if __name__ == "__main__":
-    update_readme()
+    raise SystemExit(main())
