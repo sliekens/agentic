@@ -1,14 +1,15 @@
 # Engineering Workflow Plugin
 
-This plugin provides engineering skills for operator setup, session compounding, consistency auditing, test design, scenario analysis, complexity analysis, and technical debt reviews.
+This plugin provides engineering skills for flaky-build diagnosis, operator setup, session compounding, consistency auditing, test design, scenario analysis, complexity analysis, and technical debt reviews.
 
 ## Skills
 
 - **Analyze Complexity**: Analyze a code path, system, workflow, or architecture to separate inherent complexity imposed by requirements and external constraints from accidental complexity introduced by the current implementation, then define the invariants a simplification must preserve. Use when the user asks what complexity is necessary or unavoidable, asks for inherent vs. accidental complexity, says a pipeline or subsystem feels too complex, wants to understand why something cannot be simpler, or wants a complexity map before refactoring. Also use before a technical-debt audit when unavoidable constraints and removable implementation complexity are mixed together. Do not use for exploring competing greenfield designs (`design-space-exploration`) or for a pure structural-debt inventory that does not need an invariant boundary (`technical-debt-audit`).
+- **Blind Spot Coverage**: Analyzes a specific method to identify uncovered edge cases, error paths, and unusual inputs that existing tests miss. Focuses on pragmatic, high-value blind spots rather than achieving 100% line coverage. Activates on `/blind-spot-coverage` commands.
 - **Compound**: End-of-session hill climb on the instruction surface. Encodes this session's friction into AGENTS.md, skills, or project docs so the next session does not pay the same tax.
+- **Flaky Build Investigation**: Diagnose intermittent build, test, packaging, or CI pipeline outcomes by comparing equivalent runs and correlating logs, configuration, code, environment, ordering, and timing. Use when a build or test sometimes fails, a rerun passes, behavior depends on runner or execution order, or the user asks why the build is flaky. Default to a bounded read-only investigation. Do not use for consistently failing builds, unrelated runtime defects, or release and deployment execution.
 - **Operator Setup**: Creates or updates a personal operator profile under `~/.agents/projects/` (index + `OPERATOR.md`) — who you are, skill calibration, and collaboration preferences for this project. Worktree-safe via main worktree path; wires only the current harness. Only invoked when the user explicitly runs `/operator-setup`.
 - **Realign**: Identifies and reports inconsistencies in code patterns across the codebase, helping to maintain a coherent engineering workflow.
-- **Blind Spot Coverage**: Analyzes a specific method to identify uncovered edge cases, error paths, and unusual inputs that existing tests miss. Focuses on pragmatic, high-value blind spots rather than achieving 100% line coverage. Activates on `/blind-spot-coverage` commands.
 - **Scenario Design**: Diagnoses the shape of a scenario-enumeration problem and routes to the right systematic technique below — used when the shape isn't obvious yet or when a problem spans multiple dimensions (e.g. a stateful entity with range-constrained fields) that need more than one technique. Confirms the plan with the user, then hands off to the matching technique skill(s) and ties multi-technique outputs together. Jump straight to a technique skill instead when it's already clear which one fits.
   - **Decision Tables**: Maps every combination of independent yes/no conditions to an outcome, flagging combinations nobody has specified — authorization rules, validation logic, discount/pricing stacking.
   - **Equivalence Partitioning + BVA**: Partitions an input's valid/invalid ranges into classes and probes the boundaries between them, where bugs disproportionately cluster — numeric ranges, string lengths, date windows, enums.
@@ -21,6 +22,10 @@ This plugin provides engineering skills for operator setup, session compounding,
 - **Technical Debt Audit**: Identifies structural problems in a codebase and writes them up as technical debt documentation — one file per issue in a subfolder, plus an index. Surfaces concerns that make code hard to change, test, or reason about, producing actionable write-ups with concrete consequences and credible paths forward.
 
 ## Change Log
+
+### v2.4.0
+
+- Added Flaky Build Investigation for bounded, evidence-led diagnosis of intermittent local and CI build failures
 
 ### v2.3.0
 

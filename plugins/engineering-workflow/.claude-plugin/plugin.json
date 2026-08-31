@@ -1,7 +1,7 @@
 {
   "name": "engineering-workflow",
-  "description": "Engineering skills for complexity and consistency analysis, test design, scenario analysis, and technical debt reviews.",
-  "version": "2.3.0",
+  "description": "Engineering skills for build-failure diagnosis, complexity and consistency analysis, test design, scenario analysis, and technical debt reviews.",
+  "version": "2.4.0",
   "author": {
     "name": "Steven Liekens",
     "email": "hey@stevenliekens.be"
@@ -11,6 +11,8 @@
     "workflow",
     "engineering",
     "analysis",
+    "diagnostics",
+    "ci",
     "complexity",
     "architecture",
     "design",

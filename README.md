@@ -54,6 +54,8 @@ agentic/
     │       │   └── SKILL.md
     │       ├── equivalence-partitioning-bva/
     │       │   └── SKILL.md
+    │       ├── flaky-build-investigation/
+    │       │   └── SKILL.md
     │       ├── fmea/
     │       │   └── SKILL.md
     │       ├── operator-setup/

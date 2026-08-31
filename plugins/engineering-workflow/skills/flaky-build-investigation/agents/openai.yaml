@@ -1,0 +1,7 @@
+interface:
+  display_name: "Flaky Build Investigation"
+  short_description: "Diagnose intermittent build and CI failures"
+  default_prompt: "Use $flaky-build-investigation to determine why this build fails intermittently without changing source or CI configuration."
+
+policy:
+  allow_implicit_invocation: true
