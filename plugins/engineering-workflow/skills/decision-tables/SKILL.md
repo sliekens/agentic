@@ -9,6 +9,12 @@ A decision table maps every meaningful combination of conditions (inputs, states
 
 Decision tables are the right tool when behavior is governed by **combinations of independent yes/no conditions** and you want to ensure every combination is specified — and none are missing or contradictory. The value isn't the table itself, it's the columns nobody thought about: the multi-condition combinations that the spec never actually addresses.
 
+## Existing product context
+
+For work on an existing product, look for a product, feature, or capability map in project guidance and documentation (often `docs/product-map.md`). Read the relevant sections, or reuse map context already established in this task. Use its relevant capabilities and conditions to frame the rules; verify precise predicates and outcomes in implementation or requirements.
+
+Reference the map and existing feature IDs where useful. Verify relevant stale or conflicting claims against current code/tests; the map is context, not a complete specification. If absent, continue from available evidence without creating one. Keep proposed behavior in the planning output; map creation or refresh is a separate task, and implemented changes can be reflected afterward.
+
 ## When to use
 
 - Authorization logic ("if role is admin AND resource is active AND user owns it...")

@@ -1,7 +1,7 @@
 {
   "name": "engineering-workflow",
-  "description": "Engineering skills for build-failure diagnosis, complexity and consistency analysis, test design, scenario analysis, and technical debt reviews.",
-  "version": "2.4.0",
+  "description": "Engineering skills for product mapping, build-failure diagnosis, complexity and consistency analysis, test design, scenario analysis, and technical debt reviews.",
+  "version": "2.5.0",
   "author": {
     "name": "Steven Liekens",
     "email": "hey@stevenliekens.be"
@@ -18,6 +18,7 @@
     "design",
     "testing",
     "quality",
-    "technical-debt"
+    "technical-debt",
+    "product-map"
   ]
 }

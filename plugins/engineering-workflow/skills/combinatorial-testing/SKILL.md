@@ -11,6 +11,12 @@ When a system has many independent parameters (feature flags, configuration opti
 
 The key insight: most bugs in configuration-driven code are caused by two factors interacting unexpectedly, not by any single value. Covering all pairs is orders of magnitude cheaper than covering all combinations, and it's the number that makes this technique worth reaching for — always state the exhaustive count next to the pairwise count so the reduction is visible.
 
+## Existing product context
+
+For work on an existing product, look for a product, feature, or capability map in project guidance and documentation (often `docs/product-map.md`). Read the relevant sections, or reuse map context already established in this task. Use its capability variants and limits to identify relevant factors; verify exact values and exclusions in implementation or requirements.
+
+Reference the map and existing feature IDs where useful. Verify relevant stale or conflicting claims against current code/tests; the map is context, not a complete specification. If absent, continue from available evidence without creating one. Keep proposed behavior in the planning output; map creation or refresh is a separate task, and implemented changes can be reflected afterward.
+
 ## When to use
 
 - Feature flags (A/B flags, rollout flags, killswitches)

@@ -9,6 +9,12 @@ FMEA is a systematic method for identifying how a system can fail, what the cons
 
 FMEA originated in hardware engineering (aerospace, automotive) but applies equally well to software systems, API integrations, data pipelines, and any complex process.
 
+## Existing product context
+
+For work on an existing product, look for a product, feature, or capability map in project guidance and documentation (often `docs/product-map.md`). Read the relevant sections, or reuse map context already established in this task. Use its capabilities, user outcomes, and operational limits to bound the analysis and identify who is affected by each failure.
+
+Reference the map and existing feature IDs where useful. Verify relevant stale or conflicting claims against current code/tests; the map is context, not a complete specification. If absent, continue from available evidence without creating one. Keep proposed behavior in the planning output; map creation or refresh is a separate task, and implemented changes can be reflected afterward.
+
 ## When to use
 
 - Designing a new system or integration where failure modes aren't yet documented

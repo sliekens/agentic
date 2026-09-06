@@ -9,6 +9,12 @@ Scenario analysis structures the problem space as a set of **named, narrative sc
 
 Each scenario is a story: who is doing what, under what conditions, and what should happen. This makes scenario analysis especially useful for requirements work, user story analysis, and anywhere the "why" and "who" matter as much as the technical "what."
 
+## Existing product context
+
+For work on an existing product, look for a product, feature, or capability map in project guidance and documentation (often `docs/product-map.md`). Read the relevant sections, or reuse map context already established in this task. Use its actors, entry points, journeys, and limitations to ground scenarios in the product and identify which behavior is proposed.
+
+Reference the map and existing feature IDs where useful. Verify relevant stale or conflicting claims against current code/tests; the map is context, not a complete specification. If absent, continue from available evidence without creating one. Keep proposed behavior in the planning output; map creation or refresh is a separate task, and implemented changes can be reflected afterward.
+
 ## When to use
 
 - Requirements analysis: ensuring all stakeholder use cases are covered

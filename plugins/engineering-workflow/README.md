@@ -1,6 +1,6 @@
 # Engineering Workflow Plugin
 
-This plugin provides engineering skills for flaky-build diagnosis, operator setup, session compounding, consistency auditing, test design, scenario analysis, complexity analysis, and technical debt reviews.
+This plugin provides engineering skills for product mapping, flaky-build diagnosis, operator setup, session compounding, consistency auditing, test design, scenario analysis, complexity analysis, and technical debt reviews.
 
 ## Skills
 
@@ -9,6 +9,7 @@ This plugin provides engineering skills for flaky-build diagnosis, operator setu
 - **Compound**: End-of-session hill climb on the instruction surface. Encodes this session's friction into AGENTS.md, skills, or project docs so the next session does not pay the same tax.
 - **Flaky Build Investigation**: Diagnose intermittent build, test, packaging, or CI pipeline outcomes by comparing equivalent runs and correlating logs, configuration, code, environment, ordering, and timing. Use when a build or test sometimes fails, a rerun passes, behavior depends on runner or execution order, or the user asks why the build is flaky. Default to a bounded read-only investigation. Do not use for consistently failing builds, unrelated runtime defects, or release and deployment execution.
 - **Operator Setup**: Creates or updates a personal operator profile under `~/.agents/projects/` (index + `OPERATOR.md`) — who you are, skill calibration, and collaboration preferences for this project. Worktree-safe via main worktree path; wires only the current harness. Only invoked when the user explicitly runs `/operator-setup`.
+- **Product Map**: Create or update a product map, feature map, or capability map from an existing implementation. Use when no map exists, when documenting what a program does, or after code changes add, alter, or remove capabilities that an existing map must reflect. Produces current-state documentation that planning can consult; does not propose features or replace product planning.
 - **Realign**: Identifies and reports inconsistencies in code patterns across the codebase, helping to maintain a coherent engineering workflow.
 - **Scenario Design**: Diagnoses the shape of a scenario-enumeration problem and routes to the right systematic technique below — used when the shape isn't obvious yet or when a problem spans multiple dimensions (e.g. a stateful entity with range-constrained fields) that need more than one technique. Confirms the plan with the user, then hands off to the matching technique skill(s) and ties multi-technique outputs together. Jump straight to a technique skill instead when it's already clear which one fits.
   - **Decision Tables**: Maps every combination of independent yes/no conditions to an outcome, flagging combinations nobody has specified — authorization rules, validation logic, discount/pricing stacking.
@@ -22,6 +23,11 @@ This plugin provides engineering skills for flaky-build diagnosis, operator setu
 - **Technical Debt Audit**: Identifies structural problems in a codebase and writes them up as technical debt documentation — one file per issue in a subfolder, plus an index. Surfaces concerns that make code hard to change, test, or reason about, producing actionable write-ups with concrete consequences and credible paths forward.
 
 ## Change Log
+
+### v2.5.0
+
+- Added Product Map to document implemented capabilities and maintain product maps, with five formats and explicitly connected visual charts.
+- Planning and scenario skills now consult existing product maps, reference feature IDs, and keep proposed changes separate from current capabilities.
 
 ### v2.4.0
 

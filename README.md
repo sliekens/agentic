@@ -60,6 +60,14 @@ agentic/
     │       │   └── SKILL.md
     │       ├── operator-setup/
     │       │   └── SKILL.md
+    │       ├── product-map/
+    │       │   ├── SKILL.md
+    │       │   └── references/
+    │       │       ├── inventory.md
+    │       │       ├── journeys.md
+    │       │       ├── matrix.md
+    │       │       ├── tree.md
+    │       │       └── visual-chart.md
     │       ├── realign/
     │       │   └── SKILL.md
     │       ├── scenario-analysis/

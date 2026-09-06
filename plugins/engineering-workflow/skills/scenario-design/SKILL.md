@@ -7,6 +7,12 @@ description: Diagnose the shape of a scenario-enumeration problem (multiple vari
 
 Activate when the shape of a scenario-enumeration problem isn't yet clear, or when a problem plausibly needs more than one systematic technique. This skill's job is to diagnose the shape, confirm the plan with the user, and hand off to the technique-specific skill(s) that do the actual work — it doesn't duplicate their procedures.
 
+## Existing product context
+
+For work on an existing product, look for a product, feature, or capability map in project guidance and documentation (often `docs/product-map.md`). Read the relevant sections, or reuse map context already established in this task. Use its capabilities, user journeys, and limits to frame the problem and select techniques. Pass the relevant map context to the selected skills.
+
+Reference the map and existing feature IDs where useful. Verify relevant stale or conflicting claims against current code/tests; the map is context, not a complete specification. If absent, continue from available evidence without creating one. Keep proposed behavior in the planning output; map creation or refresh is a separate task, and implemented changes can be reflected afterward.
+
 ## How this works
 
 1. Understand the problem space

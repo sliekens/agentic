@@ -13,6 +13,12 @@ A state transition model has four elements:
 - **Transitions**: edges from one state to another, triggered by an event
 - **Actions/outputs**: what the system does during a transition
 
+## Existing product context
+
+For work on an existing product, look for a product, feature, or capability map in project guidance and documentation (often `docs/product-map.md`). Read the relevant sections, or reuse map context already established in this task. Use its journeys and affected capabilities to bound the lifecycle; derive exact states and transitions from implementation or requirements.
+
+Reference the map and existing feature IDs where useful. Verify relevant stale or conflicting claims against current code/tests; the map is context, not a complete specification. If absent, continue from available evidence without creating one. Keep proposed behavior in the planning output; map creation or refresh is a separate task, and implemented changes can be reflected afterward.
+
 ## When to use
 
 - Shopping cart or checkout workflows

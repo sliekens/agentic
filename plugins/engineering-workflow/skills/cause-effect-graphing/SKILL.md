@@ -13,6 +13,12 @@ Cause-effect graphing was developed as a precursor to decision table derivation:
 1. The logical structure between causes is complex (nested ANDs and ORs) and validating the structure before building the table adds value
 2. Communicating to stakeholders who benefit from seeing the causal chain visually
 
+## Existing product context
+
+For work on an existing product, look for a product, feature, or capability map in project guidance and documentation (often `docs/product-map.md`). Read the relevant sections, or reuse map context already established in this task. Use its relevant capabilities and outcomes to frame causes and effects; verify precise logical relationships in implementation or requirements.
+
+Reference the map and existing feature IDs where useful. Verify relevant stale or conflicting claims against current code/tests; the map is context, not a complete specification. If absent, continue from available evidence without creating one. Keep proposed behavior in the planning output; map creation or refresh is a separate task, and implemented changes can be reflected afterward.
+
 ## When to use
 
 - Complex validation logic with nested conditions

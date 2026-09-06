@@ -9,6 +9,12 @@ Design space exploration maps the **parameter space of a design decision** — t
 
 The goal is to surface implicit assumptions ("we assumed X had to be true, but does it?"), identify regions of the design space that haven't been considered, and make tradeoffs explicit so decisions are deliberate rather than accidental.
 
+## Existing product context
+
+For work on an existing product, look for a product, feature, or capability map in project guidance and documentation (often `docs/product-map.md`). Read the relevant sections, or reuse map context already established in this task. Use its capabilities and limits to distinguish existing behavior to preserve from proposed changes before exploring design options.
+
+Reference the map and existing feature IDs where useful. Verify relevant stale or conflicting claims against current code/tests; the map is context, not a complete specification. If absent, continue from available evidence without creating one. Keep proposed behavior in the planning output; map creation or refresh is a separate task, and implemented changes can be reflected afterward.
+
 ## When to use
 
 - Architectural decisions with multiple valid approaches (e.g., sync vs. async, push vs. pull, monolith vs. services)
