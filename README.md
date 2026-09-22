@@ -78,6 +78,12 @@ agentic/
     │       │   └── SKILL.md
     │       ├── state-transition-testing/
     │       │   └── SKILL.md
+    │       ├── ste-writing/
+    │       │   ├── SKILL.md
+    │       │   ├── LICENSE
+    │       │   ├── UPSTREAM.md
+    │       │   └── references/
+    │       │       └── ste-recurring-errors.md
     │       └── technical-debt-audit/
     │           └── SKILL.md
     ├── synouser/
@@ -117,10 +123,6 @@ agentic/
         ├── .claude-plugin/
         │   └── plugin.json
         └── skills/
-            └── ste-writing/
-                ├── SKILL.md
-                ├── LICENSE
-                └── UPSTREAM.md
 ```
 <!-- STRUCTURE_END -->
 

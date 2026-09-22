@@ -1,12 +1,20 @@
 # Technical Writing
 
-Skills for clear, controlled technical prose.
+> **Deprecated.** The STE Writing skill moved to the [engineering-workflow](../engineering-workflow/README.md) plugin. Install `engineering-workflow` instead. This package is now empty and will be removed in a future release.
+
+## Migration
+
+Install `engineering-workflow` and uninstall `technical-writing`. The skill keeps the name `ste-writing`, so anything that invokes it continues to work once the new plugin is installed. Its upstream MIT license and pinned source attribution moved with it.
 
 ## Skills
 
-- **STE Writing**: Rewrite prose (docs, READMEs, PR descriptions, error messages, release notes, comments — never code) into ASD-STE100 Simplified Technical English to remove "AI slop". Use when asked to make writing not sound like AI, make docs clear or plain, enforce a controlled writing style, or write technical documentation that reads human. Two modes — strict (procedures/safety) and STE-flavored (general prose).
+None. This package no longer ships any skills.
 
 ## Change Log
+
+### v2.0.0
+
+- Deprecated the plugin and removed the STE Writing skill, which now ships in the engineering-workflow plugin alongside the skills that reference it
 
 ### v1.0.0
 

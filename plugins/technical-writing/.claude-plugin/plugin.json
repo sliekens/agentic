@@ -1,13 +1,14 @@
 {
   "name": "technical-writing",
-  "description": "Skills for clear, controlled technical prose.",
-  "version": "1.0.0",
+  "description": "Deprecated. The STE Writing skill moved to the engineering-workflow plugin; install that instead. This package is now empty and will be removed in a future release.",
+  "version": "2.0.0",
   "author": {
     "name": "Steven Liekens",
     "email": "hey@stevenliekens.be"
   },
   "license": "MIT",
   "keywords": [
+    "deprecated",
     "technical-writing",
     "documentation",
     "simplified-technical-english",

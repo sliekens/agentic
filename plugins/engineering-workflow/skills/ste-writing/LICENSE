@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 Ege Çelebi
+Copyright (c) 2026 Ege Chelebi
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,5 +22,7 @@ SOFTWARE.
 
 ---
 
-Note: this license covers the source code only. Blog post text and images
-under app/(website)/blog and public/ are © Ege Çelebi, all rights reserved.
+ASD-STE100 is a registered EU trademark (No. 017966390) of ASD. This project
+is unofficial and not affiliated with ASD. The license above covers this
+project's own text and code. It does not cover the ASD-STE100 specification,
+which is available from https://asd-ste100.org under ASD's own terms.

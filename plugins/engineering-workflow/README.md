@@ -1,6 +1,6 @@
 # Engineering Workflow Plugin
 
-This plugin provides engineering skills for product mapping, flaky-build diagnosis, operator setup, session compounding, consistency auditing, conformance checking, test design, scenario analysis, complexity analysis, and technical debt reviews.
+This plugin provides engineering skills for product mapping, flaky-build diagnosis, operator setup, session compounding, consistency auditing, conformance checking, test design, scenario analysis, complexity analysis, technical debt reviews, and controlled technical writing.
 
 ## Skills
 
@@ -21,9 +21,16 @@ This plugin provides engineering skills for product mapping, flaky-build diagnos
   - **Design Space Exploration**: Maps the dimensions along which an architectural or design decision can vary, places known options in that space, and surfaces unexplored regions before a decision locks in.
   - **Scenario Analysis**: Builds named, narrative scenarios — who does what under what conditions — to find requirements gaps and give stakeholders a shared vocabulary to validate against.
   - **Cause-Effect Graphing**: Builds a directed graph connecting causes to effects through AND/OR/NOT logic, then derives a decision table from it — for tangled conditional logic or stakeholder-facing visuals.
+- **STE Writing**: ASD-STE100 Simplified Technical English, and the reply shape a reader with ADHD can act on. A standing style rule, not an on-request tool. Layer 1 governs the words of every text a human reads — chat replies, docs, READMEs, commit messages, PR text, code comments, error messages, release notes, tool descriptions, task trackers, wiki pages. Layer 2 governs the order of a reply to a person — the next action first, numbered steps, real time estimates, no preamble and no closer. Neither layer touches code, identifiers, or command syntax. Load it before you write prose, and also when asked to remove "AI slop", make writing clear or plain, enforce a controlled style, or review text for STE violations. Two word modes — strict (procedures, runbooks, safety text, error messages) and STE-flavored (general prose, the default).
 - **Technical Debt Audit**: Identifies structural problems in a codebase and writes them up as technical debt documentation — one file per issue in a subfolder, plus an index. Surfaces concerns that make code hard to change, test, or reason about, producing actionable write-ups with concrete consequences and credible paths forward.
 
 ## Change Log
+
+### v2.7.0
+
+- Added STE Writing, moved here from the now-deprecated technical-writing plugin along with its upstream MIT license and pinned source attribution, so the skills that reference it no longer depend on a separately installed package
+- STE Writing now tracks upstream 2.0.3, which rewrites the skill as a standing style rule and adds a second layer governing the shape of a reply, and bundles the recurring-errors reference it cites
+- STE Writing vendors the instructions only — the upstream Python linter, Node wrapper, and Claude Code hooks stay out, so the manual checklist is now the verification step and the skill needs no runtime beyond the agent
 
 ### v2.6.0
 
