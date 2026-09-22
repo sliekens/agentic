@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "engineering-workflow",
   "description": "Engineering skills for product mapping, build-failure diagnosis, complexity, consistency and conformance analysis, test design, scenario analysis, technical debt reviews, and controlled technical writing.",
-  "version": "2.7.0",
+  "version": "2.7.1",
   "author": {
     "name": "Steven Liekens",
     "email": "hey@stevenliekens.be"

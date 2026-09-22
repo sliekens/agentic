@@ -26,6 +26,12 @@ This plugin provides engineering skills for product mapping, flaky-build diagnos
 
 ## Change Log
 
+### v2.7.1
+
+- Compound now carries its agent-writing guidance inline instead of deferring to skills that live outside this repository, so the procedure works wherever the plugin is installed
+- Compound follows junctions to the source of truth and skips plugin cache and marketplace copies, so a delta lands on the real file rather than a copy that is regenerated later
+- Compound treats `/compound` as authorizing the whole climb, and naming a skill as authorizing edits to that skill, resolving a body that claimed narrower authority than the command granted
+
 ### v2.7.0
 
 - Added STE Writing, moved here from the now-deprecated technical-writing plugin along with its upstream MIT license and pinned source attribution, so the skills that reference it no longer depend on a separately installed package
