@@ -48,6 +48,8 @@ agentic/
     │       │   └── SKILL.md
     │       ├── compound/
     │       │   └── SKILL.md
+    │       ├── cross-check/
+    │       │   └── SKILL.md
     │       ├── decision-tables/
     │       │   └── SKILL.md
     │       ├── design-space-exploration/
