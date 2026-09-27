@@ -56,6 +56,8 @@ agentic/
     │       │   └── SKILL.md
     │       ├── equivalence-partitioning-bva/
     │       │   └── SKILL.md
+    │       ├── fix-loop/
+    │       │   └── SKILL.md
     │       ├── flaky-build-investigation/
     │       │   └── SKILL.md
     │       ├── fmea/
@@ -84,8 +86,12 @@ agentic/
     │       │   ├── UPSTREAM.md
     │       │   └── references/
     │       │       └── ste-recurring-errors.md
-    │       └── technical-debt-audit/
-    │           └── SKILL.md
+    │       ├── technical-debt-audit/
+    │       │   └── SKILL.md
+    │       └── workspace-setup/
+    │           ├── SKILL.md
+    │           └── references/
+    │               └── VALIDATION.md
     ├── synouser/
     │   ├── plugin.json
     │   ├── .claude-plugin/
