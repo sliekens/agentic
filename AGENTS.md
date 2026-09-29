@@ -11,6 +11,8 @@ Agent Plugins 1.0 is the canonical package format in this repository. Keep porta
 
 Before committing changes under `plugins/`, `.claude-plugin/`, or `.github/plugin/`, follow the `release` skill.
 
+Validation checks, integration mode, and known gaps: [.agents/VALIDATION.md](.agents/VALIDATION.md).
+
 Reference:
 
 - https://docs.github.com/en/copilot/reference/cli-plugin-reference
