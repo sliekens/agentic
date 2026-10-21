@@ -82,6 +82,6 @@ If the problem spans multiple dimensions that need different techniques, invoke 
 If only one technique was used, its own summary is sufficient — no extra wrap-up needed.
 
 If multiple techniques were used, add a short combined summary:
-- How the outputs relate (e.g., "the state transition table above covers the workflow; the EP/BVA table in the same file covers the numeric fields on each transition")
+- How the outputs relate (e.g., "the state transition table above covers the workflow; the EP/BVA table in the same issue covers the numeric fields on each transition")
 - Total gaps found across both passes
 - Suggested next steps (e.g., "5 of these have no corresponding tests — `/blind-spot-coverage` on `X` would address them")

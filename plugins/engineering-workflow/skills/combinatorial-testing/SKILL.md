@@ -103,5 +103,5 @@ After the table, note:
 
 1. Understand the system and confirm the factor list and any known constraints with the user if unclear.
 2. Apply the steps above: list factors, apply constraints, generate the pairwise matrix, verify pair coverage.
-3. Write the output to a markdown file. Suggested default: `docs/analysis/<artifact-name>-combinatorial.md`. Ask the user if they'd prefer a different path before writing.
+3. Publish the output to the project's issue tracker. Read the workspace's issue-tracker record (`ISSUE_TRACKER.md` by default; the agent instructions link it) for the mechanism, commands, and artifact destination. File one issue titled `Combinatorial test matrix: <artifact name>` whose body is the full output. Search first and extend an existing issue for the same artifact instead of duplicating it. Write a markdown file (suggested default: `docs/analysis/<artifact-name>-combinatorial.md`; confirm the path first) only when the record names repository files as the mechanism. When no record exists and the project has an issue tracker, use that tracker and suggest `/workspace-setup`; when it has none, give the output in the conversation and ask where it should go.
 4. Summarize: the exhaustive vs. pairwise count, any constraint-driven exclusions, and gaps that need a decision.

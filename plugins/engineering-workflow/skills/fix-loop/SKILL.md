@@ -47,7 +47,9 @@ before using the prior state.
 
 Read the repository's agent instructions. Find:
 
-- **the issue tracker** and how to operate it (CLI, API, or MCP tools);
+- **the issue tracker** and how to operate it (CLI, API, or MCP tools), from
+  the workspace's issue-tracker record (`ISSUE_TRACKER.md` by default), which
+  also names the group that holds technical debt;
 - **the blocked convention**: a label, a status, or a `Blocked by:` line;
 - **the release process**, only to know what it needs; never run it here;
 - **runtime evidence**: logs, error tracking, or metrics for dev and
@@ -55,8 +57,8 @@ Read the repository's agent instructions. Find:
 - **the validation runbook**, and its `Integration` section: pull request or
   direct push mode, the target branch, who merges, and which CI runs.
 
-If the repository has no validation runbook, or the runbook has no
-`Integration` section, run `workspace-setup` to install or update it before
+If the repository has no issue-tracker record, no validation runbook, or the
+runbook has no `Integration` section, run `workspace-setup` to install or update it before
 step 1. Do not guess the integration mode; step 6 depends on it.
 
 Done when each item is found, or recorded as absent.
@@ -189,6 +191,9 @@ Each new issue states:
 - what happens, with file:line or runtime evidence;
 - the consequence;
 - candidate directions, marked as not decided.
+
+Add an issue that reports structural debt rather than a defect to the debt group
+named in the issue-tracker record.
 
 Done when every noted problem is an issue or a comment on one.
 

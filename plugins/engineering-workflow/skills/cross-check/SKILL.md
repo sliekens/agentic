@@ -10,7 +10,7 @@ Compare two representations of one subject and report where they agree, where th
 ## Output mode
 
 - Report the comparison in the task by default and modify nothing.
-- When the user asks to document it, write one artifact under `docs/`; prefer `<subject>-cross-check.md`. Stamp it with both sides and their revisions so a later run can diff against it instead of starting over.
+- When the user asks to document it, publish one report to the project's issue tracker as the workspace's issue-tracker record (`ISSUE_TRACKER.md` by default) directs, titled `Cross-check: <subject>`. Write `docs/<subject>-cross-check.md` instead only when the record names repository files as the mechanism. Stamp the report with both sides and their revisions so a later run can diff against it instead of starting over. File each approved remediation as its own issue that links the report.
 - Propose every remediation before changing anything. Execute only what the user approves, including implementation-side changes, in approved batches rather than as one sweep. An approved remediation authorizes that change and nothing adjacent.
 
 ## 1. Fix the two sides and the subject

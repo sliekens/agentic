@@ -1,6 +1,6 @@
 ---
 name: technical-debt-audit
-description: Identify structural problems in a codebase and write them up as technical debt documentation — one file per issue in a subfolder, plus an index. Use this skill when the user asks about structural problems, code smells, maintainability issues, architectural concerns, god classes, tight coupling, or "what's wrong with this code at a high level." Also use it when the user says things like "what should we clean up", "where is this hard to change", "what are the pain points", or "document our tech debt." The skill produces actionable write-ups, not vague observations.
+description: Identify structural problems in a codebase and file each as a technical debt issue in the project's issue tracker, grouped under one project, milestone, or label (or, when the workspace tracks issues as committed files, as one file per issue plus an index). Use this skill when the user asks about structural problems, code smells, maintainability issues, architectural concerns, god classes, tight coupling, or "what's wrong with this code at a high level." Also use it when the user says things like "what should we clean up", "where is this hard to change", "what are the pain points", or "document our tech debt." The skill produces actionable write-ups, not vague observations.
 ---
 
 The goal is to surface structural problems — concerns that make the code hard to change, test, or reason about — and write each one up clearly enough that a future reader can understand the problem, its consequences, and a credible path forward.
@@ -36,31 +36,17 @@ For each issue, form a view on the preferred approach before writing. The write-
 
 When the solution involves splitting a class, ask whether the seams need interfaces. Interfaces at internal seams add ceremony without benefit unless tests need to stub them or there are multiple real implementations. The default for internal splits is concrete classes; add interfaces when a test forces it.
 
-## Step 4 — Write the debt files
+## Step 4 — Record the debt
 
-### Index
+Read the workspace's issue-tracker record (`ISSUE_TRACKER.md` by default; the agent instructions link it) for the mechanism, the commands, and the `Grouping` entry for technical debt. When no record exists and the project has an issue tracker, use that tracker, create or pick one group for debt, and suggest `/workspace-setup`. Use the repository-files path below only when the record names it.
 
-Create or update `docs/technical-debt.md`. It is a table — one row per issue — concise enough to scan in 30 seconds:
+### Issue tracker (default)
 
-```markdown
-# Technical debt index
+File one issue per finding, titled with the problem, not the symptom (for example "OrderService mixes pricing, persistence, and notification"). Search first, including closed issues, and comment on a match instead of duplicating it. Add every issue to the debt group. Do not create an index file: the group is the index, and it shows open and closed counts.
 
-| Item             | File                              | Area           | Summary                                  |
-| ---------------- | --------------------------------- | -------------- | ---------------------------------------- |
-| Short issue name | [slug.md](technical-debt/slug.md) | Module / layer | One-line description of the core problem |
-```
-
-If the index already exists, add new rows; don't overwrite existing ones unless they're stale.
-
-### Individual files
-
-Create `docs/technical-debt/<slug>.md` for each issue. Use a short kebab-case slug that names the problem, not the symptom (e.g. `god-class.md`, `polling-ipc.md`, `shared-state-lifetime.md`).
-
-Each file follows this structure:
+Each issue body follows this structure:
 
 ```markdown
-# [Issue name]
-
 [One or two sentences identifying exactly what the problem is — class name, method name, file path. Enough that a reader can find it immediately.]
 
 ## Problems
@@ -73,25 +59,41 @@ Each file follows this structure:
 
 ## Related debt
 
-[Links to other debt files this one connects to, as relative markdown links. Omit if none.]
+[Links to related issues by number, for example "Blocked by #12". Omit if none.]
 ```
 
-Cross-reference liberally. If fixing issue A is a prerequisite for fixing issue B, say so in both files.
+Cross-reference liberally. If fixing issue A is a prerequisite for fixing issue B, say so in both issues.
 
-### AGENTS.md pointer
+### Agent instructions pointer
 
 - Check the repo root for `AGENTS.md` (or `CLAUDE.md`).
-- If one exists and doesn't already reference the index, append:
+- If one exists and doesn't already point at the debt group, append:
 
   ```markdown
   ## Technical debt
 
-  Before changing code in an area, check [docs/technical-debt.md](docs/technical-debt.md) for relevant entries and read the linked write-up first. Treat it as context, not a mandate — let it inform the change instead of expanding scope to fix it.
+  Before changing code in an area, check <link to the debt group> for relevant issues and read the linked write-up first. Treat it as context, not a mandate — let it inform the change instead of expanding scope to fix it.
   ```
 
 - Skip if a pointer already exists.
 - If neither file exists, don't create one. Flag it in the Step 5 summary and ask whether to add one.
 
+### Repository files (only when the record names this mechanism)
+
+Create or update `docs/technical-debt.md` as a table, one row per issue, concise enough to scan in 30 seconds:
+
+```markdown
+# Technical debt index
+
+| Item             | File                              | Area           | Summary                                  |
+| ---------------- | --------------------------------- | -------------- | ---------------------------------------- |
+| Short issue name | [slug.md](technical-debt/slug.md) | Module / layer | One-line description of the core problem |
+```
+
+If the index already exists, add new rows; don't overwrite existing ones unless they're stale.
+
+Create `docs/technical-debt/<slug>.md` for each issue, with a short kebab-case slug that names the problem (for example `god-class.md`, `polling-ipc.md`, `shared-state-lifetime.md`). Each file uses the issue body structure above, headed by `# [Issue name]`, with relative markdown links under `Related debt`. Point the agent instructions at `docs/technical-debt.md` the same way.
+
 ## Step 5 — Confirm with the user
 
-After writing, summarize what was documented in a short message: how many issues, which area they're in, and whether any cross-reference each other in a meaningful dependency order. Note whether a pointer to the index was added to `AGENTS.md` (or `CLAUDE.md`), or whether neither file exists and the user should decide if one should be created. If the user wants to track priority or effort, that's a separate conversation — don't add it to the files unless asked.
+After recording, summarize what was documented in a short message: how many issues (with their numbers, or file paths in repository-files mode), which area they're in, and whether any cross-reference each other in a meaningful dependency order. Note which group holds them, and whether a pointer to the group or index was added to `AGENTS.md` (or `CLAUDE.md`), or whether neither file exists and the user should decide if one should be created. If the user wants to track priority or effort, that's a separate conversation — don't add it to the issues or files unless asked.

@@ -91,6 +91,7 @@ agentic/
     │       └── workspace-setup/
     │           ├── SKILL.md
     │           └── references/
+    │               ├── ISSUE_TRACKER.md
     │               └── VALIDATION.md
     ├── synouser/
     │   ├── plugin.json
