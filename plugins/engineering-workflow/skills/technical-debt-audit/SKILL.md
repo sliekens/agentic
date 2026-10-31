@@ -34,6 +34,8 @@ Prioritize by impact: lead with the issues that cause real pain (production erro
 
 For each issue, form a view on the preferred approach before writing. The write-up is more useful when it says "use a queue or channel instead of polling a file" than "consider alternatives to the current approach."
 
+Read **Stacking complexity** in `analyze-complexity` before recommending a structural change. A recommendation that adds a coping mechanism on accidental structure is not the preferred approach.
+
 When the solution involves splitting a class, ask whether the seams need interfaces. Interfaces at internal seams add ceremony without benefit unless tests need to stub them or there are multiple real implementations. The default for internal splits is concrete classes; add interfaces when a test forces it.
 
 ## Step 4 — Record the debt

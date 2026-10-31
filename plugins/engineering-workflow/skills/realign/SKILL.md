@@ -96,6 +96,8 @@ Ask which clusters to standardize and whether the elected canonical is right, an
 
 Migrate only what the user approves. Take the most mechanical cluster first and let them verify one converted call site before converting the rest, because a canonical that looked right in the report sometimes reads badly in place.
 
+Before editing, read **Stacking complexity** in `analyze-complexity`. A migration that wraps the old approaches adds a coping mechanism. When the structure is unsound, migrate with `expand-and-contract`.
+
 ## Relationship to adjacent skills
 
 - Use `cross-check` when an external reference exists — a design, specification, or architecture document — and the question is whether the code matches it rather than whether the code agrees with itself.

@@ -95,6 +95,8 @@ After the table, list:
 
 ## Procedure
 
+While drafting, and again before you publish: when a result cannot be realized on the current architecture, and this pass is not already inside `yak-shave`, stop and apply **When the architecture is the obstacle** in `scenario-design`.
+
 1. Understand what's being analyzed (code, requirements, business rules) and confirm the conditions and actions with the user if either is ambiguous.
 2. Apply the steps above to build the full table, including the "don't-care" simplification pass.
 3. Publish the output to the project's issue tracker. Read the workspace's issue-tracker record (`ISSUE_TRACKER.md` by default; the agent instructions link it) for the mechanism, commands, and artifact destination. File one issue titled `Decision table: <artifact name>` whose body is the full output. Search first and extend an existing issue for the same artifact instead of duplicating it. Write a markdown file (suggested default: `docs/analysis/<artifact-name>-decision-table.md`; confirm the path first) only when the record names repository files as the mechanism. When no record exists and the project has an issue tracker, use that tracker and suggest `/workspace-setup`; when it has none, give the output in the conversation and ask where it should go.

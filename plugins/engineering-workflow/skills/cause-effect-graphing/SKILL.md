@@ -121,6 +121,8 @@ After building the graph, derive the decision table (see the `decision-tables` s
 
 ## Procedure
 
+While drafting, and again before you publish: when a result cannot be realized on the current architecture, and this pass is not already inside `yak-shave`, stop and apply **When the architecture is the obstacle** in `scenario-design`.
+
 1. Understand the logic being modeled and confirm the causes and effects with the user if either is ambiguous.
 2. Apply the steps above: build the graph, add constraints, derive the decision table, simplify.
 3. Publish the output to the project's issue tracker. Read the workspace's issue-tracker record (`ISSUE_TRACKER.md` by default; the agent instructions link it) for the mechanism, commands, and artifact destination. File one issue titled `Cause-effect graph: <artifact name>` whose body is the full output. Search first and extend an existing issue for the same artifact instead of duplicating it. Write a markdown file (suggested default: `docs/analysis/<artifact-name>-cause-effect.md`; confirm the path first) only when the record names repository files as the mechanism. When no record exists and the project has an issue tracker, use that tracker and suggest `/workspace-setup`; when it has none, give the output in the conversation and ask where it should go. Include the Mermaid graph alongside the derived table.

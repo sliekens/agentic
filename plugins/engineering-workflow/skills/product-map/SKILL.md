@@ -50,7 +50,7 @@ Update affected inventory rows, tree branches, journeys, matrix cells, and visua
 
 ## Contract with planning
 
-The map is an input to planning, not a plan. Make it easy to find through the project's existing documentation index when one exists. Planning skills should read the map to understand current capabilities and reference feature IDs, verifying relevant implementation when the map may be stale. Proposed features, priorities, release slices, and acceptance criteria belong in planning artifacts. Update the map after implementation establishes behavior.
+The map is an input to planning, not a plan. Make it easy to find through the project's existing documentation index when one exists. Planning skills should read the map to understand current capabilities and reference feature IDs, verifying relevant implementation when the map may be stale. `yak-shave` decides which of those capabilities to retain, retire, or introduce, and which interface replaces them. Proposed features, priorities, release slices, and acceptance criteria belong in that planning artifact, not on the map. Update the map after implementation establishes behavior.
 
 Starting a planning task does not itself require map regeneration. A missing or demonstrably stale map can warrant a separate documentation pass. Do not change other planning skills or implement missing product features as part of mapping unless requested.
 

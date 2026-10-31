@@ -1,11 +1,28 @@
 ---
 name: blind-spot-coverage
-description: Use this skill when the user wants to add test coverage targeting blind spots in a specific method — uncovered branches, edge cases, or unusual inputs. Activate on explicit requests to cover blind spots or when the user asks "what should I test here?" about a particular method. This is not about achieving 100% line coverage, but about ensuring the method behaves correctly in scenarios that are easy to miss.
+description: Use this skill when deciding whether a behavior deserves a test, or when the user wants test coverage for blind spots in a specific method. A qualifying behavior gets one integration test for its longest happy path and smaller unit tests for durable edge cases and blind spots. Leave it untested when the behavior is not permanent, there is no invariant or contract to uphold, or the code is due for rearchitecture. Activate on "what should I test here?", on an explicit blind-spot request, and when `fix-loop` is about to add or keep a test. This is not line coverage. It locks durable invariants that are easy to miss.
 ---
 
 # Blind Spot Coverage
 
-Activate when the user wants to identify and cover blind spots in a specific method's test coverage. The goal is to find what the existing tests *don't* cover — the edge cases, error paths, and unusual inputs that could break the method.
+Activate when the user wants to identify and cover blind spots in a specific method's test coverage, or when deciding whether a behavior deserves a test. The goal is to lock durable invariants the existing tests miss.
+
+## What deserves a test
+
+A test protects a durable invariant. Give a behavior a test only when that behavior is permanent and a contract or invariant must hold.
+
+A behavior that qualifies gets:
+
+- one integration test for the longest happy path;
+- smaller unit tests for edge cases and blind spots of that same invariant.
+
+Leave a behavior untested when any of these is true:
+
+- the behavior is not permanent;
+- there is no strong invariant or contract to uphold;
+- the code is due for a rearchitecture. Replace it first with `expand-and-contract`. Test the durable invariants of the new structure after usages move.
+
+A unit test that repeats the happy path already covered by the long integration test does not qualify. Add a test because an invariant is unlocked, not because a branch exists.
 
 ## Input
 
@@ -36,7 +53,9 @@ Read all existing test cases to understand what's already covered.
 
 ### 3. Analyze the method for blind spots
 
-For the target method, identify categories of blind spots:
+Apply **What deserves a test** first. If the method's behavior fails that section, say which condition failed and stop. Do not propose tests.
+
+For a behavior that qualifies, search these categories for unlocked invariants:
 
 **A. Input edge cases**
 - Empty strings, null, undefined, zero, negative numbers
@@ -57,10 +76,10 @@ For the target method, identify categories of blind spots:
 - Permission/authorization failures
 
 **D. Logic branches**
-- Every `if/else` branch
-- Every `switch/case` path including `default`
-- Every loop (empty iteration, single item, multiple items)
-- Early returns and exit conditions
+- A branch that protects a durable invariant
+- A `switch/case` path, including `default`, that protects a durable invariant
+- A loop boundary (empty, single item, many items) that protects a durable invariant
+- An early return that protects a durable invariant
 
 **E. External dependencies**
 - API calls that could fail
@@ -82,7 +101,7 @@ For each blind spot category, check if existing tests already cover it. Mark as:
 
 ### 5. Prioritize blind spots
 
-Not all blind spots are equally important. Prioritize by:
+Drop any candidate that fails **What deserves a test**. Prioritize what remains by:
 
 **High priority** (cover these first):
 - Error paths that could cause crashes
@@ -138,8 +157,8 @@ End with a question: "Which of these would you like me to implement as actual te
 
 ## Guidelines
 
-- **Be pragmatic**: Focus on value, not completeness. A method might have 50 theoretical edge cases but only 5 worth testing.
+- **Be pragmatic**: **What deserves a test** is the gate. A long list of theoretical edges is not a test list.
 - **Respect existing style**: Match the test style, framework, and patterns already used in the codebase.
-- **Stay focused**: One method at a time. Don't expand scope to the entire class or module unless explicitly asked.
+- **Stay focused**: Unit tests stay on this method's edges. The one happy-path integration test covers the longest path of the behavior, even when that path leaves the method.
 - **No false positives**: Only report blind spots that actually exist. Verify the code path is real.
 - **Language-aware**: Adapt to the language's testing conventions (Jest, pytest, RSpec, etc.)

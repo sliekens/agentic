@@ -1,11 +1,12 @@
 ---
 name: fix-loop
-description: Work an issue backlog in a loop — fix one issue, validate every phase against a repository validation runbook, file every out-of-scope problem found along the way as a new issue, then take the next issue — until only blocked issues remain or a release is needed to verify more. Use when asked to fix an issue, work the backlog, burn down issues, or run the fix loop, or when the user runs /fix-loop, optionally with a starting issue. Do not use for a single exploratory investigation with no fix (`flaky-build-investigation`, `analyze-complexity`), or for cutting or deploying releases.
+description: Harden a sound architecture one issue at a time — fix one issue, validate every phase against a repository validation runbook, file every out-of-scope problem found along the way as a new issue, then take the next issue — until only blocked issues remain or a release is needed to verify more. A simple bug gets the smallest change. A larger change, including a module rewrite, is in scope when it removes local accidental complexity instead of stacking it. Use `analyze-complexity` before choosing the shape. Use when asked to fix an issue, work the backlog, burn down issues, or run the fix loop, or when the user runs /fix-loop, optionally with a starting issue. Do not use when the architecture is unsound or the goal needs a capability the architecture cannot hold (`yak-shave`), for a single exploratory investigation with no fix (`flaky-build-investigation`, `analyze-complexity`), or for cutting or deploying releases.
 ---
 
 # Fix Loop
 
-Burn down an issue backlog one issue at a time. Every fix is also an audit:
+Harden a system whose architecture is already sound. Burn down an issue
+backlog one issue at a time. Every fix is also an audit:
 whatever the work turns up that is out of scope becomes a new issue, and new
 issues feed the next round. A problem noticed and not filed is lost.
 
@@ -16,13 +17,16 @@ check.
 
 ## Authority boundary
 
-- `/fix-loop`, or a request to work issues, authorizes: reading issues, fixing
-  them within the repository's normal change process, commenting on and
-  labeling issues, filing new issues, and editing the validation runbook.
-- It does not authorize: product decisions, new architectural patterns, or
-  other choices that repository instructions reserve for the user;
-  production releases or deployments; closing an issue before its fix is
-  verified. Stop and hand these to the user.
+- `/fix-loop`, or a request to work issues, authorizes: reading issues,
+  hardening a sound architecture within the repository's normal change
+  process, commenting on and labeling issues, filing new issues, and editing
+  the validation runbook. Step 3 chooses the size of the change.
+- It does not authorize replacing an unsound architecture. That work is
+  `expand-and-contract`.
+- It does not authorize: product decisions, or other choices that repository
+  instructions reserve for the user; production releases or deployments;
+  closing an issue before its fix is verified. Stop and hand these to the
+  user.
 - Follow the repository's instructions for branching, commits, pull requests,
   CI, and the issue tracker. Where they are silent, prefer the least
   surprising option and say which one you chose.
@@ -80,8 +84,8 @@ Check the issue's claims against the code, and against runtime evidence when
 the claim is about runtime behavior. Issues age: if the problem is already
 gone, comment with the evidence, close the issue, and go back to step 1.
 
-Prefer a failing test as the reproduction. It becomes the regression test in
-step 4.
+Prefer a failing test as the reproduction. Step 4 decides whether that test
+stays in the suite.
 
 Done when the defect is reproduced in code, runtime evidence, or a failing
 test.
@@ -90,21 +94,33 @@ test.
 
 Separate engineering choices from the user's choices.
 
-- **Engineering choice** (mechanism, structure, which of several fixes): pick
-  the simplest option that follows the repository's existing patterns. Record
-  the choice and the rejected options on the issue before writing code.
-- **User's choice** (product behavior, data the user owns, new architectural
-  patterns, anything the repository instructions restrict): comment with the
-  options and a recommendation, mark the issue blocked, and go back to step 1
-  with the next issue.
+Run `analyze-complexity` on the boundary this issue touches. Read **Stacking
+complexity** there and class the architecture before choosing a shape.
 
-Done when the approach is written on the issue, or the issue is marked blocked.
+- **Sound architecture.** Harden it. A simple bug gets the smallest change.
+  Choose a larger change, including a module rewrite, when it removes local
+  accidental complexity. Record the choice and the rejected options on the
+  issue before writing code. Name a stacked change as a rejected option when
+  one was available.
+- **Unsound architecture, or a goal the structure cannot hold.** Stop this
+  issue in the loop. A patch would stack complexity. Continue the same issue
+  under `yak-shave`.
+- **User's choice** (product behavior, data the user owns, anything the
+  repository instructions restrict): comment with the options and a
+  recommendation, mark the issue blocked, and go back to step 1 with the
+  next issue.
+
+Done when the approach is written on the issue, the issue has moved to
+`expand-and-contract`, or the issue is marked blocked. A fix-loop approach
+names the class from the analysis, the change, and the options rejected.
 
 ## 4. Fix
 
-Make the smallest change that resolves the issue, with a regression test for
-the triggering case when the change has testable behavior. Update docs that
-describe the changed behavior.
+Make the change step 3 recorded. A simplification named there is in scope
+for this issue. Update docs that describe the changed behavior.
+
+Read **What deserves a test** in `blind-spot-coverage` before adding or
+keeping a test, and obey that section.
 
 Before editing, list the validation plan: every runbook entry whose trigger
 matches the files and behavior the change touches. Validate in the inner loop:
@@ -115,8 +131,8 @@ While working, write down every problem you notice outside the issue's scope:
 bugs, swallowed errors, misleading logs, missing tests, doc drift, validation
 gaps. Do not fix them here.
 
-Done when the change and its regression test are written, and the narrow
-checks pass.
+Done when the change is written, every test that deserves to exist is
+written, and the narrow checks pass.
 
 ## 5. Validate
 

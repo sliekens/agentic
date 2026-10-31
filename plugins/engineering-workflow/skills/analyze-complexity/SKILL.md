@@ -1,6 +1,6 @@
 ---
 name: analyze-complexity
-description: Analyze a code path, system, workflow, or architecture to separate inherent complexity imposed by requirements and external constraints from accidental complexity introduced by the current implementation, then define the invariants a simplification must preserve. Use when the user asks what complexity is necessary or unavoidable, asks for inherent vs. accidental complexity, says a pipeline or subsystem feels too complex, wants to understand why something cannot be simpler, or wants a complexity map before refactoring. Also use before a technical-debt audit when unavoidable constraints and removable implementation complexity are mixed together. Do not use for exploring competing greenfield designs (`design-space-exploration`) or for a pure structural-debt inventory that does not need an invariant boundary (`technical-debt-audit`).
+description: Analyze a code path, system, workflow, or architecture to separate inherent complexity imposed by requirements and external constraints from accidental complexity introduced by the current implementation, then define the invariants a simplification must preserve. Use when the user asks what complexity is necessary or unavoidable, asks for inherent vs. accidental complexity, says a pipeline or subsystem feels too complex, wants to understand why something cannot be simpler, or wants a complexity map before refactoring. Also use before a technical-debt audit when unavoidable constraints and removable implementation complexity are mixed together, and before an implementation change so the change removes accidental complexity instead of stacking it. `fix-loop`, `yak-shave`, `expand-and-contract`, and any other skill about to change structure read **Stacking complexity**. Do not use for exploring competing greenfield designs (`design-space-exploration`) or for a pure structural-debt inventory that does not need an invariant boundary (`technical-debt-audit`).
 ---
 
 # Analyze Complexity
@@ -94,7 +94,21 @@ Before presenting the result, verify:
 - every current mechanism has been separated from the obligation it serves;
 - every accidental item has a concrete consequence;
 - proposed freedom does not erase backpressure, atomicity, ordering, liveness, or failure guarantees;
-- the document describes current constraints without becoming a changelog or implementation defense.
+- the document describes current constraints without becoming a changelog or implementation defense;
+- when the caller will change code, the result classes the architecture sound or unsound, as **Stacking complexity** defines those words.
+
+## Stacking complexity
+
+Stacking complexity means adding a mechanism whose job is to cope with accidental structure, instead of removing that structure.
+
+Class the architecture at the caller's boundary:
+
+- **Sound.** The structure matches the inherent invariants. Accidental complexity is local. A change can satisfy the issue by the smallest edit, or by removing that local accidental complexity, without a new coping mechanism.
+- **Unsound.** The structure itself is accidental. Every correct fix inside it adds a coping mechanism: a wrapper, a special case, a second path, or a translation layer.
+
+Return the class, the inherent invariants, and the accidental parts. Do not design the replacement.
+
+`fix-loop` hardens a sound architecture and looks for a simplification on that boundary. `yak-shave` chooses the capability set and the interface when the architecture is unsound, or when the goal needs a capability the structure cannot hold. `expand-and-contract` then builds that interface. Any other skill about to change structure reads this section first and follows the same split.
 
 ## Canonical document shape
 

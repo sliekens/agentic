@@ -1,6 +1,6 @@
 ---
 name: scenario-design
-description: Diagnose the shape of a scenario-enumeration problem (multiple variables, states, conditions, or failure modes) and route to the right systematic technique — decision-tables, equivalence-partitioning-bva, combinatorial-testing, state-transition-testing, fmea, design-space-exploration, scenario-analysis, or cause-effect-graphing. Use this eagerly when the user asks "what cases should I handle?", "what could go wrong?", "am I missing any scenarios?", "how do I systematically test/model this?", or describes a problem that could plausibly need more than one of those techniques (e.g. an entity with both range-constrained fields and a state machine), and it isn't obvious yet which one(s) fit. If the user already knows which technique they want (they name it, or describe a problem shape that maps cleanly to exactly one — e.g. "map out this state machine" or "what could go wrong with this integration") jump straight to that technique's own skill instead; this skill's job is diagnosis and combination, not narrow application.
+description: Diagnose the shape of a scenario-enumeration problem (multiple variables, states, conditions, or failure modes) and route to the right systematic technique — decision-tables, equivalence-partitioning-bva, combinatorial-testing, state-transition-testing, fmea, design-space-exploration, scenario-analysis, or cause-effect-graphing. Use this eagerly when the user asks "what cases should I handle?", "what could go wrong?", "am I missing any scenarios?", "how do I systematically test/model this?", or describes a problem that could plausibly need more than one of those techniques (e.g. an entity with both range-constrained fields and a state machine), and it isn't obvious yet which one(s) fit. If the user already knows which technique they want (they name it, or describe a problem shape that maps cleanly to exactly one — e.g. "map out this state machine" or "what could go wrong with this integration") jump straight to that technique's own skill instead; this skill's job is diagnosis and combination, not narrow application. When a scenario cannot be realized on the current architecture without stacking complexity, or it needs a capability the architecture cannot hold, stop and continue under `yak-shave`.
 ---
 
 # Scenario Design
@@ -73,7 +73,7 @@ Proceed after the user confirms. If the user redirects to a different technique,
 
 ### 4. Hand off
 
-Invoke the confirmed technique's skill via the Skill tool (e.g. `decision-tables`, `state-transition-testing`). That skill owns the full application procedure — building the table/graph/matrix, flagging gaps, choosing the output path, and writing the file. Don't re-derive its steps here.
+Invoke the confirmed technique's skill via the Skill tool (e.g. `decision-tables`, `state-transition-testing`). That skill owns the full application procedure — building the table/graph/matrix, flagging gaps, choosing the output path, and writing the file. Don't re-derive its steps here. While it runs, apply **When the architecture is the obstacle**. An obstacle ends that technique pass.
 
 If the problem spans multiple dimensions that need different techniques, invoke each skill for its slice of the problem in turn.
 
@@ -85,3 +85,14 @@ If multiple techniques were used, add a short combined summary:
 - How the outputs relate (e.g., "the state transition table above covers the workflow; the EP/BVA table in the same issue covers the numeric fields on each transition")
 - Total gaps found across both passes
 - Suggested next steps (e.g., "5 of these have no corresponding tests — `/blind-spot-coverage` on `X` would address them")
+
+Apply **When the architecture is the obstacle** before a gap becomes a test or a fix.
+
+## When the architecture is the obstacle
+
+Scenario work comes first. An architecture obstacle found there is the push into `yak-shave`.
+
+- The current structure can hold the scenario. The gap is a missing test, an undefined case, or a local defect. Leave it as a scenario gap. A missing test goes to `blind-spot-coverage`. A local defect on a sound architecture goes to `fix-loop`.
+- The scenario cannot be realized without stacking complexity, or it needs a capability the architecture cannot hold. Stop extending scenarios on that architecture. Continue under `yak-shave` with the boundary and the scenarios that exposed the obstacle.
+
+An architecture obstacle does not become more rows on the current structure.

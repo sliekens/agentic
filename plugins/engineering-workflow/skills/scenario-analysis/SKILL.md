@@ -117,6 +117,8 @@ Scenarios that expose undefined behavior, missing requirements, or assumptions t
 
 ## Procedure
 
+While drafting, and again before you publish: when a result cannot be realized on the current architecture, and this pass is not already inside `yak-shave`, stop and apply **When the architecture is the obstacle** in `scenario-design`.
+
 1. Understand the subject and participants, and confirm the key variables with the user if the meaningful dimensions aren't obvious.
 2. Draft scenarios per the steps above, then check coverage against actors/states/failure modes and add scenarios for any gaps.
 3. Publish the output to the project's issue tracker. Read the workspace's issue-tracker record (`ISSUE_TRACKER.md` by default; the agent instructions link it) for the mechanism, commands, and artifact destination. File one issue titled `Scenarios: <artifact name>` whose body is the full output. Search first and extend an existing issue for the same artifact instead of duplicating it. Write a markdown file (suggested default: `docs/analysis/<artifact-name>-scenarios.md`; confirm the path first) only when the record names repository files as the mechanism. When no record exists and the project has an issue tracker, use that tracker and suggest `/workspace-setup`; when it has none, give the output in the conversation and ask where it should go.
