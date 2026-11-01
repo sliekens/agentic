@@ -1,6 +1,6 @@
 ---
 name: compound
-description: End-of-session hill climb on the instruction surface. Encodes this session's friction into AGENTS.md, skills, or project docs so the next session does not pay the same tax.
+description: End-of-session hill climb on the instruction surface. Encodes this session's friction into AGENTS.md, skills, or project docs so the next session does not pay the same tax. Do not use when the user is introducing a practice the current skills do not own (`capture-skill`).
 disable-model-invocation: true
 argument-hint: "[optional friction hint]"
 ---
@@ -8,6 +8,8 @@ argument-hint: "[optional friction hint]"
 End-of-session *climb* on the instruction surface. Turn this session's *friction* into a *delta* at its *home*, so the next session does not pay the same tax.
 
 `/compound` authorizes the climb. A hint, if given, is the primary event; still mine the rest. `/compound` naming a skill authorizes editing that skill.
+
+A practice the user is introducing now, and the skills they say do not cover it, belong to `capture-skill`. This climb records friction from the session. It does not interview a new practice into a skill.
 
 The target is the instruction surface — skills, AGENTS.md / CLAUDE.md, pointers, project docs, or a discoverable environment. Not product code, not a session diary.
 
@@ -60,7 +62,7 @@ Cap this run at three deltas, and at one delta per home. Leftovers stay on the t
 
 Write each ranked delta at its *home*. Follow junctions to the source of truth; skip plugin cache and marketplace copies.
 
-Pause and wait before creating a new skill, a new user-global instruction, a document outside this repository, or a large prune.
+Pause and wait before creating a new skill, a new user-global instruction, a document outside this repository, or a large prune. Creating a skill for a practice the user is introducing is `capture-skill`.
 
 New user skills, once approved, live in `~/.agents/skills/<name>/` and junction to `~/.claude/skills/<name>` and `~/.grok/skills/<name>`.
 

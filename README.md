@@ -42,6 +42,8 @@ agentic/
     │       │   └── SKILL.md
     │       ├── blind-spot-coverage/
     │       │   └── SKILL.md
+    │       ├── capture-skill/
+    │       │   └── SKILL.md
     │       ├── cause-effect-graphing/
     │       │   └── SKILL.md
     │       ├── combinatorial-testing/
