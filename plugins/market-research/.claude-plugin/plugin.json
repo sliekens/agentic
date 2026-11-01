@@ -1,0 +1,17 @@
+{
+  "name": "market-research",
+  "description": "Market research for technology purchases: survey current products, compare independent evidence, and recommend only when asked.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Steven Liekens",
+    "email": "hey@stevenliekens.be"
+  },
+  "license": "MIT",
+  "keywords": [
+    "market-research",
+    "technology",
+    "purchasing",
+    "comparison",
+    "products"
+  ]
+}

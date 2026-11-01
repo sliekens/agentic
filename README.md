@@ -130,6 +130,14 @@ agentic/
     │               ├── pipeline-services.md
     │               ├── tagging-steps.md
     │               └── well-known-steps.md
+    ├── market-research/
+    │   ├── README.md
+    │   ├── plugin.json
+    │   ├── .claude-plugin/
+    │   │   └── plugin.json
+    │   └── skills/
+    │       └── tech-market-research/
+    │           └── SKILL.md
     └── technical-writing/
         ├── README.md
         ├── plugin.json

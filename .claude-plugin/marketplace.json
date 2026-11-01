@@ -38,6 +38,11 @@
       "name": "technical-writing",
       "source": "./plugins/technical-writing",
       "description": "Deprecated. The STE Writing skill moved to the engineering-workflow plugin; install that instead. This package is now empty and will be removed in a future release."
+    },
+    {
+      "name": "market-research",
+      "source": "./plugins/market-research",
+      "description": "Market research for technology purchases: survey current products, compare independent evidence, and recommend only when asked."
     }
   ]
 }
