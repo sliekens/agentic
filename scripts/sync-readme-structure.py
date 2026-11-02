@@ -24,8 +24,12 @@ def format_plugin_tree(root: Path) -> list[str]:
         dir_path = plugins_path / name
         if dir_path.exists():
             plugin_dirs.append(dir_path)
-    # Add any new plugins not in the order list
-    all_dirs = [d for d in plugins_path.iterdir() if d.is_dir()]
+    # Add any new plugins not in the order list, sorted so the tree
+    # does not follow filesystem directory order.
+    all_dirs = sorted(
+        (d for d in plugins_path.iterdir() if d.is_dir()),
+        key=lambda d: d.name,
+    )
     for d in all_dirs:
         if d not in plugin_dirs:
             plugin_dirs.append(d)
