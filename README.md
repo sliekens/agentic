@@ -66,6 +66,8 @@ agentic/
     │       │   └── SKILL.md
     │       ├── fmea/
     │       │   └── SKILL.md
+    │       ├── hole/
+    │       │   └── SKILL.md
     │       ├── operator-setup/
     │       │   └── SKILL.md
     │       ├── product-map/
