@@ -3,11 +3,13 @@ name: hole
 description: >-
   Teaches a person one step at a time, down a rabbit hole, and follows
   their signals. Use when they say teach me, explain this, go slowly,
-  one thing at a time, /hole, hole, or when they send clear, unclear, fuzzy, muddy,
-  down, dig, surface, up, out, skip, lost, fork, tangent, wander,
-  back, map, or go. Also use when a lesson takes a side path and should
-  return to the main path. Do not use when they asked you to implement,
-  fix, or finish the work.
+  one thing at a time, /hole, or hole. Once a Hole lesson is already
+  active, also use when they send clear, unclear, fuzzy, muddy, down, dig,
+  surface, up, out, skip, lost, fork, tangent, wander, back, map, or go,
+  and when a side path should return to the main path. A bare signal word
+  does not start a lesson. Do not use when they asked you to implement,
+  fix, finish, investigate, or audit the work. An ordinary go that approves
+  a read-only investigation is not this skill.
 ---
 
 # Hole
@@ -39,6 +41,8 @@ Teach the current step and stop.
 - The first time a name hides a mechanism, open it before moving on. Say what the syntax stores, and name the program that reads it during the build. One step. Leave the level under that closed until they say `down`.
 
 ## Signals
+
+These words are signals only inside a Hole lesson. A lesson starts when they ask to be taught (`teach me`, `explain this`, `go slowly`, `one thing at a time`) or they say `/hole` or `hole`. A bare signal word does not start a lesson. Outside a lesson, `go`, `map`, `clear`, and the other signal words keep the meaning they already have in the work.
 
 A signal is the instruction, even when it is the whole message. Words after a colon are the target. A few extra words narrow this step. They do not add a second topic.
 
@@ -78,7 +82,7 @@ Each line is `open` or `cleared`. Mark the line they are in with `here`.
 - `cleared` on a deeper line: they said `up`.
 - `open`: it is still in the hole. A side path they left with `back` before `clear` stays open.
 
-Collapse the cleared lines in a group into one line. Keep each open line on its own line.
+Keep every step on its own numbered line, open or cleared. Do not collapse several cleared steps into one line. Each number is one step.
 
 `map: open` shows only the open lines. `map: deeper` shows only the deeper lines. Keep numbering those lines with the same numbers they have on the full map, so `go 3` still means line 3.
 
@@ -104,7 +108,13 @@ Use these shapes. Replace the angle-bracket part with this step.
 | `back` | The side path is done. | `back` |
 | `map` | More than one path is open. | `map` |
 
-Pick from what this reply opened. If you named a new mechanism, offer `down` with that name. If you went down, offer `up`. Always include `clear` when the next step is waiting. If more than one path is open, you may offer `map` as one of the two.
+Pick from what this reply opened. Offer one signal, or two. Never three. Count every signal, including `back`, `fork`, and `unclear`.
+
+If this reply went down and a next step on the main path is waiting, offer `up` and `clear`. Do not offer `down` or `map` in that reply. The next `down` waits until they are back on the step they left.
+
+If this reply went down and no next step is waiting, offer `up`. Offer `down` as the other signal only when you named a new mechanism. If that slot is still open, `map` may take it when more than one path is open.
+
+If this reply did not go down, offer `down` when you named a new mechanism, and `clear` when a next step is waiting. Offer `map` only when a slot remains and more than one path is open.
 
 ## Side paths
 
@@ -116,4 +126,4 @@ If the lesson has drifted further than the fork they named, stop the drift and n
 
 ## Out of scope
 
-Doing the task for them when they did not ask for that action. A plain sentence that asks for the action is enough. A full guide. A second path "in case." Reprinting the whole signal table. The recommendation at the end of the reply is the reminder. `map` is how they see the whole hole.
+Doing the task for them when they did not ask for that action, including an investigation or an audit. A bare `go` that approves that work is not a lesson. A plain sentence that asks for the action is enough. A full guide. A second path "in case." Reprinting the whole signal table. The recommendation at the end of the reply is the reminder. `map` is how they see the whole hole.
