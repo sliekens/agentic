@@ -34,7 +34,8 @@ This plugin provides engineering skills for issue backlog burn-down, workspace s
 
 ### v2.12.0
 
-- Added Hole from Steven's global agent skills: one-step rabbit-hole teaching with signal words
+- Added Hole: teach one step at a time down a rabbit hole. The person steers with `clear`, `unclear`, `down`, `up`, `skip`, `lost`, `fork`, `back`, `map`, and `go`. A side path leaves the next step on the main path waiting, and `back` returns to it
+- `map` lists the open and cleared paths, and the deeper lines still open, then stops. `go N` teaches that one line
 
 ### v2.11.0
 
