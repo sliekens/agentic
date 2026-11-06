@@ -94,6 +94,10 @@ agentic/
     │       │       └── ste-recurring-errors.md
     │       ├── technical-debt-audit/
     │       │   └── SKILL.md
+    │       ├── untangle-codebase/
+    │       │   ├── SKILL.md
+    │       │   ├── LICENSE
+    │       │   └── UPSTREAM.md
     │       ├── workspace-setup/
     │       │   ├── SKILL.md
     │       │   └── references/

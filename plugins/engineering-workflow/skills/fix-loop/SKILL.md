@@ -1,6 +1,6 @@
 ---
 name: fix-loop
-description: Harden a sound architecture one issue at a time — fix one issue, validate every phase against a repository validation runbook, file every out-of-scope problem found along the way as a new issue, then take the next issue — until only blocked issues remain or a release is needed to verify more. A simple bug gets the smallest change. A larger change, including a module rewrite, is in scope when it removes local accidental complexity instead of stacking it. Use `analyze-complexity` before choosing the shape. Use when asked to fix an issue, work the backlog, burn down issues, or run the fix loop, or when the user runs /fix-loop, optionally with a starting issue. Do not use when the architecture is unsound or the goal needs a capability the architecture cannot hold (`yak-shave`), for a single exploratory investigation with no fix (`flaky-build-investigation`, `analyze-complexity`), or for cutting or deploying releases.
+description: Harden a sound architecture one issue at a time — fix one issue, validate every phase against a repository validation runbook, file every out-of-scope problem found along the way as a new issue, then take the next issue — until only blocked issues remain or a release is needed to verify more. A simple bug gets the smallest change. A larger change, including a module rewrite, is in scope when it removes local accidental complexity instead of stacking it. Use `analyze-complexity` before choosing the shape. Use when asked to fix an issue, work the backlog, burn down issues, or run the fix loop, or when the user runs /fix-loop, optionally with a starting issue. Do not use when the architecture is unsound or the goal needs a capability the architecture cannot hold (`yak-shave`), for a single exploratory investigation with no fix (`flaky-build-investigation`, `analyze-complexity`), for untangling the whole codebase in one pass instead of issue by issue (`untangle-codebase`), or for cutting or deploying releases.
 ---
 
 # Fix Loop
@@ -23,6 +23,8 @@ check.
   the validation runbook. Step 3 chooses the size of the change.
 - It does not authorize replacing an unsound architecture. That work is
   `expand-and-contract`.
+- It does not authorize a whole-codebase refactor in one pass. That work is
+  `untangle-codebase`.
 - It does not authorize: product decisions, or other choices that repository
   instructions reserve for the user; production releases or deployments;
   closing an issue before its fix is verified. Stop and hand these to the

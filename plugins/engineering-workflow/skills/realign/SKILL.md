@@ -1,6 +1,6 @@
 ---
 name: realign
-description: Audit a codebase for divergent solutions to one recurring problem — several error-handling styles, competing HTTP clients, three ways to assemble the same query — by searching out every instance, clustering them by approach, electing a canonical form from what already exists, and proposing a migration for the outliers. Use when the user says the code is inconsistent, notices the same job done differently in two places, asks which approach is the real one, wants a pattern settled before building on it, or invokes `/realign`. Do not use for comparing an implementation against an external reference such as a design, specification, or architecture document (`cross-check`), for cataloguing current capabilities (`product-map`), or for structural problems that are not about inconsistency (`technical-debt-audit`).
+description: Audit a codebase for divergent solutions to one recurring problem — several error-handling styles, competing HTTP clients, three ways to assemble the same query — by searching out every instance, clustering them by approach, electing a canonical form from what already exists, and proposing a migration for the outliers. Use when the user says the code is inconsistent, notices the same job done differently in two places, asks which approach is the real one, wants a pattern settled before building on it, or invokes `/realign`. Do not use for comparing an implementation against an external reference such as a design, specification, or architecture document (`cross-check`), for cataloguing current capabilities (`product-map`), for structural problems that are not about inconsistency (`technical-debt-audit`), or for untangling and refactoring the whole codebase in one pass (`untangle-codebase`).
 ---
 
 # Realign
@@ -104,4 +104,5 @@ Before editing, read **Stacking complexity** in `analyze-complexity`. A migratio
 - Use `product-map` when the goal is an inventory of what the system does rather than how consistently it does it.
 - Use `analyze-complexity` when the variation may be justified by constraints that are not visible at the call sites, and the inherent requirements need separating from the implementation choices first.
 - Use `technical-debt-audit` when the migration is too large to carry out now and should be tracked as debt.
+- Use `untangle-codebase` when the inconsistency is one symptom among many and the user wants the whole codebase refactored in one pass.
 - Use `design-space-exploration` when no existing approach deserves to win and a new one has to be chosen deliberately.

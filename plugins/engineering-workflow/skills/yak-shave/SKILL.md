@@ -1,6 +1,6 @@
 ---
 name: yak-shave
-description: Plan a replacement before Parallel Change. Sniff out a bad system or a feature the current architecture cannot hold, inventory what that system does, decide which capabilities to retain, retire, or introduce, and design the interface for that set. Then enter `expand-and-contract`. Use when the user says yak shave or yak shaving, when a new feature does not fit the architecture, when `scenario-design` finds a scenario the architecture cannot hold, or when `fix-loop` stops because the architecture is unsound. Do not use to harden a sound architecture that already fits the goal (`fix-loop`), or to build, migrate, and delete once the interface is confirmed (`expand-and-contract`).
+description: Plan a replacement before Parallel Change. Sniff out a bad system or a feature the current architecture cannot hold, inventory what that system does, decide which capabilities to retain, retire, or introduce, and design the interface for that set. Then enter `expand-and-contract`. Use when the user says yak shave or yak shaving, when a new feature does not fit the architecture, when `scenario-design` finds a scenario the architecture cannot hold, or when `fix-loop` stops because the architecture is unsound. Do not use to harden a sound architecture that already fits the goal (`fix-loop`), to build, migrate, and delete once the interface is confirmed (`expand-and-contract`), or to untangle the whole codebase in one pass rather than replace one system (`untangle-codebase`).
 ---
 
 # Yak Shave
@@ -13,6 +13,7 @@ The path from a bad system, or from a feature the current architecture cannot ho
 - Retain, retire, and introduce change what the product does. Show the dispositions and wait for the user before designing the interface or entering `expand-and-contract`.
 - It does not authorize building the new structure. That work is `expand-and-contract`.
 - It does not authorize hardening a sound architecture whose current structure can hold the goal. That work is `fix-loop`.
+- It does not authorize untangling the whole codebase in one pass. That work is `untangle-codebase`.
 
 ## 1. Sniff
 
