@@ -1,6 +1,6 @@
 ---
 name: fix-loop
-description: Harden a sound architecture one issue at a time — fix one issue, validate every phase against a repository validation runbook, file every out-of-scope problem found along the way as a new issue, then take the next issue — until only blocked issues remain or a release is needed to verify more. A simple bug gets the smallest change. A larger change, including a module rewrite, is in scope when it removes local accidental complexity instead of stacking it. Use `analyze-complexity` before choosing the shape. Use when asked to fix an issue, work the backlog, burn down issues, or run the fix loop, or when the user runs /fix-loop, optionally with a starting issue. Do not use when the architecture is unsound or the goal needs a capability the architecture cannot hold (`yak-shave`), for a single exploratory investigation with no fix (`flaky-build-investigation`, `analyze-complexity`), for untangling the whole codebase in one pass instead of issue by issue (`untangle-codebase`), or for cutting or deploying releases.
+description: Harden a sound architecture one issue at a time — fix one issue, validate every phase against a repository validation runbook, file every out-of-scope problem found along the way as a new issue, then take the next issue — until only blocked issues remain or a release is needed to verify more. A simple bug gets the smallest change. A larger change, including a module rewrite, is in scope when it removes local accidental complexity instead of stacking it. Use `analyze-complexity` before choosing the shape. Use when asked to fix an issue, work the backlog, burn down issues, or run the fix loop, or when the user runs /fix-loop, optionally with a starting issue. Do not use when the architecture is unsound or the goal needs a capability the architecture cannot hold (`yak-shave`), for a single exploratory investigation with no fix (`flaky-build-investigation`, `analyze-complexity`), for untangling the whole codebase in one pass instead of issue by issue (`untangle-codebase`), or for cutting or deploying releases. When the user describes a defect that is not yet an issue, stop and use `bug-report`. When `work-once` runs this skill, finish one issue, return a WorkResult, and do not load the next skill or take another issue.
 ---
 
 # Fix Loop
@@ -49,6 +49,28 @@ Keep this in the task, not in a repository file:
 After resuming, recheck the worktree, the branch, and each open issue's state
 before using the prior state.
 
+## Tick
+
+Backlog mode is the default for `/fix-loop` and for a request to work the backlog, including a request that names a starting issue and then continues. Tick mode is when the caller is `work-once`, or the user asked for one issue and no continuation.
+
+In tick mode, do steps 0 through 7 for one issue. Return a [work result](../capture-skill/references/work-result.md) and stop. Do not run step 8. Do not load `next_skill`. When `work-once` is the caller, it writes the cursor. When this skill is the top of the session, write the cursor before exiting.
+
+| Stop | `stop_reason` | `next_skill` |
+| --- | --- | --- |
+| Record or runbook missing | `tracker-missing` | `workspace-setup` |
+| A defect is described and no issue exists | `needs-issue` | `bug-report` |
+| Unsound, or the goal does not fit | `needs-replacement` | `yak-shave` |
+| The job is the whole codebase | `whole-codebase` | `untangle-codebase` |
+| A choice the user must make | `needs-user` | `none` |
+| The pull request waits on a merge | `awaiting-merge` | `fix-loop` |
+| A release must happen before more can be verified | `awaiting-release` | `none` |
+| The issue is closed | `done` | `none` |
+| No actionable issue | `idle` | `none` |
+
+`analyze-complexity` and `blind-spot-coverage` stay inside this skill. They are not `next_skill`.
+
+When tick mode is given an issue whose fix has already landed, do not change the code again. Return `awaiting-release` / `none` when runtime verification still needs a release. When step 6's close rule is already met, close the issue and return `done` / `none`.
+
 ## 0. Locate the tooling
 
 Read the repository's agent instructions. Find:
@@ -65,18 +87,25 @@ Read the repository's agent instructions. Find:
 
 If the repository has no issue-tracker record, no validation runbook, or the
 runbook has no `Integration` section, run `workspace-setup` to install or update it before
-step 1. Do not guess the integration mode; step 6 depends on it.
+step 1. Do not guess the integration mode; step 6 depends on it. In tick mode,
+return `tracker-missing` / `workspace-setup` and do not run `workspace-setup`.
 
 Done when each item is found, or recorded as absent.
 
 ## 1. Pick
 
-Start with the issue the user named. Otherwise take the oldest open issue that
+Start with the issue the user named. When they describe a defect and no issue
+exists yet, stop and use `bug-report`. Do not invent the issue inside this
+loop. In tick mode, return `needs-issue` / `bug-report` and do not run
+`bug-report`. When the job is the whole codebase, stop and use
+`untangle-codebase`. In tick mode, return `whole-codebase` /
+`untangle-codebase` and do not load it. When no issue was named, take the oldest open issue that
 is not blocked (no blocked label or status, no open issue in its `Blocked by:`
 line), has no open pull request of its own, and is not waiting on a release.
 
 Read it with its comments. Check the repository's technical-debt notes for the
-area, if it keeps any.
+area, if it keeps any. In tick mode, when no issue is actionable, return
+`idle` / `none`.
 
 Done when one issue is chosen and its history is read.
 
@@ -85,6 +114,7 @@ Done when one issue is chosen and its history is read.
 Check the issue's claims against the code, and against runtime evidence when
 the claim is about runtime behavior. Issues age: if the problem is already
 gone, comment with the evidence, close the issue, and go back to step 1.
+In tick mode, return `done` / `none` and do not go back to step 1.
 
 Prefer a failing test as the reproduction. Step 4 decides whether that test
 stays in the suite.
@@ -106,11 +136,13 @@ complexity** there and class the architecture before choosing a shape.
   one was available.
 - **Unsound architecture, or a goal the structure cannot hold.** Stop this
   issue in the loop. A patch would stack complexity. Continue the same issue
-  under `yak-shave`.
+  under `yak-shave`. In tick mode, return `needs-replacement` / `yak-shave`
+  and do not load `yak-shave`.
 - **User's choice** (product behavior, data the user owns, anything the
   repository instructions restrict): comment with the options and a
   recommendation, mark the issue blocked, and go back to step 1 with the
-  next issue.
+  next issue. In tick mode, return `needs-user` / `none` and do not go back
+  to step 1.
 
 Done when the approach is written on the issue, the issue has moved to
 `expand-and-contract`, or the issue is marked blocked. A fix-loop approach
@@ -186,7 +218,8 @@ changes separately from the fix.
 - **Pull request:** branch from the current target branch, open a pull request,
   and follow its CI to green. Merge it only when the `Merge` line lets you;
   otherwise the issue waits on a merge, and the next issue starts again from
-  the target branch, not from the unmerged branch.
+  the target branch, not from the unmerged branch. In tick mode, do not start
+  the next issue.
 
 Comment on the issue with the commit or pull request, what changed, and how to
 verify it in production. Leave the issue open:
@@ -216,6 +249,8 @@ named in the issue-tracker record.
 Done when every noted problem is an issue or a comment on one.
 
 ## 8. Repeat
+
+Skip this step in tick mode. Return the **Tick** row for the outcome of step 6: `awaiting-merge`, `awaiting-release`, or `done`.
 
 Go back to step 1. The newly filed issues are candidates like any other.
 

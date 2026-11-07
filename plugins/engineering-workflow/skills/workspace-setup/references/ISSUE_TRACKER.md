@@ -19,6 +19,15 @@
 - **Close:** <command; whether it takes a comment>
 - **Blocked convention:** <label, status, or `Blocked by:` line>
 
+## Cursor
+
+`work-once` writes this at the end of a wake. The next wake reads it. One issue has at most one `next_skill`.
+
+- **next_skill storage:** <one label `next:<skill>`, or one line `next_skill: <skill>` at the top of the issue body>
+- **Set:** <command that replaces any existing next_skill; delete the label or the line when the value is `none`>
+- **Find:** <command that lists open issues that have a next_skill, oldest first>
+- **Comment shape:** use **Comment**. The comment is three lines, `work-once:`, `stop_reason: <token>`, `next_skill: <skill|none>`, then one sentence. No log or trace body.
+
 ## Grouping
 
 - **Technical debt:** <the project, milestone, or label that holds debt issues, and how to add an issue to it; `none` when the tracker cannot group>

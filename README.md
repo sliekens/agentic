@@ -42,8 +42,22 @@ agentic/
     │       │   └── SKILL.md
     │       ├── blind-spot-coverage/
     │       │   └── SKILL.md
-    │       ├── capture-skill/
+    │       ├── bug-report/
     │       │   └── SKILL.md
+    │       ├── capture-skill/
+    │       │   ├── SKILL.md
+    │       │   └── references/
+    │       │       ├── action.md
+    │       │       ├── assurance.md
+    │       │       ├── cognition.md
+    │       │       ├── context.md
+    │       │       ├── control.md
+    │       │       ├── coordination.md
+    │       │       ├── grounding.md
+    │       │       ├── memory.md
+    │       │       ├── primitives.md
+    │       │       ├── template.md
+    │       │       └── work-result.md
     │       ├── cause-effect-graphing/
     │       │   └── SKILL.md
     │       ├── combinatorial-testing/
@@ -98,6 +112,8 @@ agentic/
     │       │   ├── SKILL.md
     │       │   ├── LICENSE
     │       │   └── UPSTREAM.md
+    │       ├── work-once/
+    │       │   └── SKILL.md
     │       ├── workspace-setup/
     │       │   ├── SKILL.md
     │       │   └── references/

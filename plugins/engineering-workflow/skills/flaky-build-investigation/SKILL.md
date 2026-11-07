@@ -1,6 +1,6 @@
 ---
 name: flaky-build-investigation
-description: Diagnose intermittent build, test, packaging, or CI pipeline outcomes by comparing equivalent runs and correlating logs, configuration, code, environment, ordering, and timing. Use when a build or test sometimes fails, a rerun passes, behavior depends on runner or execution order, or the user asks why the build is flaky. Default to a bounded read-only investigation. Do not use for consistently failing builds, unrelated runtime defects, or release and deployment execution.
+description: Diagnose intermittent build, test, packaging, or CI pipeline outcomes by comparing equivalent runs and correlating logs, configuration, code, environment, ordering, and timing. Use when a build or test sometimes fails, a rerun passes, behavior depends on runner or execution order, or the user asks why the build is flaky. Default to a bounded read-only investigation. Do not use for consistently failing builds, unrelated runtime defects, or release and deployment execution. When the user wants the failure filed as an issue, stop and use `bug-report`.
 ---
 
 # Flaky Build Investigation
@@ -68,6 +68,8 @@ Use the repository's existing local command and preserve its meaningful CI input
 Stop the local run matrix at the declared bound or when existing evidence already decides the next action.
 
 ## Decision gates and stop conditions
+
+When the user wants this failure filed as an issue, stop and use `bug-report`. Do not create the issue from this skill.
 
 Before asking the user, restate the unresolved goal, inspect the available evidence, consider plausible causes, try safe alternatives, and critique the leading explanation. Ask one focused question only when:
 

@@ -1,6 +1,6 @@
 ---
 name: expand-and-contract
-description: Replace a system with Parallel Change, also called Expand and Contract. Build the new structure beside the old one, migrate existing usages, then delete the old structure. A later slice waits until production has reached its checkpoint. An additive migration must be in production before code that uses the new schema deploys. A version that has stopped using the old schema must be the running version before a destructive migration removes it. Use when `yak-shave` has confirmed the capability set and the interface, or when the user asks for parallel change or expand-and-contract and that set is already decided. Do not use to choose which capabilities to retain, retire, or introduce (`yak-shave`), to harden a sound architecture (`fix-loop`), to choose among greenfield designs (`design-space-exploration`), or to release or deploy.
+description: Replace a system with Parallel Change, also called Expand and Contract. Build the new structure beside the old one, migrate existing usages, then delete the old structure. A later slice waits until production has reached its checkpoint. An additive migration must be in production before code that uses the new schema deploys. A version that has stopped using the old schema must be the running version before a destructive migration removes it. Use when `yak-shave` has confirmed the capability set and the interface, or when the user asks for parallel change or expand-and-contract and that set is already decided. Do not use to choose which capabilities to retain, retire, or introduce (`yak-shave`), to harden a sound architecture (`fix-loop`), to choose among greenfield designs (`design-space-exploration`), or to release or deploy. When `work-once` runs this skill, return the next skill at a handoff and do not load it. A checkpoint returns no next skill until production evidence is on the issue.
 ---
 
 # Expand and Contract
@@ -15,13 +15,24 @@ Parallel Change. Build the new structure, migrate existing usages, then delete t
 - It does not authorize hardening a sound architecture whose current structure can hold the goal. That work is `fix-loop`.
 - It does not authorize production releases or deployments. A checkpoint stops the skill until the user supplies production evidence. Reaching that checkpoint is a release. This skill does not run it.
 
+## Tick
+
+When `work-once` is the caller, this run is tick mode. Return a [work result](../capture-skill/references/work-result.md) at a handoff or a checkpoint and stop. Do not load the next skill. Do not write the cursor. `analyze-complexity`, `blind-spot-coverage`, and `product-map` stay inside this skill.
+
+- The set is missing: `stop_reason: needs-set`, `next_skill: yak-shave`.
+- The architecture is sound: `stop_reason: sound`, `next_skill: fix-loop`.
+- A checkpoint gates the next slice: comment the checkpoint. `stop_reason: awaiting-release`, `next_skill: none`. Do not mark the issue blocked.
+- Contract meets its done line: `stop_reason: done`, `next_skill: none`.
+
+When a later session writes the production evidence on the issue, that session sets `next_skill` to `expand-and-contract` with the record's **Set** operation, so the next wake resumes here.
+
 ## 1. Judge
 
 Run `analyze-complexity` on the boundary. Read **Stacking complexity** and class the architecture.
 
 - A confirmed capability set and interface are in hand. Keep going. Expand builds that interface.
-- The set is missing, and the architecture is unsound or the goal needs a capability the structure cannot hold. Stop and run `yak-shave`.
-- The architecture is sound and the current structure can hold the goal. Stop and hand the work to `fix-loop`.
+- The set is missing, and the architecture is unsound or the goal needs a capability the structure cannot hold. Stop and run `yak-shave`. In tick mode, return `needs-set` / `yak-shave` and do not load it.
+- The architecture is sound and the current structure can hold the goal. Stop and hand the work to `fix-loop`. In tick mode, return `sound` / `fix-loop` and do not load it.
 
 Done when one of those three is chosen and the inherent invariants are named.
 
@@ -29,7 +40,7 @@ Done when one of those three is chosen and the inherent invariants are named.
 
 A checkpoint is a fact in production that the next slice depends on. Write every checkpoint on the issue before Expand. Each one names the fact, the slice it gates, and the evidence that proves the fact.
 
-Do not start the gated slice until that evidence is on the issue. Comment the evidence when it arrives. This skill does not release or deploy to produce it.
+Do not start the gated slice until that evidence is on the issue. Comment the evidence when it arrives. This skill does not release or deploy to produce it. In tick mode, an unmet checkpoint returns `awaiting-release` / `none`.
 
 When the change splits a schema into an additive migration and a destructive migration, the issue includes these two checkpoints:
 
@@ -76,4 +87,4 @@ Each slice uses this section. Run the repository validation runbook for the file
 
 When the change came from `yak-shave`, update the product map with `product-map` after Contract, so the map matches the new current behavior.
 
-Done for a slice when the planned checks pass and the slice has landed, or its pull request waits on a merge. Done for the skill when Contract meets its done line and no checkpoint is still open.
+Done for a slice when the planned checks pass and the slice has landed, or its pull request waits on a merge. Done for the skill when Contract meets its done line and no checkpoint is still open. In tick mode, Contract done returns `done` / `none`. A slice whose pull request waits on a merge returns `awaiting-merge` / `expand-and-contract`.

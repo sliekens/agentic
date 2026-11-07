@@ -1,6 +1,6 @@
 ---
 name: workspace-setup
-description: Install the workspace files that engineering-workflow skills depend on — the validation runbook (VALIDATION.md) that fix-loop reads, including whether changes land through pull requests or by direct push, and the issue-tracker record (ISSUE_TRACKER.md) that says where issues and work artifacts live — by copying bundled seed files into the workspace and fitting them to it from existing context, exploration, and a few easy-to-answer questions. Recommends an issue tracker from the evidence (such as the git remote), records the choice, and migrates open work that lives in committed markdown into that tracker, deleting the migrated files, unless the user chose repository files. Use when the user runs /workspace-setup, asks to set up or bootstrap the workflow in a repository, asks to move TODO, plan, or debt documents into the issue tracker, or when a skill such as fix-loop finds its workspace file missing. Re-running updates an existing install instead of overwriting it. Do not use for personal collaboration preferences (`operator-setup`).
+description: Install the workspace files that engineering-workflow skills depend on — the validation runbook (VALIDATION.md) that fix-loop reads, including whether changes land through pull requests or by direct push, and the issue-tracker record (ISSUE_TRACKER.md) that says where issues and work artifacts live — by copying bundled seed files into the workspace and fitting them to it from existing context, exploration, and a few easy-to-answer questions. Recommends an issue tracker from the evidence (such as the git remote), records the choice, and migrates open work that lives in committed markdown into that tracker, deleting the migrated files, unless the user chose repository files. Use when the user runs /workspace-setup, asks to set up or bootstrap the workflow in a repository, asks to move TODO, plan, or debt documents into the issue tracker, or when a skill such as fix-loop, bug-report, or work-once finds its workspace file missing. Re-running updates an existing install instead of overwriting it. Do not use for personal collaboration preferences (`operator-setup`).
 ---
 
 # Workspace Setup
@@ -30,7 +30,7 @@ evidence, write the result, and report it as an assumption.
 | Seed | Default workspace path | Used by |
 | --- | --- | --- |
 | [references/VALIDATION.md](references/VALIDATION.md) | the workspace's agent-doc folder, for example `.agents/VALIDATION.md` or `docs/agents/validation.md` | `fix-loop` (steps 0, 4, 5, and 6) |
-| [references/ISSUE_TRACKER.md](references/ISSUE_TRACKER.md) | the same folder, for example `.agents/ISSUE_TRACKER.md` or `docs/agents/issue-tracker.md` | `fix-loop`, `technical-debt-audit`, `cross-check`, `realign`, and every scenario-design technique that publishes its output |
+| [references/ISSUE_TRACKER.md](references/ISSUE_TRACKER.md) | the same folder, for example `.agents/ISSUE_TRACKER.md` or `docs/agents/issue-tracker.md` | `fix-loop`, `bug-report`, `work-once`, `technical-debt-audit`, `cross-check`, `realign`, and every scenario-design technique that publishes its output |
 
 ## Authority boundary
 
@@ -102,7 +102,8 @@ For ISSUE_TRACKER.md:
   (`issues/`, `docs/issues/`, `TODO.md`, `BACKLOG.md`, `ROADMAP.md`);
 - **operation:** the create, read, list, comment, label, and close commands of
   the candidate, checked with a help flag, and the grouping features it has
-  (project, milestone, label) that can hold technical debt;
+  (project, milestone, label) that can hold technical debt, and whether a label
+  or a one-line body field can store one `next_skill`;
 - **recommendation:** choose one candidate from this evidence. Prefer the
   tracker of the forge that hosts the `origin` remote when it has issues
   enabled and a working CLI. Prefer a tracker already in use over a better one
@@ -149,6 +150,11 @@ question always passes.
     the choice;
   - fill `Operations` with commands checked in step 2, not commands from
     memory;
+  - fill `Cursor` from those same commands. When the tracker can label an
+    issue, storage is one label `next:<skill>`, **Set** replaces that label,
+    and **Find** lists open issues that have it, oldest first. When it
+    cannot, storage is one line `next_skill: <skill>` at the top of the
+    issue body. **Set** for `none` removes the label or the line;
   - fill `Grouping` with the project, milestone, or label that holds technical
     debt. When the tracker has none, offer to create one and create it only
     after the user agrees;
@@ -157,8 +163,9 @@ question always passes.
   - keep the `Repository files` section only when the user chose that
     mechanism, and delete it otherwise.
 - **update:** keep the workspace's content. Add missing structure from the
-  seed, such as the entry shape or a `Known gaps` section, and fill it from
-  exploration. Do not remove entries the workspace wrote.
+  seed, such as the entry shape, a `Known gaps` section, or a `Cursor`
+  section, and fill it from exploration. Do not remove entries the
+  workspace wrote.
 - **merge:** leave the existing file in place, create the seed at its target
   path from the existing content, and link the two. Never delete or move the
   existing file.

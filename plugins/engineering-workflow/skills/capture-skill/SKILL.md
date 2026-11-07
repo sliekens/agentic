@@ -1,16 +1,20 @@
 ---
 name: capture-skill
-description: Capture a practice the user is introducing as one new skill, after testing that none of the skills they name already own it. Use when the user says they have skills for some jobs but something is missing, says a practice is not captured or is not covered, says nothing captures this, or introduces a workflow that should become a skill — including "we have skills for X, Y, and Z, but I'm missing something." Read the named skills first. If one owns the practice, name it and stop. If the gap is only a missing handoff sentence, patch that boundary and stop. Otherwise confirm the shape, write one skill whose description and steps send each neighboring job to its own skill, and add the return pointer on each neighbor. Do not use to record session friction into whatever instruction home fits (`compound`), to revise a skill the user already named, or to carry out the practice after the skill exists.
+description: >
+  Capture a practice the user is introducing as one new skill built from the primitive catalog, after testing that none of the skills they name already own it. Use when the user says they have skills for some jobs but something is missing, says a practice is not captured or is not covered, says nothing captures this, or introduces a workflow that should become a skill — including "we have skills for X, Y, and Z, but I'm missing something." Read the named skills first. If one owns the practice, name it and stop. If the gap is only a missing handoff sentence, patch that boundary and stop. Otherwise select the smallest set of primitives that can do the practice, confirm that recipe, and write one skill whose steps are those primitives and whose description sends each neighboring job to its own skill. Add the return pointer on each neighbor. If the catalog has no primitive for a part of the practice, stop and name the gap. Do not use to record session friction into whatever instruction home fits (`compound`), to revise a skill the user already named, to add a primitive to the catalog, or to carry out the practice after the skill exists.
 ---
 
 # Capture Skill
 
-The user is introducing a practice and naming the skills around it. Give that practice one skill, or show that a skill already owns it.
+The user is introducing a practice and naming the skills around it. Give that practice one skill built from the primitive catalog, or show that a skill already owns it.
+
+A primitive is one building block. The catalog is [primitives](references/primitives.md). The new skill is a recipe: which primitives, in what order, what each one must name, and the evidence that ends the run. The written skill stands on its own. It does not point back at this catalog.
 
 ## Authority boundary
 
-- `/capture-skill`, or a statement that a practice is missing from the skills the user names, authorizes reading those skills, writing one new skill, and adding the boundary sentence on each neighbor the new skill touches.
+- `/capture-skill`, or a statement that a practice is missing from the skills the user names, authorizes reading those skills, reading this catalog, writing one new skill, and adding the boundary sentence on each neighbor the new skill touches.
 - It does not authorize performing the practice. When the skill exists, stop. The user invokes that skill.
+- It does not authorize a new primitive. A practice the catalog cannot express stops this run. Adding an entry is a separate change, from [template](references/template.md).
 - It does not authorize a commit, a push, or a publish. When the home is a plugin in this workspace, continue under `release`. That prepares the version, changelog, and catalogs, and it stops before a commit unless one was already requested.
 - Friction accumulated across a session, with no practice being introduced, belongs to `compound`.
 
@@ -38,9 +42,21 @@ Choose one:
 
 Done when one outcome is chosen, and the evidence is the skills that were read.
 
-## 3. Confirm the shape
+## 3. Select the primitives
 
-Show the shape and wait. Fill every line the files and the message already decide. Ask only where two shapes would produce different skills.
+Read the index in [primitives](references/primitives.md), including the recipes. A recipe there is a pattern. It is not a step you can paste as one block.
+
+Choose the smallest set of primitives that can do the practice. For each primitive you keep, and for each one you almost kept, read that entry in its group file. Use "When to use", "When not to use", and "In a skill". Do not load every group file.
+
+Keep a primitive only when the recipe gets worse without it. A handoff to a neighbor is not a primitive. It stays a boundary.
+
+When a part of the practice has no entry, and it is not a handoff, stop. Name the missing primitive. Do not hide that part in a custom step, and do not add the catalog entry in this run. The [later list](references/primitives.md#left-for-later) is a list of gaps, not a list of blocks you may use.
+
+Done when the ordered primitives, the stop evidence, and the primitives you left out are explicit, or when a missing primitive stopped the run.
+
+## 4. Confirm the recipe
+
+Show the recipe and wait. Fill every line the files and the message already decide. Ask only where two recipes would produce different skills.
 
 - **Name:** kebab-case. Name the practice, not the session.
 - **Job:** one sentence.
@@ -48,43 +64,54 @@ Show the shape and wait. Fill every line the files and the message already decid
 - **Use when:** the phrases the user actually uses.
 - **Hands off when:** one line per neighbor, naming that skill.
 - **Authority:** what invoking the skill allows, and which decisions it hands to the user or to another skill.
-- **Steps:** the procedure. Each step states what is true when it is done.
+- **Primitives:** the kept primitives, in order. Under each one, the names its "In a skill" section requires: fields, limits, evidence, and who writes them.
+- **Stop:** the ending, and the evidence that ending requires.
+- **Left out:** each primitive you considered and did not keep, in one line.
 
-A confirmation or an edit is the go-ahead. A redirect replaces the shape. Do not write the file before that.
+A confirmation or an edit is the go-ahead. A redirect replaces the recipe. Do not write the file before that.
 
-Done when the user has confirmed the shape.
+Done when the user has confirmed the recipe.
 
-## 4. Write
+## 5. Write
 
 Read the nearest neighbor's `SKILL.md` and match its section pattern. Required in every case:
 
 - `name` matches the directory.
 - The description states the job, when to use the skill, and when to hand off. It names each neighbor.
-- Each step ends with what is true when the step is done.
+- Each step is one confirmed primitive, or a handoff.
+- The step states the names that primitive's entry requires, and what is true when the step is done.
 - A handoff names the other skill and stops. The new skill does not contain that skill's procedure.
+- A skill that `work-once` can run ends in a [work result](references/work-result.md) in tick mode. It names `next_skill` and does not load it. A direct request from a person may still continue into the next skill when the procedure says so.
+- The new skill does not tell its operator to open this catalog.
 
 On each neighbor, add one sentence at the step where the new skill takes over, and one clause in that neighbor's description. Leave the neighbor's procedure as it was.
 
 Done when the new skill and each neighbor boundary are written, and each handoff is named on both sides.
 
-## 5. Check
+## 6. Check
 
-Re-read the new skill against its description.
+Re-read the new skill against its description and against each kept primitive's entry.
 
 - The job in the description is the job the steps perform.
+- Every step is a primitive from the confirmed recipe, or a handoff.
+- The names that primitive's "In a skill" section requires appear in the step.
 - No step repeats a neighbor's procedure.
 - Every handoff is named on both sides.
+- A skill that `work-once` can run returns a work result in tick mode and does not load `next_skill` there.
 - The name, the directory, and the description agree.
+- Nothing in the new skill depends on this catalog.
 
 When the home is a plugin in this workspace, continue under `release`.
 
 Done when the check holds, and `release` has the handoff or the home is outside this workspace.
 
-## 6. Report
+## 7. Report
 
 Lead with the skill name and the one-sentence job. Then list:
 
 - the home path;
+- the primitives, in order;
+- the primitives left out;
 - each neighbor, and the sentence that sends work to it;
-- whether a skill was written, a boundary was patched, or an owner was named;
+- whether a skill was written, a boundary was patched, an owner was named, or a missing primitive stopped the run;
 - the release version, when `release` ran.

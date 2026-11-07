@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "engineering-workflow",
-  "description": "Engineering skills for issue backlog burn-down with runbook-driven validation and workspace setup, product mapping, build-failure diagnosis, complexity, consistency and conformance analysis, test design, scenario analysis, technical debt reviews, parallel change, yak-shave planning, whole-codebase untangling, capturing an unowned practice as a skill, one-step rabbit-hole teaching, and controlled technical writing.",
-  "version": "2.13.0",
+  "description": "Engineering skills for issue backlog burn-down with runbook-driven validation, bug reports, one-issue wakes that resume from the issue tracker, and workspace setup, product mapping, build-failure diagnosis, complexity, consistency and conformance analysis, test design, scenario analysis, technical debt reviews, parallel change, yak-shave planning, whole-codebase untangling, capturing an unowned practice as a skill built from a catalog of primitives, one-step rabbit-hole teaching, and controlled technical writing.",
+  "version": "2.14.0",
   "author": {
     "name": "Steven Liekens",
     "email": "hey@stevenliekens.be"
