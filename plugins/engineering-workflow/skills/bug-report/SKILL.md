@@ -1,12 +1,13 @@
 ---
 name: bug-report
-description: File one reported defect as an issue in the workspace issue tracker, with expected behavior, actual behavior, a repro or an explicit `none`, and evidence as identifiers rather than log or trace payloads. Use when the user reports a bug, says something is broken, or asks to file or write a bug report, and that defect is not already an issue. Search open issues first and stop when one states the same actual behavior. Stop when the new issue exists. Do not fix it (`fix-loop`). When the issue-tracker record is missing, stop and use `workspace-setup`. When `work-once` is the caller, return the stop record and do not write the cursor. Do not use for a structural-debt inventory with no failing behavior (`technical-debt-audit`), or to diagnose an intermittent build (`flaky-build-investigation`).
+description: File one reported defect as an issue in the workspace issue tracker, with expected behavior, actual behavior, a repro or an explicit `none`, and evidence as identifiers rather than log or trace payloads. Use when the user reports a bug, says something is broken, or asks to file or write a bug report, and that defect is not already an issue, including a defect `backlog` routes here. Search open issues first and stop when one states the same actual behavior. Stop when the new issue exists. Do not fix it (`fix-loop`). When the issue-tracker record is missing, stop and use `workspace-setup`. When `work-once` is the caller, return the stop record and do not write the cursor. Do not use for a structural-debt inventory with no failing behavior (`technical-debt-audit`), or to diagnose an intermittent build (`flaky-build-investigation`).
 ---
 
 # Bug Report
 
 File one reported defect as an issue, then stop. The issue is input for
-`fix-loop`. This skill does not confirm the defect against the code and does
+`fix-loop`. `backlog` sends a defect here when the user adds one to the
+backlog. This skill does not confirm the defect against the code and does
 not change the code.
 
 ## Authority boundary

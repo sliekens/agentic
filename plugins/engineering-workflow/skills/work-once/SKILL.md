@@ -1,6 +1,6 @@
 ---
 name: work-once
-description: Run one skill for one issue, write the returned next skill onto that issue, and exit. Use when a schedule wakes an agent, when the user runs /work-once, or when one tick should resume from the issue tracker. Prefer an open issue that already has next_skill and is not waiting on a person. Otherwise run `fix-loop` on the oldest actionable issue, one issue only. Do not load the returned next skill in this run. Do not use to burn down a backlog in one sitting (`fix-loop`), to plan a replacement (`yak-shave`), to perform parallel change (`expand-and-contract`), or to file a defect (`bug-report`), except as the single skill this tick was told to run.
+description: Run one skill for one issue, write the returned next skill onto that issue, and exit. Use when a schedule wakes an agent, when the user runs /work-once, or when one tick should resume from the issue tracker. Prefer an open issue that already has next_skill and is not waiting on a person; a person unblocks those with `backlog`, which this skill never runs. Otherwise run `fix-loop` on the oldest actionable issue, one issue only. Do not load the returned next skill in this run. Do not use to burn down a backlog in one sitting (`fix-loop`), to plan a replacement (`yak-shave`), to perform parallel change (`expand-and-contract`), or to file a defect (`bug-report`), except as the single skill this tick was told to run.
 ---
 
 # Work Once
@@ -30,7 +30,7 @@ Use **Find**. Take the oldest open issue that has `next_skill` set, is not block
 
 When none, take the oldest open issue that `fix-loop` step 1 would take: not blocked, no open pull request of its own, and not waiting on a release. Also skip an issue whose latest `work-once` comment has `stop_reason` `awaiting-release`. The skill for that issue is `fix-loop`, in tick mode.
 
-When none, print `stop_reason=idle issue_id=none next_skill=none` and exit.
+When none, print `stop_reason=idle issue_id=none next_skill=none` and exit. Blocked issues wait for a person, who walks them with `backlog`.
 
 Done when one issue and one skill name are chosen.
 

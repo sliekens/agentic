@@ -40,6 +40,8 @@ agentic/
     │   └── skills/
     │       ├── analyze-complexity/
     │       │   └── SKILL.md
+    │       ├── backlog/
+    │       │   └── SKILL.md
     │       ├── blind-spot-coverage/
     │       │   └── SKILL.md
     │       ├── bug-report/

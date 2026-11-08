@@ -1,6 +1,6 @@
 ---
 name: fix-loop
-description: Harden a sound architecture one issue at a time — fix one issue, validate every phase against a repository validation runbook, file every out-of-scope problem found along the way as a new issue, then take the next issue — until only blocked issues remain or a release is needed to verify more. A simple bug gets the smallest change. A larger change, including a module rewrite, is in scope when it removes local accidental complexity instead of stacking it. Use `analyze-complexity` before choosing the shape. Use when asked to fix an issue, work the backlog, burn down issues, or run the fix loop, or when the user runs /fix-loop, optionally with a starting issue. Do not use when the architecture is unsound or the goal needs a capability the architecture cannot hold (`yak-shave`), for a single exploratory investigation with no fix (`flaky-build-investigation`, `analyze-complexity`), for untangling the whole codebase in one pass instead of issue by issue (`untangle-codebase`), or for cutting or deploying releases. When the user describes a defect that is not yet an issue, stop and use `bug-report`. When `work-once` runs this skill, finish one issue, return a WorkResult, and do not load the next skill or take another issue.
+description: Harden a sound architecture one issue at a time — fix one issue, validate every phase against a repository validation runbook, file every out-of-scope problem found along the way as a new issue, then take the next issue — until only blocked issues remain or a release is needed to verify more. A simple bug gets the smallest change. A larger change, including a module rewrite, is in scope when it removes local accidental complexity instead of stacking it. Use `analyze-complexity` before choosing the shape. Use when asked to fix an issue, work the backlog, burn down issues, or run the fix loop, or when the user runs /fix-loop, optionally with a starting issue. Do not use when the architecture is unsound or the goal needs a capability the architecture cannot hold (`yak-shave`), for a single exploratory investigation with no fix (`flaky-build-investigation`, `analyze-complexity`), for untangling the whole codebase in one pass instead of issue by issue (`untangle-codebase`), or for cutting or deploying releases. When the user describes a defect that is not yet an issue, stop and use `bug-report`. A person decides blocked issues with `backlog`. When `work-once` runs this skill, finish one issue, return a WorkResult, and do not load the next skill or take another issue.
 ---
 
 # Fix Loop
@@ -124,7 +124,13 @@ test.
 
 ## 3. Decide
 
-Separate engineering choices from the user's choices.
+The loop exists to fix issues, so a fork is something to resolve, not a
+reason to stop. Most forks have one good option, and the other options only
+look like choices. Investigate each option against the code, the runtime
+evidence, the repository's patterns and restrictions, and the issue's
+history. Reject an option that breaks an invariant or a restriction, misses
+the issue's goal, or only defers the problem. When one good option is left,
+take it, whether it is a mechanism or product behavior.
 
 Run `analyze-complexity` on the boundary this issue touches. Read **Stacking
 complexity** there and class the architecture before choosing a shape.
@@ -138,15 +144,33 @@ complexity** there and class the architecture before choosing a shape.
   issue in the loop. A patch would stack complexity. Continue the same issue
   under `yak-shave`. In tick mode, return `needs-replacement` / `yak-shave`
   and do not load `yak-shave`.
-- **User's choice** (product behavior, data the user owns, anything the
-  repository instructions restrict): comment with the options and a
-  recommendation, mark the issue blocked, and go back to step 1 with the
-  next issue. In tick mode, return `needs-user` / `none` and do not go back
-  to step 1.
+- **Several good options, or none.** This is a real fork. Sort it by door.
+  - **Two-way door:** a revert undoes it without data loss and with no
+    lasting effect outside the repository. Take the simplest good option
+    that follows the repository's patterns, and record how to revert it.
+  - **One-way door:** a revert cannot undo it (data the user owns is deleted
+    or rewritten, a destructive migration, a production change, an external
+    commitment), or the repository instructions restrict it. Build the door
+    without walking through it: ship the expand part of
+    `expand-and-contract`, so the new path runs next to the old one and the
+    old one stays the default. A revert discards it if the user rejects it.
+    Then comment the options, the evidence, the recommendation, and the
+    contract step that needs approval, mark the issue blocked, and go back
+    to step 1 with the next issue. Block with no expand part only when the
+    contract is the whole change, or when no good option is left. In tick
+    mode, return `needs-user` / `none` and do not go back to step 1. The
+    user decides blocked issues with `backlog`.
+
+A missing tool or approval is not a fork. A missing approval marks the issue
+blocked with the approval it needs. A missing tool, MCP server, credential,
+or route is open work for one agent on one host: file it, or comment on the
+existing one, where the issue-tracker record groups tooling problems, and
+link it from this issue instead of marking the issue blocked.
 
 Done when the approach is written on the issue, the issue has moved to
-`expand-and-contract`, or the issue is marked blocked. A fix-loop approach
-names the class from the analysis, the change, and the options rejected.
+`expand-and-contract`, or the issue is marked blocked with its contract step.
+A fix-loop approach names the class from the analysis, the change, the
+options rejected, and how to revert it.
 
 ## 4. Fix
 
@@ -263,7 +287,7 @@ Stop when either:
 ## 9. Report
 
 Lead with what the user must do next (usually: review and merge, release, or
-decide on a blocked issue). Then list:
+decide on blocked issues with `backlog`). Then list:
 
 - issues fixed, with pull requests, awaiting merge;
 - issues fixed, with commits, awaiting release;
