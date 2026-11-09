@@ -36,6 +36,10 @@ This plugin provides engineering skills for issue backlog burn-down, bug reports
 
 ## Change Log
 
+### v2.15.1
+
+- Backlog closes an issue during the walk when its decision leaves no work, and returns every other unblocked issue to the tracker's pick order instead of writing a `fix-loop` cursor that jumps it ahead of unfixed issues
+
 ### v2.15.0
 
 - Added Backlog: one front door that walks blocked issues with the user, deciding each fork that has one good option or is a two-way door without asking, and asking only about real forks, one-way doors, and approval rules, several questions per turn. A tooling problem becomes open work instead of a block. It also adds new backlog items through Bug Report, Technical Debt Audit, or one new issue

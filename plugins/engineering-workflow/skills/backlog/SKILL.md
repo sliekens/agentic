@@ -1,6 +1,6 @@
 ---
 name: backlog
-description: Front door to the workspace backlog. Walk the blocked issues with the user one at a time, or add a new item by routing it to the skill that owns that kind of item. A walk re-investigates each fork first. A fork with one good option, or a two-way door, is decided and unblocked without a question. Only a real fork (several good options, or none) or a one-way door is explained to the user with recommended options and a question. Each decision goes on the issue, `blocked` comes off, and the issue gets a `next:fix-loop` or `next:expand-and-contract` cursor. Use when the user runs /backlog, asks to walk, review, or triage the backlog or the blocked issues, asks what is waiting on them, or asks to add something to the backlog. A defect goes to `bug-report`, structural debt with no failing behavior to `technical-debt-audit`, and a missing issue-tracker record to `workspace-setup`. Do not use to fix an issue (`fix-loop`), or from `work-once`: this skill needs a person.
+description: Front door to the workspace backlog. Walk the blocked issues with the user one at a time, or add a new item by routing it to the skill that owns that kind of item. A walk re-investigates each fork first. A fork with one good option, or a two-way door, is decided and unblocked without a question. Only a real fork (several good options, or none) or a one-way door is explained to the user with recommended options and a question. Each decision goes on the issue and `blocked` comes off. A decision that leaves no work (resolved, obsolete, not planned) closes the issue in the walk. The rest go back into the normal pick order, and only an approved contract step gets a `next:expand-and-contract` cursor. Use when the user runs /backlog, asks to walk, review, or triage the backlog or the blocked issues, asks what is waiting on them, or asks to add something to the backlog. A defect goes to `bug-report`, structural debt with no failing behavior to `technical-debt-audit`, and a missing issue-tracker record to `workspace-setup`. Do not use to fix an issue (`fix-loop`), or from `work-once`: this skill needs a person.
 ---
 
 # Backlog
@@ -13,10 +13,11 @@ its kind. This skill does not fix anything.
 
 - `/backlog`, or a request to walk or add to the backlog, authorizes reading
   the issue-tracker record, the issues, and the code; commenting on issues;
-  removing the blocked marker; writing the cursor; and creating one issue for
-  an item that is neither a defect nor debt.
-- It does not authorize a fix, a commit, a close, or a contract step the user
-  has not approved. The fix is `fix-loop`. The contract step is
+  removing the blocked marker; writing a cursor for a skill other than
+  `fix-loop`; closing an issue whose decision leaves no work; and creating one
+  issue for an item that is neither a defect nor debt.
+- It does not authorize a fix, a commit, or a contract step the user has not
+  approved. The fix is `fix-loop`. The contract step is
   `expand-and-contract`.
 - It does not authorize choosing a tracker. A missing record stops the run
   for `workspace-setup`.
@@ -130,12 +131,16 @@ For each `issue_id`:
    - `tooling` — the block is a missing tool, MCP server, credential, or
      route for one agent on one host.
    - `resolved` — the code or the evidence shows the problem is gone.
-4. **Act on the class:**
+4. **Act on the class.** Never write a `fix-loop` cursor. An unblocked issue
+   already enters the tracker's pick order, and a cursor would jump it ahead
+   of unfixed issues, so the loop would spend its wakes on walk results
+   instead of fixes. Leave any lifecycle stage and its check time alone.
    - `one-good`, `two-way`, `resolved`: take the remaining option, or the
      simplest good one. Do not ask. Comment the decision, the rejected
-     options with their reasons, and how to revert. Remove the blocked marker
-     and set the cursor to `fix-loop`, which confirms a resolved issue and
-     closes it. Tell the user in one line.
+     options with their reasons, and how to revert. Remove the blocked marker.
+     When the decision leaves no work (the problem is gone, the work is
+     obsolete or not planned), close the issue now with that comment, because
+     a wake spent only on closing it ships nothing. Tell the user in one line.
    - `one-way`: ask. Name what is blocked, why, and the evidence. Give each
      option with its consequence, recommendation first, plus `skip` and
      `stop`. When the expand part of `expand-and-contract` can be built
@@ -147,14 +152,13 @@ For each `issue_id`:
    - `tooling`: do not ask. A tooling problem is open work. File it, or
      comment on the existing one, where the tracker record groups tooling
      problems, with the agent and host it affects. On the issue, replace the
-     blocked marker with a line naming that tooling issue, agent, and host,
-     and set the cursor to `fix-loop`.
+     blocked marker with a line naming that tooling issue, agent, and host.
 5. **Store the answer** in `decision` with its source `(user)`:
    - an option: comment the decision and the options that were on the table,
-     remove the blocked marker, and set the cursor to `fix-loop`. When the
-     option approves a contract step, set it to `expand-and-contract`.
-   - a grant: comment it, remove the blocked marker, and set the cursor to
-     `fix-loop`.
+     and remove the blocked marker. Close the issue when the option leaves no
+     work. When the option approves a contract step, set the cursor to
+     `expand-and-contract`.
+   - a grant: comment it and remove the blocked marker.
    - an answer that changes a standing rule (an approval rule, a restriction,
      an access assumption): change the rule in the repository instructions
      first, then classify every remaining issue in `queue` against the new
@@ -172,7 +176,7 @@ Done when every id in `queue` has a result, or the user said `stop`. Set
 
 | Ending | Evidence | Next owner |
 | --- | --- | --- |
-| `walked` | one result per blocked issue | `fix-loop` or `work-once`, through the cursors |
+| `walked` | one result per blocked issue | `fix-loop` or `work-once`, through the pick order |
 | `stopped` | the results so far | the user, on the next `/backlog` |
 | `filed` | the id from **Create** | `fix-loop` |
 | `duplicate` | the existing id | the user |
