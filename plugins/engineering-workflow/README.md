@@ -36,6 +36,16 @@ This plugin provides engineering skills for issue backlog burn-down, bug reports
 
 ## Change Log
 
+### v2.15.2
+
+- Product Map defaults to a short overview and feature sections grouped by area, with behavior before limits and links to detailed product descriptions. Compact tables and supporting views remain available when they help readers.
+- Product Map keeps the scope note short and includes configuration assumptions only when they affect the mapped capabilities.
+- Product Map uses progressive disclosure: high-level feature summaries link to detailed references in separate files, independently of neighboring features.
+- Product Map uses stable descriptive reference paths instead of numbered feature IDs, preserving existing references during updates.
+- Detailed feature references describe product behavior, usage, and limitations. Code and tests support research, while generated product documentation omits supporting-evidence links to them.
+- Product Map resolves research gaps through targeted follow-up. A concrete blocker leaves the affected scope incomplete rather than treating unknown labels as completed documentation.
+- Product Map sets presentation defaults for product, area, and feature levels. Optional visuals explain behavior or answer reader questions rather than repeat the document hierarchy.
+
 ### v2.15.1
 
 - Backlog closes an issue during the walk when its decision leaves no work, and returns every other unblocked issue to the tracker's pick order instead of writing a `fix-loop` cursor that jumps it ahead of unfixed issues
