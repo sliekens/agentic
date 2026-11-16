@@ -1,6 +1,6 @@
 ---
 name: fix-loop
-description: Harden a sound architecture one issue at a time — fix one issue, validate every phase against a repository validation runbook, file every out-of-scope problem found along the way as a new issue, then take the next issue — until only blocked issues remain or a release is needed to verify more. A simple bug gets the smallest change. A larger change, including a module rewrite, is in scope when it removes local accidental complexity instead of stacking it. Use `analyze-complexity` before choosing the shape. Use when asked to fix an issue, work the backlog, burn down issues, or run the fix loop, or when the user runs /fix-loop, optionally with a starting issue. Do not use when the architecture is unsound or the goal needs a capability the architecture cannot hold (`yak-shave`), for a single exploratory investigation with no fix (`flaky-build-investigation`, `analyze-complexity`), for untangling the whole codebase in one pass instead of issue by issue (`untangle-codebase`), or for cutting or deploying releases. When the user describes a defect that is not yet an issue, stop and use `bug-report`. A person decides blocked issues with `backlog`. When `work-once` runs this skill, finish one issue, return a WorkResult, and do not load the next skill or take another issue.
+description: Harden a sound architecture one issue at a time — fix one issue, validate every phase against a repository validation runbook, file every out-of-scope problem found along the way as a new issue, then take the next issue — until only blocked issues remain or a release is needed to verify more. A simple bug gets the smallest change. A larger change, including a module rewrite, is in scope when it removes local accidental complexity instead of stacking it. Use `analyze-complexity` before choosing the shape. Use when asked to fix an issue, work the backlog, burn down issues, or run the fix loop, or when the user runs /fix-loop, optionally with a starting issue. Do not use when the architecture is unsound or the goal needs a capability the architecture cannot hold (`yak-shave`), for a single exploratory investigation with no fix (`flaky-build-investigation`, `analyze-complexity`), for untangling the whole codebase in one pass instead of issue by issue (`untangle-codebase`), or for cutting or deploying releases. When the user describes a defect that is not yet an issue, stop and use `bug-report`. A person decides blocked issues with `backlog`. On a choice-like turn where the answer might be obvious, load `duh` before you treat the choice as the user's. When `work-once` runs this skill, finish one issue, return a WorkResult, and do not load the next skill or take another issue.
 ---
 
 # Fix Loop
@@ -123,6 +123,8 @@ Done when the defect is reproduced in code, runtime evidence, or a failing
 test.
 
 ## 3. Decide
+
+Before a choice in this step, load `duh` and take the survivor when it returns `proceed`.
 
 The loop exists to fix issues, so a fork is something to resolve, not a
 reason to stop. Most forks have one good option, and the other options only

@@ -72,6 +72,8 @@ agentic/
     │       │   └── SKILL.md
     │       ├── design-space-exploration/
     │       │   └── SKILL.md
+    │       ├── duh/
+    │       │   └── SKILL.md
     │       ├── equivalence-partitioning-bva/
     │       │   └── SKILL.md
     │       ├── expand-and-contract/
